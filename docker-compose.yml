@@ -1,0 +1,61 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:1.17.8
+    container_name: pr2_shop_nginx
+    ports:
+      - "5101:80"
+    volumes:
+      - ./code:/code
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    networks:
+      - net_shop
+  php:
+    container_name: pr2_shop_php
+    build:
+      context: docker/php-fpm
+    volumes:
+      - ./code:/code
+      - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1"
+      PHP_IDE_CONFIG: "serverName=PhpServerBase"
+    networks:
+      - net_shop
+  db:
+    container_name: pr2_shop_db
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'base'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '12345'
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - ./docker/db:/var/lib/mysql
+    ports:
+      - "5106:3306"
+    networks:
+      - net_shop
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pr2_shop_phpmyadmin
+    restart: unless-stopped
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=1024M
+      - MEMORY_LIMIT=1024M
+      - MAX_EXECUTION_TIME=300
+    ports:
+      - "5180:80"
+    depends_on:
+      - db
+    networks:
+      - net_shop
+networks:
+  net_shop:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.202.0/24
