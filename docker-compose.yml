@@ -18,7 +18,7 @@ services:
       - ./code:/code
       - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
     environment:
-      XDEBUG_CONFIG: "remote_host=192.168.220.1 remote_enable=1"
+      XDEBUG_CONFIG: "remote_host=192.168.202.1 remote_enable=1"
       PHP_IDE_CONFIG: "serverName=PhpServerBase"
     networks:
       - net_shop
@@ -28,7 +28,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'base'
-      MYSQL_USER: 'user'
+      MYSQL_USER: 'root'
       MYSQL_PASSWORD: '12345'
       MYSQL_ROOT_PASSWORD: 'root'
     volumes:
