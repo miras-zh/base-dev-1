@@ -12,11 +12,11 @@
 <body>
 <div class="container bg-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="#" class="navbar-brand">CRM</a>
+        <a href="index.php" class="navbar-brand">CRM</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Users</a>
+                    <a href="index.php?page=users" class="nav-link">Users</a>
                 </li>
             </ul>
         </div>

@@ -33,5 +33,6 @@ class UserController {
             var_dump($_POST);
             echo '</div>';
         }
+        header('Location: index.php?page=users');
     }
 }

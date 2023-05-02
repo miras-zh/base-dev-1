@@ -8,7 +8,7 @@ ob_start();
     <div class="container">
         <h1>Create User</h1>
     </div>
-    <form action="" method="post">
+    <form action="index.php?page=users&action=store" method="post">
         <div class="form-group">
             <label for="login">Login</label>
             <input type="text" class="form-control" id="login" name="login" required />

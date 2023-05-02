@@ -7,7 +7,7 @@ ob_start();
 
 ?>
     <h1>User list</h1>
-    <a href="#" class="btn btn-success">Create User</a>
+    <a href="index.php?page=users&action=create" class="btn btn-success">Create User</a>
     <table class="table  table-dark">
         <thead>
         <tr>
@@ -23,7 +23,7 @@ ob_start();
             <tr>
                 <th scope="row"><?php echo $user['id']; ?></th>
                 <td><?php echo $user['login']; ?></td>
-                <td><?php echo $user['is_admin']; ?></td>
+                <td><?php echo $user['is_admin'] == 1 ? 'yes' : 'no'; ?></td>
                 <td><?php echo $user['created_at']; ?></td>
                 <td>
                     <!--                <a href="index.php?page=users&action=edit&id=-->
