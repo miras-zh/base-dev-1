@@ -1,11 +1,5 @@
 <?php
 
-echo "<br/>";
-echo "<br/>";
-    var_dump($_SERVER['REQUEST_URI']);
-echo "<br/>";
-echo "<hr/>";
-
 if($_SERVER['REQUEST_URI'] === '/index.php'){
     header("Location: /");
     exit();

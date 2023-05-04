@@ -24,8 +24,8 @@ ob_start();
         <div class="form-group">
             <label for="admin">Admin</label>
             <select name="admin" id="admin" class="form-control">
-                <option value="0">no</option>
-                <option value="1">yes</option>
+                <option value="0" selected>user</option>
+                <option value="1">admin</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>

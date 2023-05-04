@@ -1,16 +1,8 @@
 <?php
 
-echo "<div class='bg-dark'>";
-echo $_SERVER['HTTP_USER_AGENT'];
-echo '<br/>';
-echo "</div>";
-
-echo 'test</br>';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 const ROOT_DIR = __DIR__;
-
-/* Установите желаемую кодировку после установления соединения */
 
 require_once ROOT_DIR . '/app/models/Database.php';
 $db = Database::getInstance();

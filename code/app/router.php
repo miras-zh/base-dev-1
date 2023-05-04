@@ -10,8 +10,6 @@ class Router
 //        $page = trim($page, '/');
         $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
-        var_dump($_GET);
-
         switch ($page) {
             case '':
             case 'home':
@@ -27,7 +25,19 @@ class Router
                             $controller->create();
                             break;
                         case 'store':
+                            echo '<div class="d-flex flex-column align-content-center bg-danger text-black">';
+                            var_dump('>>> ', $_POST);
+                            echo '</div>';
                             $controller->store();
+                            break;
+                        case 'delete':
+                            $controller->delete();
+                            break;
+                        case 'edit':
+                            $controller->edit();
+                            break;
+                        case 'update':
+                            $controller->update();
                             break;
                     }
                 } else {

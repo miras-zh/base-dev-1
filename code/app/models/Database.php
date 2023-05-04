@@ -4,30 +4,29 @@ class Database
 {
     private static $instance = null;
     private $conn;
-    public $host = 'localhost';
-    private $user = 'root';
-    private $pass = '12345';
-    private $name = 'minicrm';
-    private $port = 3306;
 
     public function __construct()
     {
-        echo 'database123';
-        $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->name, $this->port);
-//        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-//        $mysqli = new mysqli($this->host, $this->user, $this->pass, $this->name);
-        /* Установите желаемую кодировку после установления соединения */
-        $this->conn->set_charset('utf8mb4');
-        printf("____Успешно... %s\n", $this->conn->host_info);
+        $config = require_once __DIR__ . '/../../config.php';
+//        var_dump($config);
+        $db_host = $config['db_host'];
+        $db_user = $config['db_user'];
+        $db_pass = $config['db_pass'];
+        $db_name = $config['db_name'];
 
-//        if($this->conn->connect_error){
-//            die('CONNECT FAILED: ' . $this->conn->connect_error);
-//        }
+        try {
+            $connectDriver = "mysql:host=$db_host;dbname=$db_name";
+            $this->conn = new PDO($connectDriver,$db_user, $db_pass);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+//            echo 'success';
+        }catch (PDOException $err){
+            echo "connect failed" . $err->getMessage();
+        }
     }
 
     public static function getInstance(){
-        if(!self::$instance){
-            self::$instance = new Database();
+        if(!isset(self::$instance)){
+            self::$instance = new self();
         }
         return self::$instance;
     }
