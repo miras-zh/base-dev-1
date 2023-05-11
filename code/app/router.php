@@ -45,9 +45,21 @@ class Router
                 }
 
                 break;
-            case 'user':
-                $controller = new User();
-                $controller->index();
+            case 'register':
+                $controller = new AuthController();
+                $controller->register();
+                break;
+            case 'login':
+                $controller = new AuthController();
+                $controller->login();
+                break;
+            case 'authenticate':
+                $controller = new AuthController();
+                $controller->authenticate();
+                break;
+            case 'logout':
+                $controller = new AuthController();
+                $controller->logout();
                 break;
             default:
                 http_response_code(404);

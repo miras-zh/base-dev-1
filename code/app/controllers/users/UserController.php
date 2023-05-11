@@ -20,19 +20,29 @@ class UserController
 
     public function store(): void
     {
-        if ($_POST['login'] && $_POST['password'] && $_POST['confirm_password']) {
+        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
-
-
+            var_dump($_POST);
             if ($password !== $confirm_password) {
                 echo "password do not match";
                 return;
             }
 
             $userModel = new User();
-            $users = $userModel->create($_POST);
+            $data=[
+                'username'=> $_POST['username'],
+                'email'=> $_POST['email'],
+                'password'=> password_hash($password, PASSWORD_DEFAULT),
+                'role'=> 1
+            ];
 
+            $userModel->create(
+                $data['username'],
+                $data['email'],
+                $data['password'],
+                $data['role'],
+            );
         }
         header('Location: index.php?page=users');
     }
@@ -65,6 +75,7 @@ class UserController
 
     public function update(): void
     {
+        echo "test update";
         $userModel = new User();
         $userModel->update($_GET['id'], $_POST);
 

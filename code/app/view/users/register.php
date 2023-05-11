@@ -6,11 +6,11 @@ ob_start();
 
 <div class="bg-dark h-100">
     <div class="container">
-        <h1>Create User</h1>
+        <h1>Register</h1>
     </div>
     <form action="index.php?page=users&action=store" method="post">
         <div class="form-group">
-            <label for="username">Login</label>
+            <label for="username">User name</label>
             <input type="text" class="form-control" id="username" name="username" required />
         </div>
         <div class="form-group">
@@ -25,13 +25,6 @@ ob_start();
             <label for="confirm_password">Confirm Password</label>
             <input type="password" class="form-control" id="confirm_password" name="confirm_password" required />
         </div>
-<!--        <div class="form-group">-->
-<!--            <label for="admin">Admin</label>-->
-<!--            <select name="admin" id="admin" class="form-control">-->
-<!--                <option value="0" selected>user</option>-->
-<!--                <option value="1">admin</option>-->
-<!--            </select>-->
-<!--        </div>-->
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
 </div>

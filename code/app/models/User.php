@@ -11,7 +11,12 @@ class User
         $this->db = Database::getInstance()->getConnection();
 
         try {
+            echo '<div class="container">';
+            echo '<br/>                 ';
+            $this->db->prepare("SELECT 1 FROM `roles` LIMIT 1")->execute();
             $this->db->prepare("SELECT 1 FROM `users` LIMIT 1")->execute();
+            echo '<div>';
+
         } catch (PDOException $err) {
             $this->createTable();
         } catch (\Throwable $throwable) {
@@ -20,21 +25,37 @@ class User
         }
     }
 
-    public function createTable()
+    public function createTable(): bool
     {
-        $query = "CREATE TABLE IF NOT EXISTS `users` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `login` VARCHAR(255) NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
-    `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
-    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-     )";
+        $roleTableQuery = "CREATE TABLE IF NOT EXISTS `roles` (
+            `id` INT(11) NOT NULL PRIMARY KEY ,
+            `role_name` VARCHAR(255) NOT NULL,
+            `role_description` TEXT)";
+        $userTableQuery = "CREATE TABLE IF NOT EXISTS `users` (
+             `id` INT(11) NOT NULL AUTO_INCREMENT,
+             `username` VARCHAR(255) NOT NULL, 
+             `email` VARCHAR(255) NOT NULL, 
+             `email_verification` TINYINT(1) NOT NULL DEFAULT 0, 
+             `password` VARCHAR(255) NOT NULL,
+             `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
+             `role` INT(11) NOT NULL DEFAULT 0,
+             `is_active` TINYINT(1) NOT NULL DEFAULT 1,
+             `last_login` TIMESTAMP NULL,
+             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+             PRIMARY KEY (`id`),
+             FOREIGN KEY (`role`) REFERENCES `roles`(`id`) )";
+        var_dump($userTableQuery);
 
+        $this->db->beginTransaction();
         try {
-            $stmnt = $this->db->query($query);
-            $stmnt->execute();
+            $this->db->exec($roleTableQuery);
+            $this->db->exec($userTableQuery);
+            $this->db->commit();
             return true;
         } catch (PDOException $err) {
+            $this->db->rollBack();
+            var_dump($err);
+            exit();
             return false;
         }
     }
@@ -59,20 +80,23 @@ class User
         }
     }
 
-    public function create($data): bool
+    public function create(
+        string $username,
+        string $email,
+        string $password,
+        int    $role,
+    ): bool
     {
-        $login = $data['login'];
-        $password = password_hash($data['password'], PASSWORD_DEFAULT);
-        $admin = $data['admin'] !== 0 && !empty($data['admin']) ? 1 : 0;
         $created_at = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO users (login, password, is_admin, created_at) VALUE (?,?,?,?)";
+        $query = "INSERT INTO users (username, email, password, role, created_at) VALUES (?,?,?,?,?)";
 
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$login, $password, $admin, $created_at]);
+            $stmt->execute([$username, $email, password_hash($password, PASSWORD_DEFAULT), $role, $created_at]);
             return true;
         } catch (PDOException $error) {
+            exit($error);
             return false;
         }
     }
@@ -121,19 +145,21 @@ class User
 
     }
 
-    public function update($id, $data)
+    public function update($id, $data): bool
     {
-        $login = $data['login'];
-        $admin = $data['admin'] !== 0 && !empty($data['admin']) ? 1 : 0;
-
-        $query = "UPDATE users SET login=?, is_admin=? WHERE id=?";
+        $username = $data['username'];
+        $admin = !empty($data['admin']) && $data['admin'] !== 0 ? 1 : 0;
+        $email = $data['email'];
+        $role = $data['role'];
+        $is_active = isset($data['is_active']) ? 1 : 0;
+        $query = "UPDATE users SET username=?,email=?, role=?, is_admin=? WHERE id=?";
 
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$login, $admin, $id]);
-
+            $stmt->execute([$username,$email, $role,$admin, $id]);
             return true;
         } catch (PDOException $error) {
+            exit($error);
             return false;
         }
     }

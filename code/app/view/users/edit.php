@@ -13,17 +13,23 @@ ob_start();
 <!--        </pre>-->
         <form action="index.php?page=users&action=update&id=<?=$user['id'] ?>" method="post" class="w-50">
             <div class="form-group mt-1">
-                <label for="login">Login</label>
-                <input type="text" class="form-control" id="login" name="login" value="<?=$user['login']; ?>" required />
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username" value="<?=$user['username']; ?>" required />
+            </div>
+            <div class="form-group mt-1">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="<?=$user['email']; ?>" required/>
             </div>
             <div class="form-group mt-3">
-                <label for="admin">Admin</label>
-                <select name="admin" id="admin" class="form-control">
-                    <option value="0" <?php if(!$user['is_admin']){echo 'selected';}?>>user role</option>
-                    <option value="1" <?php if($user['is_admin']){echo 'selected';}?>>admin role</option>
+                <label for="role">Role:</label>
+                <select name="role" id="role" class="form-control">
+                    <option value="1" <?php echo $user['role'] ? 'selected': ''; ?>>User</option>
+                    <option value="2" <?php echo $user['role'] ? 'selected': ''; ?>>Content creator</option>
+                    <option value="3" <?php echo $user['role'] ? 'selected': '' ;?>>Editor</option>
+                    <option value="4" <?php echo $user['role'] ? 'selected': '' ;?>>Admin</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Save</button>
+            <button type="submit" class="btn btn-primary mt-3">Save changes</button>
         </form>
     </div>
 
