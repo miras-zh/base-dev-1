@@ -2,8 +2,7 @@
 //require_once '../../models/User.php';
 require_once ROOT_DIR . '/app/models/User.php';
 
-class UserController
-{
+class RoleController{
 
     public function index(): void
     {

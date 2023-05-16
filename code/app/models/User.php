@@ -93,7 +93,7 @@ class User
 
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$username, $email, password_hash($password, PASSWORD_DEFAULT), $role, $created_at]);
+            $stmt->execute([$username, $email, $password, $role, $created_at]);
             return true;
         } catch (PDOException $error) {
             exit($error);
@@ -156,7 +156,7 @@ class User
 
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$username,$email, $role,$admin, $id]);
+            $stmt->execute([$username, $email, $role, $admin, $id]);
             return true;
         } catch (PDOException $error) {
             exit($error);

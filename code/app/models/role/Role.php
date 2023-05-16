@@ -1,15 +1,14 @@
 <?php
 
-class AuthUser
-{
-    private $db;
+class Role {
+    private PDO $db;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
 
         try {
-            $result = $this->db->query("SELECT 1 FROM `users` LIMIT 1");
+            $result = $this->db->query("SELECT 1 FROM `roles` LIMIT 1");
         } catch (PDOException $error) {
             $this->createTable();
         }
@@ -21,29 +20,28 @@ class AuthUser
             `id` INT(11) NOT NULL PRIMARY KEY ,
             `role_name` VARCHAR(255) NOT NULL,
             `role_description` TEXT)";
-        $userTableQuery = "CREATE TABLE IF NOT EXISTS `users` (
-             `id` INT(11) NOT NULL AUTO_INCREMENT,
-             `username` VARCHAR(255) NOT NULL, 
-             `email` VARCHAR(255) NOT NULL, 
-             `email_verification` TINYINT(1) NOT NULL DEFAULT 0, 
-             `password` VARCHAR(255) NOT NULL,
-             `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
-             `role` INT(11) NOT NULL DEFAULT 0,
-             `is_active` TINYINT(1) NOT NULL DEFAULT 1,
-             `last_login` TIMESTAMP NULL,
-             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-             PRIMARY KEY (`id`),
-             FOREIGN KEY (`role`) REFERENCES `roles`(`id`) )";
 
         $this->db->beginTransaction();
         try {
             $this->db->exec($roleTableQuery);
-            $this->db->exec($userTableQuery);
             $this->db->commit();
             return true;
         } catch (PDOException $err) {
             $this->db->rollBack();
             return false;
+        }
+    }
+
+    public function getAllRoles(){
+        $query = "SELECT * FROM `roles`";
+
+        try {
+            $stmnt = $this->db->prepare($query);
+            $roles = $stmnt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $roles;
+        }catch (PDOException $e){
+
         }
     }
 
@@ -78,28 +76,41 @@ class AuthUser
         }
     }
 
-    public function findByEmail($email): bool|array
+    public function getRoleById($id): bool|array
     {
+            $query = "SELECT * FROM users WHERE id=?";
         try {
-            $query = "SELECT * FROM users WHERE email=? LIMIT 1";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$email]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt->execute([$id]);
+            $role = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            echo '<br />';
-            echo '<br />';
-            echo '<br />';
-            echo '<div class="bg-primary container mb-4 mt-5 p-5 text-black border-1 border-secondary">';
-            echo '$user:';
-            echo '<br />';
-            var_dump($user);
-            echo '</div>';
-            echo '<br />';
-
-            return is_array($user) ? $user : false;
+            return $role? $role : false;
 
         } catch (PDOException $err) {
             return false;
+        }
+    }
+
+    public function createRole($role_name, $role_description){
+        $query = "INSERT INTO roles (role_name,role_description) VALUES (?,?)";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$role_name, $role_description]);
+            return true;
+        }catch (PDOException $e){
+
+        }
+    }
+
+    public function updateRole($id, $role_name, $role_description){
+        $query = "UPDATE roles SET role_name=?,role_description=? WHERE id=?";
+
+        try {
+            $stmnt = $this->db->prepare($query);
+            $stmnt->execute([$role_name, $role_description]);
+            return true;
+        }catch (PDOException $e){
+
         }
     }
 }

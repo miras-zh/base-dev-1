@@ -4,10 +4,20 @@ class Router
 {
     public function run()
     {
+        $real_route = preg_replace('|\?.*?$|', '', $_SERVER['REQUEST_URI']);
+        $real_route = trim($real_route, '/');
+        $real_route_parts = explode('/', $real_route);
+        if ($real_route_parts !== [] && $real_route_parts[0] === 'api') {
+            $input = file_get_contents('php://input');
+            if ($input === false || $input === '') {
+                $input = null;
+            }
 
-//        $page = preg_replace('|\?.*?$|', '', $_SERVER['REQUEST_URI']);
-//        echo $page;
-//        $page = trim($page, '/');
+            array_shift($real_route_parts);
+            \App\Api\ApiController::handleRequest($real_route_parts, $_GET, $_POST, $input);
+            exit;
+        }
+
         $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
         switch ($page) {
@@ -60,6 +70,24 @@ class Router
             case 'logout':
                 $controller = new AuthController();
                 $controller->logout();
+                break;
+            case 'auth':
+                $controller = new AuthController();
+
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'store':
+                            $controller->store();
+                            break;
+                        case 'authenticate':
+                            $controller->authenticate();
+                            break;
+                        default;
+                        break;
+                    }
+                } else {
+                    $controller->login();
+                }
                 break;
             default:
                 http_response_code(404);

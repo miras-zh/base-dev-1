@@ -11,30 +11,29 @@ class AuthController
         require_once ROOT_DIR . '/app/view/users/register.php';
     }
 
+    public function index(){}
+
     public function store(): void
     {
         if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
-            $password = $_POST['password'];
-            $confirm_password = $_POST['confirm_password'];
-            var_dump($_POST);
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $confirm_password = trim($_POST['confirm_password']);
+            $email = trim($_POST['email']);
+            $role = 1;
             if ($password !== $confirm_password) {
                 echo "password do not match";
                 return;
             }
 
             $userModel = new User();
-            $data = [
-                'username' => $_POST['username'],
-                'email' => $_POST['email'],
-                'password' => password_hash($password, PASSWORD_DEFAULT),
-                'role' => 1
-            ];
 
+            echo 'create!!!';
             $userModel->create(
-                $data['username'],
-                $data['email'],
-                $data['password'],
-                $data['role'],
+                $username,
+                $email,
+                $password,
+                $role,
             );
         }
         header('Location: index.php?page=login');
@@ -42,21 +41,32 @@ class AuthController
 
     public function login(): void
     {
-        include ROOT_DIR . '/app/views/users/login.php';
+        require_once ROOT_DIR . '/app/view/users/login.php';
     }
 
     public function authenticate(): void
     {
         $authModel = new AuthUser();
+        var_dump($_POST);
+
 
         if ($_POST['email'] !== null && $_POST['password'] !== null) {
             $email = $_POST['email'];
             $password = $_POST['password'];
+            $remember = $_POST['remember'] ?? '';
+
             $user = $authModel->findByEmail($email);
-            if($user && password_verify($password, $user['password'])){
+
+            if($user['password'] == $_POST['password']){
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_role'] = $user['role'];
+
+                if($remember === 'on'){
+                    setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
+                    setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
+                }
+
                 header('Location: index.php');
             }else{
                 echo 'INVALID';

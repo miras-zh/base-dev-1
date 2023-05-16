@@ -49,10 +49,10 @@ ob_start();
 $content = ob_get_clean();
 include ROOT_DIR . '/app/view/layout.php';
 
-
-echo '<div class="container border-1 bg-black border-white font-monospace">';
-var_dump($users);
-echo '</div>';
+//
+//echo '<div class="container border-1 bg-black border-white font-monospace">';
+//var_dump($users);
+//echo '</div>';
 ?>
 
 
