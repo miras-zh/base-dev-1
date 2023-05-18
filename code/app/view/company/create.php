@@ -34,7 +34,7 @@ ob_start();
             <input type="number" class="form-control" id="phone" name="phone" required />
         </div>
         <div class="form-group">
-            <label for="otrasl">Email address </label>
+            <label for="otrasl">Отрасль </label>
             <input type="text" class="form-control" id="otrasl" name="otrasl" required />
         </div>
 

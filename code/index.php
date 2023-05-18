@@ -29,11 +29,13 @@ require_once ROOT_DIR . '/app/controllers/HomeController.php';
 require_once 'app/controllers/users/UserController.php';
 require_once 'app/controllers/role/RoleController.php';
 require_once 'app/controllers/company/CompanyController.php';
+require_once 'app/controllers/pages/PagesController.php';
 require_once 'app/models/User.php';
 require_once 'app/models/AuthUser.php';
 require_once 'app/router.php';
 require_once 'app/models/role/Role.php';
 require_once 'app/models/company/Company.php';
+require_once 'app/models/pages/Pages.php';
 
 $router = new Router();
 $router->run();

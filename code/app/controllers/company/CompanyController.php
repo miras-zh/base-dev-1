@@ -1,7 +1,8 @@
 <?php
 require_once ROOT_DIR . '/app/models/company/Company.php';
 
-class CompanyController{
+class CompanyController
+{
 
     public function index(): void
     {
@@ -19,19 +20,29 @@ class CompanyController{
 
     public function store(): void
     {
-        if (isset($_POST['company_name']) && isset($_POST['company_description'])) {
+        if (isset($_POST['company_name']) && isset($_POST['company_bin'])) {
             $company_name = trim($_POST['company_name']);
-            $company_description = trim($_POST['company_description']);
+            $company_bin = trim($_POST['company_bin']);
+            $region = trim($_POST['region']);
+            $address = trim($_POST['address']);
+            $otrasl = trim($_POST['otrasl']);
+            $phone = trim($_POST['phone']);
+            $email = trim($_POST['email']);
 
             if (empty($company_name)) {
-                echo "Role name is required";
+                echo "Company name is required";
                 return;
             }
 
             $companyModel = new Company();
             $companyModel->createCompany(
                 $company_name,
-                $company_description
+                $company_bin,
+                $region,
+                $address,
+                $otrasl,
+                $phone,
+                $email
             );
         }
         header('Location: index.php?page=companies');

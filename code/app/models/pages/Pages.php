@@ -22,7 +22,7 @@ class Pages {
             `slug` VARCHAR(255) NOT NULL,
             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
-            ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+            ENGINE=InnoDB DEFAULT CHARSET='utf8mb4'";
 
         $this->db->beginTransaction();
         try {
@@ -81,12 +81,12 @@ class Pages {
         }
     }
 
-    public function updatePage($id, $role_name, $role_description){
-        $query = "UPDATE roles SET role_name=?,role_description=? WHERE id=?";
+    public function updatePage($id, $title, $slug){
+        $query = "UPDATE pages SET title=?,slug=? WHERE id=?";
 
         try {
             $stmnt = $this->db->prepare($query);
-            $stmnt->execute([$role_name, $role_description, $id]);
+            $stmnt->execute([$title, $slug, $id]);
             return true;
         }catch (PDOException $e){
 
@@ -94,7 +94,7 @@ class Pages {
     }
 
     public function deletePage($id):bool{
-        $query = "DELETE FROM roles WHERE id= ?";
+        $query = "DELETE FROM pages WHERE id= ?";
 
         try {
             $stmt = $this->db->prepare($query);

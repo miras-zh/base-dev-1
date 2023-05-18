@@ -136,6 +136,31 @@ class Router
                     $controller->login();
                 }
                 break;
+            case 'pages':
+                $controller = new PagesController();
+
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'create':
+                            $controller->create();
+                            break;
+                        case 'store':
+                            $controller->store();
+                            break;
+                        case 'delete':
+                            $controller->delete();
+                            break;
+                        case 'edit':
+                            $controller->edit($_GET['id']);
+                            break;
+                        case 'update':
+                            $controller->update();
+                            break;
+                    }
+                } else {
+                    $controller->index();
+                }
+                break;
             default:
                 http_response_code(404);
                 echo 'Page not Found';

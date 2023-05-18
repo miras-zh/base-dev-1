@@ -8,9 +8,6 @@ ob_start();
         <div class="container">
             <h1>Edit User</h1>
         </div>
-<!--        <pre>-->
-        <?php var_dump($user);?>
-<!--        </pre>-->
         <form action="index.php?page=users&action=update&id=<?=$user['id'] ?>" method="post" class="w-50">
             <div class="form-group mt-1">
                 <label for="username">Username:</label>

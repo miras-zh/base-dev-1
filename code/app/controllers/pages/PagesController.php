@@ -6,7 +6,7 @@ class PagesController{
     public function index(): void
     {
         $pagesModel = new Pages();
-        $roles = $pagesModel->getAllPages();
+        $pages = $pagesModel->getAllPages();
 
         require_once ROOT_DIR . '/app/view/pages/index.php';
     }
@@ -60,20 +60,20 @@ class PagesController{
 
     public function update(): void
     {
-        if (isset($_POST['id']) && isset($_POST['role_name']) && isset($_POST['role_description'])) {
+        if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['slug'])) {
             $id = trim($_POST['id']);
-            $role_name = trim($_POST['role_name']);
-            $role_description = trim($_POST['role_description']);
+            $title = trim($_POST['title']);
+            $slug = trim($_POST['slug']);
 
-            if (empty($role_name)) {
-                echo "Role name is required";
+            if (empty($title)) {
+                echo "title is required";
                 return;
             }
 
-            $roleModel = new Role();
-            $roleModel->updateRole($id, $role_name, $role_description);
+            $pageModel = new Pages();
+            $page = $pageModel->updatePage($id, $title, $slug);
         }
 
-        header('Location: index.php?page=roles');
+        header('Location: index.php?page=pages');
     }
 }

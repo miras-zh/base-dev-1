@@ -24,6 +24,12 @@
                     <a href="index.php?page=roles" class="nav-link">Роли Пользователей</a>
                 </li>
                 <li class="nav-item item-menu-box">
+                    <a href="index.php?page=pages" class="nav-link">Страницы</a>
+                </li>
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=roles" class="nav-link">Регионы</a>
+                </li>
+                <li class="nav-item item-menu-box">
                     <a href="index.php?page=register" class="nav-link">Регистрация</a>
                 </li>
                 <li class="nav-item item-menu-box">

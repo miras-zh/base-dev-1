@@ -71,13 +71,21 @@ class Company {
         }
     }
 
-    public function createCompany($company_name, $company_description){
-        $query = "INSERT INTO companies (company_name,company_description) VALUES (?,?)";
+    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email){
+        $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email) VALUES (?,?,?,?,?,?,?)";
+
+            echo '<br/>';
+            echo '<div class="container bg-info text-black">';
+            var_dump($company_name,' - ', $company_bin,' - ', $region,' - ', $address,' - ', $otrasl,' - ', $phone,' - ', $email);
+            echo '</div>';
+            echo '<br/>';
+            echo '<br/>';
+
 
         try {
             $stmt = $this->db->prepare($query);
             var_dump($stmt);
-            $res = $stmt->execute([$company_name, $company_description]);
+            $res = $stmt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email]);
 
             return true;
         }catch (PDOException $e){
