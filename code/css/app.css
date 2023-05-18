@@ -1,0 +1,23 @@
+.item-menu-box{
+    background: #4e369e4d;
+    width: 180px;
+    border-radius: 4px;
+    padding-left: 10px;
+    color: white !important;
+    margin-bottom: 7px;
+}
+
+.item-menu-box:hover{
+    background: #4e369e80;
+}
+
+.item-menu-box a:hover{
+    color: white;
+}
+
+.item-menu-box a {
+    color: white;
+}
+.shadow-grey{
+    box-shadow: 1px 1px 11px -3px rgba(147, 148, 148, 0.2);
+}

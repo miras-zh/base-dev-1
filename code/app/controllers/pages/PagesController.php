@@ -1,62 +1,61 @@
 <?php
-require_once ROOT_DIR . '/app/models/role/Role.php';
+require_once ROOT_DIR . '/app/models/pages/Pages.php';
 
-class RoleController
-{
+class PagesController{
 
     public function index(): void
     {
-        $roleModel = new Role();
-        $roles = $roleModel->getAllRoles();
+        $pagesModel = new Pages();
+        $roles = $pagesModel->getAllPages();
 
-        require_once ROOT_DIR . '/app/view/role/index.php';
+        require_once ROOT_DIR . '/app/view/pages/index.php';
     }
 
     public function create(): void
     {
         //вызываем шабблон страницы
-        require_once ROOT_DIR . '/app/view/role/create.php';
+        require_once ROOT_DIR . '/app/view/pages/create.php';
     }
 
     public function store(): void
     {
-        if (isset($_POST['role_name']) && isset($_POST['role_description'])) {
-            $role_name = trim($_POST['role_name']);
-            $role_description = trim($_POST['role_description']);
+        if (isset($_POST['title']) && isset($_POST['slug'])) {
+            $title = trim($_POST['title']);
+            $slug = trim($_POST['slug']);
 
-            if (empty($role_name)) {
-                echo "Role name is required";
+            if (empty($title) && empty($title)) {
+                echo "title is required";
                 return;
             }
 
-            $roleModel = new Role();
-            $roleModel->createRole(
-                $role_name,
-                $role_description
+            $pageModel = new Pages();
+            $pageModel->createPage(
+                $title,
+                $slug
             );
         }
-        header('Location: index.php?page=roles');
+        header('Location: index.php?page=pages');
     }
 
     public function delete(): void
     {
-        $roleModel = new Role();
-        $roleModel->deleteRole($_GET['id']);
+        $pageModel = new Pages();
+        $pageModel->deletePage($_GET['id']);
 
         header('Location: index.php?page=roles');
     }
 
     public function edit($id): void
     {
-        $roleModel = new Role();
-        $role = $roleModel->getRoleById($id);
+        $pageModel = new Pages();
+        $page = $pageModel->getPageById($id);
 
-        if (!$role) {
-            echo "Role not found";
+        if (!$page) {
+            echo "Page not found";
             return;
         }
 
-        include ROOT_DIR . "/app/view/role/edit.php";
+        include ROOT_DIR . "/app/view/pages/edit.php";
     }
 
     public function update(): void

@@ -23,10 +23,9 @@ ob_start();
             <div class="form-group mt-3">
                 <label for="role">Role:</label>
                 <select name="role" id="role" class="form-control">
-                    <option value="1" <?php echo $user['role'] ? 'selected': ''; ?>>User</option>
-                    <option value="2" <?php echo $user['role'] ? 'selected': ''; ?>>Content creator</option>
-                    <option value="3" <?php echo $user['role'] ? 'selected': '' ;?>>Editor</option>
-                    <option value="4" <?php echo $user['role'] ? 'selected': '' ;?>>Admin</option>
+                    <?php foreach ($roles as $role): ?>
+                    <option value="<?=$role['id'];?>" <?php echo $user['role']===$role['id'] ? 'selected': '' ;?>><?=$role['role_name'];?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Save changes</button>

@@ -2,7 +2,7 @@
 
 class Router
 {
-    public function run()
+    public function run(): void
     {
         $real_route = preg_replace('|\?.*?$|', '', $_SERVER['REQUEST_URI']);
         $real_route = trim($real_route, '/');
@@ -35,9 +35,6 @@ class Router
                             $controller->create();
                             break;
                         case 'store':
-                            echo '<div class="d-flex flex-column align-content-center bg-danger text-black">';
-                            var_dump('>>> ', $_POST);
-                            echo '</div>';
                             $controller->store();
                             break;
                         case 'delete':
@@ -54,6 +51,56 @@ class Router
                     $controller->index();
                 }
 
+                break;
+            case 'roles':
+                $controller = new RoleController();
+
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'create':
+                            $controller->create();
+                            break;
+                        case 'store':
+                            $controller->store();
+                            break;
+                        case 'delete':
+                            $controller->delete();
+                            break;
+                        case 'edit':
+                            $controller->edit($_GET['id']);
+                            break;
+                        case 'update':
+                            $controller->update();
+                            break;
+                    }
+                } else {
+                    $controller->index();
+                }
+                break;
+            case 'companies':
+                $controller = new CompanyController();
+
+                if (isset($_GET['action'])) {
+                    switch ($_GET['action']) {
+                        case 'create':
+                            $controller->create();
+                            break;
+                        case 'store':
+                            $controller->store();
+                            break;
+                        case 'delete':
+                            $controller->delete();
+                            break;
+                        case 'edit':
+                            $controller->edit($_GET['id']);
+                            break;
+                        case 'update':
+                            $controller->update();
+                            break;
+                    }
+                } else {
+                    $controller->index();
+                }
                 break;
             case 'register':
                 $controller = new AuthController();

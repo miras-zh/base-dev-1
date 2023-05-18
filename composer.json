@@ -7,5 +7,7 @@
             "email": "mikos.zh8@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+      "ext-pdo": "*"
+    }
 }

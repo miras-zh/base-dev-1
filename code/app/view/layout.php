@@ -1,6 +1,4 @@
-<?php
-
-?>
+<?php ?>
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
 <head>
@@ -8,29 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=$title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/app.css">
 </head>
 <body>
-<div class="container bg-dark">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="index.php" class="navbar-brand">CRM</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="index.php?page=users" class="nav-link">Users</a>
+<div class="w-100 h-100 bg-dark m-auto d-flex flex-row">
+    <div class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative" style="width: 300px;height: 100vh; background: #34249252;">
+        <a href="index.php" class="navbar-brand mb-2">CRM</a>
+        <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">
+            <ul class="navbar-nav d-flex flex-column">
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=companies" class="nav-link">База компании</a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?page=register" class="nav-link">Register</a>
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=users" class="nav-link">Пользователи</a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?page=login" class="nav-link">Login</a>
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=roles" class="nav-link">Роли Пользователей</a>
                 </li>
-                <li class="nav-item">
-                    <a href="index.php?page=logout" class="nav-link">Logout</a>
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=register" class="nav-link">Регистрация</a>
+                </li>
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=login" class="nav-link">Логин</a>
+                </li>
+                <li class="nav-item item-menu-box">
+                    <a href="index.php?page=logout" class="nav-link">Выход</a>
                 </li>
             </ul>
         </div>
-    </nav>
-    <div class="container mt-4">
+    </div>
+    <div class="w-100 mt-4 m-auto px-4 py-4">
         <?php  echo $content; ?>
     </div>
 </div>

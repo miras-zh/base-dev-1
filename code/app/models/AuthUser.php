@@ -86,16 +86,6 @@ class AuthUser
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            echo '<br />';
-            echo '<br />';
-            echo '<br />';
-            echo '<div class="bg-primary container mb-4 mt-5 p-5 text-black border-1 border-secondary">';
-            echo '$user:';
-            echo '<br />';
-            var_dump($user);
-            echo '</div>';
-            echo '<br />';
-
             return is_array($user) ? $user : false;
 
         } catch (PDOException $err) {

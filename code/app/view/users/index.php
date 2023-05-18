@@ -1,10 +1,7 @@
 <?php
-
-
 $title = 'User list';
 require_once ROOT_DIR . '/app/models/User.php';
 ob_start();
-
 ?>
     <h1>User list</h1>
     <a href="index.php?page=users&action=create" class="btn btn-success">Create User</a>
@@ -48,11 +45,6 @@ ob_start();
 <?php
 $content = ob_get_clean();
 include ROOT_DIR . '/app/view/layout.php';
-
-//
-//echo '<div class="container border-1 bg-black border-white font-monospace">';
-//var_dump($users);
-//echo '</div>';
 ?>
 
 

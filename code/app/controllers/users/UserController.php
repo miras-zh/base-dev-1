@@ -1,6 +1,6 @@
 <?php
-//require_once '../../models/User.php';
 require_once ROOT_DIR . '/app/models/User.php';
+require_once ROOT_DIR . '/app/models/role/Role.php';
 
 class UserController
 {
@@ -9,12 +9,13 @@ class UserController
     {
         $userModel = new User();
         $users = $userModel->readAll();
+        $roleModel = new Role();
+        $roles = $roleModel->getAllRoles();
         require_once ROOT_DIR . '/app/view/users/index.php';
     }
 
     public function create(): void
     {
-        //вызываем шабблон страницы
         require_once ROOT_DIR . '/app/view/users/create.php';
     }
 
@@ -30,11 +31,12 @@ class UserController
             }
 
             $userModel = new User();
+            $config = require_once ROOT_DIR . '/config.php';
             $data=[
                 'username'=> $_POST['username'],
                 'email'=> $_POST['email'],
                 'password'=> password_hash($password, PASSWORD_DEFAULT),
-                'role'=> 1
+                'role'=>$config['start_role']
             ];
 
             $userModel->create(
@@ -61,13 +63,8 @@ class UserController
         $userModel->read($_GET['id']);
         $user = $userModel->read($_GET['id']);
 
-        echo "<div class='container bg-info text-black'>";
-        var_dump($_GET);
-        echo "</div>";
-        echo "<div class='container bg-primary text-black'>";
-        var_dump($user);
-        echo "</div>";
-
+        $roleModel = new Role();
+        $roles = $roleModel->getAllRoles();
 
         include ROOT_DIR . "/app/view/users/edit.php";
 //        header('Location: index.php?page=users');

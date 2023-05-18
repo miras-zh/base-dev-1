@@ -11,12 +11,7 @@ class User
         $this->db = Database::getInstance()->getConnection();
 
         try {
-            echo '<div class="container">';
-            echo '<br/>                 ';
-            $this->db->prepare("SELECT 1 FROM `roles` LIMIT 1")->execute();
             $this->db->prepare("SELECT 1 FROM `users` LIMIT 1")->execute();
-            echo '<div>';
-
         } catch (PDOException $err) {
             $this->createTable();
         } catch (\Throwable $throwable) {
@@ -65,7 +60,7 @@ class User
 
     }
 
-    public function readAll()
+    public function readAll(): bool|array
     {
         try {
             $stmnt = $this->db->query("SELECT * FROM `users`");
