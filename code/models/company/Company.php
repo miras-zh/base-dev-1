@@ -1,6 +1,11 @@
 <?php
 
-class Company {
+namespace models\company;
+
+use models\Database;
+
+class Company
+{
     private PDO $db;
 
     public function __construct()
@@ -40,7 +45,8 @@ class Company {
         }
     }
 
-    public function getAllCompanies(){
+    public function getAllCompanies()
+    {
         $query = "SELECT * FROM `companies`";
 
         try {
@@ -51,7 +57,7 @@ class Company {
             }
 
             return $companies;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
         }
     }
@@ -71,15 +77,16 @@ class Company {
         }
     }
 
-    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email){
+    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email)
+    {
         $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email) VALUES (?,?,?,?,?,?,?)";
 
-            echo '<br/>';
-            echo '<div class="container bg-info text-black">';
-            var_dump($company_name,' - ', $company_bin,' - ', $region,' - ', $address,' - ', $otrasl,' - ', $phone,' - ', $email);
-            echo '</div>';
-            echo '<br/>';
-            echo '<br/>';
+        echo '<br/>';
+        echo '<div class="container bg-info text-black">';
+        var_dump($company_name, ' - ', $company_bin, ' - ', $region, ' - ', $address, ' - ', $otrasl, ' - ', $phone, ' - ', $email);
+        echo '</div>';
+        echo '<br/>';
+        echo '<br/>';
 
 
         try {
@@ -88,7 +95,7 @@ class Company {
             $res = $stmt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email]);
 
             return true;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             echo '<br/>';
             echo '<br/>';
             echo '<br/>';
@@ -96,19 +103,21 @@ class Company {
         }
     }
 
-    public function updateCompany($id, $company_name, $company_description){
+    public function updateCompany($id, $company_name, $company_description)
+    {
         $query = "UPDATE companies SET company_name=?,company_description=? WHERE id=?";
 
         try {
             $stmnt = $this->db->prepare($query);
             $stmnt->execute([$company_name, $company_description, $id]);
             return true;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
         }
     }
 
-    public function deleteCompany($id):bool{
+    public function deleteCompany($id): bool
+    {
         $query = "DELETE FROM companies WHERE id= ?";
 
         try {

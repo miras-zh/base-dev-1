@@ -1,4 +1,9 @@
 <?php
+
+namespace controllers\users;
+use models\role\Role;
+use models\User;
+
 require_once ROOT_DIR . '/app/models/User.php';
 require_once ROOT_DIR . '/app/models/role/Role.php';
 
@@ -32,11 +37,11 @@ class UserController
 
             $userModel = new User();
             $config = require_once ROOT_DIR . '/config.php';
-            $data=[
-                'username'=> $_POST['username'],
-                'email'=> $_POST['email'],
-                'password'=> password_hash($password, PASSWORD_DEFAULT),
-                'role'=>$config['start_role']
+            $data = [
+                'username' => $_POST['username'],
+                'email' => $_POST['email'],
+                'password' => password_hash($password, PASSWORD_DEFAULT),
+                'role' => $config['start_role']
             ];
 
             $userModel->create(

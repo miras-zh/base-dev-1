@@ -1,7 +1,12 @@
 <?php
+
+namespace controllers\pages;
+use models\pages\Pages;
+
 require_once ROOT_DIR . '/app/models/pages/Pages.php';
 
-class PagesController{
+class PagesController
+{
 
     public function index(): void
     {

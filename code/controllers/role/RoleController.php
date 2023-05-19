@@ -1,4 +1,8 @@
 <?php
+
+namespace controllers\role;
+use models\role\Role;
+
 require_once ROOT_DIR . '/app/models/role/Role.php';
 
 class RoleController

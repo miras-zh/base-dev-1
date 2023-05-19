@@ -1,5 +1,6 @@
 <?php
 
+namespace models;
 class Database
 {
     private static $instance = null;
@@ -16,22 +17,24 @@ class Database
 
         try {
             $connectDriver = "mysql:host=$db_host;dbname=$db_name";
-            $this->conn = new PDO($connectDriver,$db_user, $db_pass);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $this->conn = new PDO($connectDriver, $db_user, $db_pass);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //            echo 'success';
-        }catch (PDOException $err){
+        } catch (PDOException $err) {
             echo "connect failed" . $err->getMessage();
         }
     }
 
-    public static function getInstance(){
-        if(!isset(self::$instance)){
+    public static function getInstance()
+    {
+        if (!isset(self::$instance)) {
             self::$instance = new self();
         }
         return self::$instance;
     }
 
-    public function getConnection(){
+    public function getConnection()
+    {
         return $this->conn;
     }
 }

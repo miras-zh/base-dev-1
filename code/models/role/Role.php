@@ -1,6 +1,11 @@
 <?php
 
-class Role {
+namespace models\role;
+
+use models\Database;
+
+class Role
+{
     private $db;
 
     public function __construct()
@@ -32,7 +37,8 @@ class Role {
         }
     }
 
-    public function getAllRoles(){
+    public function getAllRoles()
+    {
         $query = "SELECT * FROM `roles`";
 
         try {
@@ -43,14 +49,14 @@ class Role {
             }
 
             return $roles;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
         }
     }
 
     public function getRoleById($id): bool|array
     {
-            $query = "SELECT * FROM roles WHERE id=?";
+        $query = "SELECT * FROM roles WHERE id=?";
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
@@ -63,7 +69,8 @@ class Role {
         }
     }
 
-    public function createRole($role_name, $role_description){
+    public function createRole($role_name, $role_description)
+    {
         $query = "INSERT INTO roles (role_name,role_description) VALUES (?,?)";
         var_dump($role_name, ' - ', $role_description);
         var_dump($query);
@@ -72,10 +79,10 @@ class Role {
             var_dump($stmt);
             $res = $stmt->execute([$role_name, $role_description]);
             echo '<br/>';
-            var_dump('->',$res);
+            var_dump('->', $res);
 
             return true;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
             echo '<br/>';
             echo '<br/>';
             echo '<br/>';
@@ -83,19 +90,21 @@ class Role {
         }
     }
 
-    public function updateRole($id, $role_name, $role_description){
+    public function updateRole($id, $role_name, $role_description)
+    {
         $query = "UPDATE roles SET role_name=?,role_description=? WHERE id=?";
 
         try {
             $stmnt = $this->db->prepare($query);
             $stmnt->execute([$role_name, $role_description, $id]);
             return true;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
         }
     }
 
-    public function deleteRole($id):bool{
+    public function deleteRole($id): bool
+    {
         $query = "DELETE FROM roles WHERE id= ?";
 
         try {

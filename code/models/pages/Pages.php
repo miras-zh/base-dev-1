@@ -1,6 +1,11 @@
 <?php
 
-class Pages {
+namespace models\pages;
+
+use models\Database;
+
+class Pages
+{
     private $db;
 
     public function __construct()
@@ -35,7 +40,8 @@ class Pages {
         }
     }
 
-    public function getAllPages(){
+    public function getAllPages()
+    {
         $query = "SELECT * FROM `pages`";
 
         try {
@@ -46,7 +52,7 @@ class Pages {
             }
 
             return $pages;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
         }
     }
@@ -66,34 +72,37 @@ class Pages {
         }
     }
 
-    public function createPage($title, $slug){
+    public function createPage($title, $slug)
+    {
         $query = "INSERT INTO pages (title,slug) VALUES (?,?)";
         try {
             $stmt = $this->db->prepare($query);
             var_dump($stmt);
             $res = $stmt->execute([$title, $slug]);
-            var_dump('->',$res);
+            var_dump('->', $res);
 
             return true;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
             var_dump('error->', $e);
         }
     }
 
-    public function updatePage($id, $title, $slug){
+    public function updatePage($id, $title, $slug)
+    {
         $query = "UPDATE pages SET title=?,slug=? WHERE id=?";
 
         try {
             $stmnt = $this->db->prepare($query);
             $stmnt->execute([$title, $slug, $id]);
             return true;
-        }catch (PDOException $e){
+        } catch (PDOException $e) {
 
         }
     }
 
-    public function deletePage($id):bool{
+    public function deletePage($id): bool
+    {
         $query = "DELETE FROM pages WHERE id= ?";
 
         try {

@@ -1,6 +1,10 @@
 <?php
 
 //require_once '../../models/User.php';
+namespace controllers\auth;
+use models\AuthUser;
+use models\User;
+
 require_once ROOT_DIR . '/app/models/AuthUser.php';
 
 class AuthController
@@ -11,7 +15,9 @@ class AuthController
         require_once ROOT_DIR . '/app/view/users/register.php';
     }
 
-    public function index(){}
+    public function index()
+    {
+    }
 
     public function store(): void
     {
@@ -57,24 +63,25 @@ class AuthController
 
             $user = $authModel->findByEmail($email);
 
-            if($user['password'] == $_POST['password']){
+            if ($user['password'] == $_POST['password']) {
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_role'] = $user['role'];
 
-                if($remember === 'on'){
+                if ($remember === 'on') {
                     setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
                     setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
                 }
 
                 header('Location: index.php');
-            }else{
+            } else {
                 echo 'INVALID';
             }
         }
     }
 
-    public function logout(): void{
+    public function logout(): void
+    {
         session_start();
         session_unset();
         session_destroy();

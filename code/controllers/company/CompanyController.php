@@ -1,4 +1,8 @@
 <?php
+
+namespace controllers\company;
+use models\company\Company;
+
 require_once ROOT_DIR . '/app/models/company/Company.php';
 
 class CompanyController

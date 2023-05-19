@@ -1,5 +1,7 @@
 <?php
 
+namespace models;
+
 class AuthUser
 {
     private $db;
