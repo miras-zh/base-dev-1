@@ -2,12 +2,12 @@
 
 
 $title = 'Role list';
-require_once ROOT_DIR . '/app/models/role/Role.php';
+require_once ROOT_DIR . '/models/role/Role.php';
 ob_start();
 
 ?>
-<h1>Roles list</h1>
-<a href="index.php?page=roles&action=create" class="btn btn-success">Create Role</a>
+<h1>Список ролей</h1>
+<a href="/roles/create" class="btn btn-success">Создать роль</a>
 <table class="table  table-dark">
     <thead>
     <tr>
@@ -24,8 +24,8 @@ ob_start();
             <td><?php echo $role['role_name']; ?></td>
             <td><?php echo $role['role_description']; ?></td>
             <td>
-                <a href="index.php?page=roles&action=edit&id=<?=$role['id']?>" class="btn btn-primary">Edit</a>
-                <a href="index.php?page=roles&action=delete&id=<?=$role['id']?>" class="btn btn-danger">Delete</a>
+                <a href="/roles/edit/<?=$role['id']?>" class="btn btn-primary">Edit</a>
+                <a href="/roles/delete/<?=$role['id']?>" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>

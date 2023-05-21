@@ -10,7 +10,7 @@ class HomeController
 
     }
 
-    public function index()
+    public function index(): void
     {
         include ROOT_DIR . "/app/view/index.php";
     }

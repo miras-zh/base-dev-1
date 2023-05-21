@@ -1,9 +1,10 @@
 <?php
 
 namespace controllers\company;
+
 use models\company\Company;
 
-require_once ROOT_DIR . '/app/models/company/Company.php';
+require_once ROOT_DIR . '/models/company/Company.php';
 
 class CompanyController
 {
@@ -24,14 +25,27 @@ class CompanyController
 
     public function store(): void
     {
-        if (isset($_POST['company_name']) && isset($_POST['company_bin'])) {
-            $company_name = trim($_POST['company_name']);
+        if (isset($_POST['company_name'])) {
             $company_bin = trim($_POST['company_bin']);
-            $region = trim($_POST['region']);
-            $address = trim($_POST['address']);
-            $otrasl = trim($_POST['otrasl']);
-            $phone = trim($_POST['phone']);
-            $email = trim($_POST['email']);
+            $company_name = trim($_POST['company_name']);
+            $region = isset($_POST['region']) && trim($_POST['region']) !== ''? $_POST['region']:'Kazakhstan';
+            $address = isset($_POST['address']) && trim($_POST['address']) !== ''? $_POST['address']:'Astana';;
+            $otrasl = isset($_POST['otrasl']) && trim($_POST['otrasl']) !== ''? $_POST['otrasl']:'Kazakhstan';;
+            $phone = isset($_POST['phone']) && trim($_POST['phone']) !== ''? $_POST['phone']:'phone none';;
+            $email = isset($_POST['email']) && trim($_POST['email']) !== ''? $_POST['email']:'email@email.com';;
+
+            var_dump($_POST);
+echo '<br />';
+echo '<br />';
+echo '<br />';
+            var_dump('$company_bin >',$company_bin);echo '<br />';
+            var_dump('$company_name >',$company_name);echo '<br />';
+            var_dump('$region >',$region);echo '<br />';
+            var_dump('$address >',$address);echo '<br />';
+            var_dump('$otrasl >',$otrasl);echo '<br />';
+            var_dump('$phone >',$phone);echo '<br />';
+            var_dump('$email >',$email);echo '<br />';
+
 
             if (empty($company_name)) {
                 echo "Company name is required";
@@ -49,21 +63,21 @@ class CompanyController
                 $email
             );
         }
-        header('Location: index.php?page=companies');
+        header('Location: /companies');
     }
 
-    public function delete(): void
+    public function delete($params): void
     {
         $companyModel = new Company();
-        $companyModel->deleteCompany($_GET['id']);
+        $companyModel->deleteCompany($params['id']);
 
-        header('Location: index.php?page=companies');
+        header('Location: /companies');
     }
 
-    public function edit($id): void
+    public function edit($params): void
     {
         $companyModel = new Company();
-        $company = $companyModel->getCompanyById($id);
+        $company = $companyModel->getCompanyById($params['id']);
 
         if (!$company) {
             echo "Company not found";
@@ -74,12 +88,23 @@ class CompanyController
         include ROOT_DIR . "/app/view/company/edit.php";
     }
 
-    public function update(): void
+    public function update($params): void
     {
-        if (isset($_POST['id']) && isset($_POST['company_name']) && isset($_POST['company_description'])) {
-            $id = trim($_POST['id']);
+        if (isset($params['id']) && isset($_POST['company_name']) && isset($_POST['email'])) {
+            var_dump($params);
+            echo '<br/>';
+            var_dump($_POST);
+            echo '<br/>';
+            echo '-----';
+            echo '<br/>';
+            $id = trim($params['id']);
             $company_name = trim($_POST['company_name']);
-            $company_description = trim($_POST['company_description']);
+            $company_bin = trim($_POST['company_bin']);
+            $region = isset($_POST['region']) && trim($_POST['region']) !== ''? $_POST['region']:'Kazakhstan';
+            $address = isset($_POST['address']) && trim($_POST['address']) !== ''? $_POST['address']:'Astana';;
+            $otrasl = isset($_POST['otrasl']) && trim($_POST['otrasl']) !== ''? $_POST['otrasl']:'Kazakhstan';;
+            $phone = isset($_POST['phone']) && trim($_POST['phone']) !== ''? $_POST['phone']:'phone none';;
+            $email = isset($_POST['email']) && trim($_POST['email']) !== ''? $_POST['email']:'email@email.com';;
 
             if (empty($company_name)) {
                 echo "Company name is required";
@@ -87,9 +112,15 @@ class CompanyController
             }
 
             $companyModel = new Company();
-            $companyModel->updateCompany($id, $company_name, $company_description);
+            $companyModel->updateCompany($id, $company_name,
+                $company_bin,
+                $region,
+                $address,
+                $otrasl,
+                $phone,
+                $email);
         }
 
-        header('Location: index.php?page=companies');
+        header('Location: /companies');
     }
 }

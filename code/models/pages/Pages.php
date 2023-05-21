@@ -3,10 +3,13 @@
 namespace models\pages;
 
 use models\Database;
+use models\role\Role;
+use PDO;
+use PDOException;
 
 class Pages
 {
-    private $db;
+    private \PDO $db;
 
     public function __construct()
     {
@@ -25,9 +28,10 @@ class Pages
             `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
             `title` VARCHAR(255) NOT NULL,
             `slug` VARCHAR(255) NOT NULL,
+            `role` VARCHAR(255) NOT NULL,
             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)
-            ENGINE=InnoDB DEFAULT CHARSET='utf8mb4'";
+            ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
         $this->db->beginTransaction();
         try {
@@ -72,13 +76,13 @@ class Pages
         }
     }
 
-    public function createPage($title, $slug)
+    public function createPage($title, $slug, $role)
     {
-        $query = "INSERT INTO pages (title,slug) VALUES (?,?)";
+        $query = "INSERT INTO pages (title,slug, role) VALUES (?,?,?)";
         try {
             $stmt = $this->db->prepare($query);
             var_dump($stmt);
-            $res = $stmt->execute([$title, $slug]);
+            $res = $stmt->execute([$title, $slug, $role]);
             var_dump('->', $res);
 
             return true;

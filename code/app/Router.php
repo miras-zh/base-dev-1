@@ -13,38 +13,50 @@ use controllers\users\UserController;
 class Router
 {
 
-    private $routes = [
-        '/^\/' . APP_BASE_PATH . '\/?$/' => ['controller' => 'home\\HomeController', 'action' => 'index'],
-        '/^\/' . APP_BASE_PATH . '\/?$/' => ['controller' => 'company\\CompanyController', 'action' => 'index'],
-        '/^\/' . APP_BASE_PATH . '\/?$/' => ['controller' => 'pages\\PagesController', 'action' => 'index'],
-        '/^\/' . APP_BASE_PATH . '\/?$/' => ['controller' => 'role\\RoleController', 'action' => 'index'],
-        '/^\/' . APP_BASE_PATH . '\/?$/' => ['controller' => 'users\\UserController', 'action' => 'index'],
-
+    private array $routes = [
+        '|^/?$|' => ['controller' => 'home\\HomeController', 'action' => 'index'],
+        '|^/users(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'users\\UserController'],
+        '|^/companies(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'company\\CompanyController'],
+        '|^/roles(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'role\\RoleController'],
+        '|^/pages(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'pages\\PagesController'],
     ];
 
     public function run(): void
     {
         $uri = $_SERVER['REQUEST_URI'];
+
         $controller = null;
         $action = null;
         $params = null;
+
+        foreach ($this->routes as $pattern => $route){
+            if(preg_match($pattern,$uri,$matches)){
+                $controller = "controllers\\" . $route['controller'];
+                $action = $route['action'] ?? $matches['action'] ?? 'index';
+//                получаем параметры из совпавших с регулярным выражением подстрок
+                $params = array_filter($matches, 'is_string',ARRAY_FILTER_USE_KEY);
+                break;
+            }
+        }
+
+        if(!$controller){
+            http_response_code(404);
+            echo 'page not found';
+            return;
+        }
+
+        $controllerInstance = new $controller();
+        if(!method_exists($controllerInstance, $action)){
+            http_response_code(404);
+            echo 'page not found';
+            return;
+        }
+
+        call_user_func_array([$controllerInstance, $action],[$params]);
     }
 }
 
 
 
 
-//
-//$real_route = preg_replace('|\?.*?$|', '', $_SERVER['REQUEST_URI']);
-//$real_route = trim($real_route, '/');
-//$real_route_parts = explode('/', $real_route);
-//if ($real_route_parts !== [] && $real_route_parts[0] === 'api') {
-//    $input = file_get_contents('php://input');
-//    if ($input === false || $input === '') {
-//        $input = null;
-//    }
-//
-//    array_shift($real_route_parts);
-//    \App\Api\ApiController::handleRequest($real_route_parts, $_GET, $_POST, $input);
-//    exit;
-//}
+

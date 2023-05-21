@@ -1,6 +1,6 @@
 <?php
 $title = 'Edit';
-require_once ROOT_DIR . '/app/models/User.php';
+require_once ROOT_DIR . '/models/user/User.php';
 ob_start();
 ?>
 
@@ -8,7 +8,7 @@ ob_start();
         <div class="container">
             <h1>Edit User</h1>
         </div>
-        <form action="index.php?page=users&action=update&id=<?=$user['id'] ?>" method="post" class="w-50">
+        <form action="/users/update/<?=$user['id'] ?>" method="post" class="w-50">
             <div class="form-group mt-1">
                 <label for="username">Username:</label>
                 <input type="text" class="form-control" id="username" name="username" value="<?=$user['username']; ?>" required />

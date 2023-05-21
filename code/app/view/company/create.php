@@ -1,6 +1,6 @@
 <?php
 $title = 'User list';
-require_once ROOT_DIR . '/app/models/company/Company.php';
+require_once ROOT_DIR . '/models/company/Company.php';
 ob_start();
 ?>
 
@@ -8,7 +8,7 @@ ob_start();
     <div class="container">
         <h1>Добавить компанию</h1>
     </div>
-    <form action="index.php?page=companies&action=store" method="post">
+    <form action="/companies/store" method="post">
         <div class="form-group">
             <label for="company_name">Наименование компании</label>
             <input type="text" class="form-control" id="company_name" name="company_name" required />
@@ -18,24 +18,24 @@ ob_start();
             <input type="number" class="form-control" id="company_bin" name="company_bin" required />
         </div>
         <div class="form-group">
-            <label for="company_bin">Регион регистрации</label>
-            <input type="text" class="form-control" id="company_bin" name="region" required />
+            <label for="region">Регион регистрации</label>
+            <input type="text" class="form-control" id="region" name="region" />
         </div>
         <div class="form-group">
             <label for="address">Адрес</label>
-            <input type="text" class="form-control" id="address" name="address" required />
+            <input type="text" class="form-control" id="address" name="address"  />
         </div>
         <div class="form-group">
             <label for="email">Email адрес </label>
-            <input type="email" class="form-control" id="email" name="email" required />
+            <input type="email" class="form-control" id="email" name="email"  />
         </div>
         <div class="form-group">
             <label for="phone">Телефон</label>
-            <input type="number" class="form-control" id="phone" name="phone" required />
+            <input type="number" class="form-control" id="phone" name="phone"  />
         </div>
         <div class="form-group">
             <label for="otrasl">Отрасль </label>
-            <input type="text" class="form-control" id="otrasl" name="otrasl" required />
+            <input type="text" class="form-control" id="otrasl" name="otrasl"  />
         </div>
 
         <button type="submit" class="btn btn-primary mt-3">Добавить компанию</button>

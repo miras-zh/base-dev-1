@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_URI'] === '/index.php'){
 }
 
 $title = 'User list';
-require_once ROOT_DIR . '/app/models/User.php';
+require_once ROOT_DIR . '/models/user/User.php';
 ob_start();
 
 ?>

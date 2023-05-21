@@ -2,8 +2,8 @@
 
 //require_once '../../models/User.php';
 namespace controllers\auth;
-use models\AuthUser;
-use models\User;
+use models\auth\AuthUser;
+use models\user\User;
 
 require_once ROOT_DIR . '/app/models/AuthUser.php';
 

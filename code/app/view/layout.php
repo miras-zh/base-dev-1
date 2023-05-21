@@ -11,32 +11,32 @@
 <body>
 <div class="w-100 h-100 bg-dark m-auto d-flex flex-row">
     <div class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative" style="width: 300px;height: 100vh; background: #34249252;">
-        <a href="index.php" class="navbar-brand mb-2">CRM</a>
+        <a href="/" class="navbar-brand mb-2">CRM</a>
         <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">
             <ul class="navbar-nav d-flex flex-column">
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=companies" class="nav-link">База компании</a>
+                    <a href="/companies" class="nav-link">База компании</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=users" class="nav-link">Пользователи</a>
+                    <a href="/users" class="nav-link">Пользователи</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=roles" class="nav-link">Роли Пользователей</a>
+                    <a href="/roles" class="nav-link">Роли Пользователей</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=pages" class="nav-link">Страницы</a>
+                    <a href="/pages" class="nav-link">Страницы</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=roles" class="nav-link">Регионы</a>
+                    <a href="/regions" class="nav-link">Регионы</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=register" class="nav-link">Регистрация</a>
+                    <a href="/registration" class="nav-link">Регистрация</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=login" class="nav-link">Логин</a>
+                    <a href="/login" class="nav-link">Логин</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="index.php?page=logout" class="nav-link">Выход</a>
+                    <a href="/logout" class="nav-link">Выход</a>
                 </li>
             </ul>
         </div>

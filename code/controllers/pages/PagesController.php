@@ -2,8 +2,9 @@
 
 namespace controllers\pages;
 use models\pages\Pages;
+use models\role\Role;
 
-require_once ROOT_DIR . '/app/models/pages/Pages.php';
+require_once ROOT_DIR . '/models/pages/Pages.php';
 
 class PagesController
 {
@@ -18,7 +19,8 @@ class PagesController
 
     public function create(): void
     {
-        //вызываем шабблон страницы
+        $roleModel = new Role();
+        $roles = $roleModel->getAllRoles();
         require_once ROOT_DIR . '/app/view/pages/create.php';
     }
 
@@ -27,6 +29,7 @@ class PagesController
         if (isset($_POST['title']) && isset($_POST['slug'])) {
             $title = trim($_POST['title']);
             $slug = trim($_POST['slug']);
+            $role = isset($_POST['role']) && trim($_POST['role'])!== '' ? trim($_POST['role']):'1';
 
             if (empty($title) && empty($title)) {
                 echo "title is required";
@@ -36,24 +39,25 @@ class PagesController
             $pageModel = new Pages();
             $pageModel->createPage(
                 $title,
-                $slug
+                $slug,
+                $role
             );
         }
-        header('Location: index.php?page=pages');
+        header('Location: /pages');
     }
 
-    public function delete(): void
+    public function delete($params): void
     {
         $pageModel = new Pages();
-        $pageModel->deletePage($_GET['id']);
+        $pageModel->deletePage($params['id']);
 
-        header('Location: index.php?page=roles');
+        header('Location: /pages');
     }
 
-    public function edit($id): void
+    public function edit($params): void
     {
         $pageModel = new Pages();
-        $page = $pageModel->getPageById($id);
+        $page = $pageModel->getPageById($params['id']);
 
         if (!$page) {
             echo "Page not found";
@@ -63,9 +67,9 @@ class PagesController
         include ROOT_DIR . "/app/view/pages/edit.php";
     }
 
-    public function update(): void
+    public function update($params): void
     {
-        if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['slug'])) {
+        if (isset($params['id']) && isset($_POST['title']) && isset($_POST['slug'])) {
             $id = trim($_POST['id']);
             $title = trim($_POST['title']);
             $slug = trim($_POST['slug']);
@@ -79,6 +83,6 @@ class PagesController
             $page = $pageModel->updatePage($id, $title, $slug);
         }
 
-        header('Location: index.php?page=pages');
+        header('Location: /pages');
     }
 }

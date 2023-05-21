@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api;
+namespace controllers\Api;
 
 abstract class ApiMethod
 {

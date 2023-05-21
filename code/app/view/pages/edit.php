@@ -1,6 +1,6 @@
 <?php
 $title = 'Edit page';
-require_once ROOT_DIR . '/app/models/pages/Pages.php';
+require_once ROOT_DIR . '/models/pages/Pages.php';
 ob_start();
 ?>
 
@@ -8,7 +8,7 @@ ob_start();
     <div class="container">
         <h1>Edit Page</h1>
     </div>
-    <form action="index.php?page=pages&action=update" method="post">
+    <form action="/pages/update/<?=$page['id'] ?>" method="post">
         <input type="hidden" name="id" value="<?=$page['id'] ?>">
         <div class="form-group">
             <label for="title">Page title</label>

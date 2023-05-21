@@ -1,10 +1,10 @@
 <?php
 $title = 'User list';
-require_once ROOT_DIR . '/app/models/User.php';
+require_once ROOT_DIR . '/models/user/User.php';
 ob_start();
 ?>
     <h1>User list</h1>
-    <a href="index.php?page=users&action=create" class="btn btn-success">Create User</a>
+    <a href="/users/create" class="btn btn-success">Create User</a>
     <table class="table  table-dark">
         <thead>
         <tr>
@@ -34,8 +34,8 @@ ob_start();
                     <?php //echo $user['id'];?><!--" class="btn btn-primary">Edit</a>-->
                     <!--                <a href="index.php?page=users&action=delete&id=-->
                     <?php //echo $user['id'];?><!--" class="btn btn-danger">Delete</a>-->
-                    <a href="index.php?page=users&action=edit&id=<?=$user['id']?>" class="btn btn-primary">Edit</a>
-                    <a href="index.php?page=users&action=delete&id=<?=$user['id']?>" class="btn btn-danger">Delete</a>
+                    <a href="/users/edit/<?=$user['id']?>" class="btn btn-primary">Edit</a>
+                    <a href="/users/delete/<?=$user['id']?>" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -2,10 +2,10 @@
 
 namespace controllers\users;
 use models\role\Role;
-use models\User;
+use models\user\User;
 
-require_once ROOT_DIR . '/app/models/User.php';
-require_once ROOT_DIR . '/app/models/role/Role.php';
+require_once ROOT_DIR . '/models/user/User.php';
+require_once ROOT_DIR . '/models/role/Role.php';
 
 class UserController
 {
@@ -51,22 +51,21 @@ class UserController
                 $data['role'],
             );
         }
-        header('Location: index.php?page=users');
+        header('Location: /users');
     }
 
-    public function delete(): void
+    public function delete($params): void
     {
         $userModel = new User();
-        $userModel->delete($_GET['id']);
+        $userModel->delete($params['id']);
 
-        header('Location: index.php?page=users');
+        header('Location: /users');
     }
 
-    public function edit(): void
+    public function edit($params): void
     {
         $userModel = new User();
-        $userModel->read($_GET['id']);
-        $user = $userModel->read($_GET['id']);
+        $user = $userModel->read($params['id']);
 
         $roleModel = new Role();
         $roles = $roleModel->getAllRoles();
@@ -75,12 +74,12 @@ class UserController
 //        header('Location: index.php?page=users');
     }
 
-    public function update(): void
+    public function update($params): void
     {
         echo "test update";
         $userModel = new User();
-        $userModel->update($_GET['id'], $_POST);
+        $userModel->update($params['id'], $_POST);
 
-        header('Location: index.php?page=users');
+        header('Location: /users');
     }
 }

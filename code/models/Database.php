@@ -1,19 +1,22 @@
 <?php
 
 namespace models;
+use PDO;
+use PDOException;
+
 class Database
 {
-    private static $instance = null;
-    private $conn;
+    private static ?Database $instance = null;
+    private PDO $conn;
 
     public function __construct()
     {
-        $config = require_once __DIR__ . '/../../config.php';
+        $config = require_once ROOT_DIR . '/config.php';
 //        var_dump($config);
-        $db_host = $config['db_host'];
-        $db_user = $config['db_user'];
-        $db_pass = $config['db_pass'];
-        $db_name = $config['db_name'];
+        $db_host = DB_HOST;
+        $db_user = DB_USER;
+        $db_pass = DB_PASS;
+        $db_name = DB_NAME;
 
         try {
             $connectDriver = "mysql:host=$db_host;dbname=$db_name";
@@ -25,7 +28,7 @@ class Database
         }
     }
 
-    public static function getInstance()
+    public static function getInstance(): ?Database
     {
         if (!isset(self::$instance)) {
             self::$instance = new self();
@@ -33,7 +36,7 @@ class Database
         return self::$instance;
     }
 
-    public function getConnection()
+    public function getConnection(): PDO
     {
         return $this->conn;
     }

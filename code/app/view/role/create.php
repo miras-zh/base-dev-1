@@ -1,23 +1,23 @@
 <?php
 $title = 'Role list';
-require_once ROOT_DIR . '/app/models/role/Role.php';
+require_once ROOT_DIR . '/models/role/Role.php';
 ob_start();
 ?>
 
 <div class="bg-dark h-100">
     <div class="container">
-        <h1>Create Role</h1>
+        <h1>Создание роли пользователей</h1>
     </div>
-    <form action="index.php?page=roles&action=store" method="post">
+    <form action="/roles/store" method="post">
         <div class="form-group">
-            <label for="rolename">Role</label>
+            <label for="rolename">Роли пользователей</label>
             <input type="text" class="form-control" id="rolename" name="role_name" required />
         </div>
         <div class="form-group">
-            <label for="role_description">Role description </label>
+            <label for="role_description">Описание роли </label>
             <input type="text" class="form-control" id="role_description" name="role_description" required />
         </div>
-        <button type="submit" class="btn btn-primary mt-5">Create role</button>
+        <button type="submit" class="btn btn-primary mt-5">Создать роль</button>
     </form>
 </div>
 

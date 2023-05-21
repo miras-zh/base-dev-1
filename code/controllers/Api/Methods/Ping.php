@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Api\Methods;
+namespace controllers\Api\Methods;
 
-use App\Api\ApiMethod;
+use controllers\Api\ApiMethod;
 
 class Ping extends ApiMethod
 {

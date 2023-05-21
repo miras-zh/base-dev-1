@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Api;
+namespace controllers\Api;
 
-use App\Api\Exceptions\ApiException;
+use controllers\Api\Exceptions\ApiException;
 
 class ApiController
 {
@@ -28,12 +28,19 @@ class ApiController
 
         try {
             $method_class = self::getMethodClass($route_parts);
+
+
+
+            var_dump('$method_class:',$method_class);
+            echo '<br/>';
             if (!class_exists($method_class)) {
                 throw new ApiException(404, 'Method not found');
             }
 
             try {
                 $method_result = $method_class::execute($params);
+                var_dump('----------------------------- $method_result:',$method_result);
+                echo '<br/>';
                 $result = [
                     'ok' => true,
                     'result' => $method_result,
@@ -61,6 +68,6 @@ class ApiController
 
     private static function getMethodClass(array $route_parts): string|ApiMethod
     {
-        return '\\App\\Api\\Methods\\' . implode('\\', $route_parts);
+        return '\\controllers\\Api\\Methods\\' . implode('\\', $route_parts);
     }
 }

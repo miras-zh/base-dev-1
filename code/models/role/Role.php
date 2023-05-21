@@ -3,6 +3,8 @@
 namespace models\role;
 
 use models\Database;
+use PDO;
+use PDOException;
 
 class Role
 {

@@ -1,6 +1,10 @@
 <?php
 
-namespace models;
+namespace models\auth;
+
+use models\Database;
+use models\PDO;
+use models\PDOException;
 
 class AuthUser
 {

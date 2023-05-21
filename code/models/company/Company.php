@@ -3,6 +3,8 @@
 namespace models\company;
 
 use models\Database;
+use PDO;
+use PDOException;
 
 class Company
 {
@@ -70,6 +72,9 @@ class Company
             $stmt->execute([$id]);
             $company = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            var_dump($company);
+            echo '<br/>';
+
             return $company;
 
         } catch (PDOException $err) {
@@ -96,20 +101,22 @@ class Company
 
             return true;
         } catch (PDOException $e) {
-            echo '<br/>';
-            echo '<br/>';
-            echo '<br/>';
+            ;
             var_dump('error->', $e);
         }
     }
 
-    public function updateCompany($id, $company_name, $company_description)
+    public function updateCompany($id, $company_name,$company_bin, $region, $address, $otrasl, $phone, $email)
     {
-        $query = "UPDATE companies SET company_name=?,company_description=? WHERE id=?";
-
+        $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
+        var_dump('query >', $query);
+        echo '<br/>';
         try {
             $stmnt = $this->db->prepare($query);
-            $stmnt->execute([$company_name, $company_description, $id]);
+            $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
+
+            var_dump('res->',$res);
+
             return true;
         } catch (PDOException $e) {
 

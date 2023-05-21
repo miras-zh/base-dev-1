@@ -3,7 +3,7 @@
 namespace controllers\role;
 use models\role\Role;
 
-require_once ROOT_DIR . '/app/models/role/Role.php';
+require_once ROOT_DIR . '/models/role/Role.php';
 
 class RoleController
 {
@@ -39,21 +39,21 @@ class RoleController
                 $role_description
             );
         }
-        header('Location: index.php?page=roles');
+        header('Location: /roles');
     }
 
-    public function delete(): void
+    public function delete($params): void
     {
         $roleModel = new Role();
-        $roleModel->deleteRole($_GET['id']);
+        $roleModel->deleteRole($params['id']);
 
-        header('Location: index.php?page=roles');
+        header('Location: /roles');
     }
 
-    public function edit($id): void
+    public function edit($params): void
     {
         $roleModel = new Role();
-        $role = $roleModel->getRoleById($id);
+        $role = $roleModel->getRoleById($params['id']);
 
         if (!$role) {
             echo "Role not found";
@@ -63,10 +63,11 @@ class RoleController
         include ROOT_DIR . "/app/view/role/edit.php";
     }
 
-    public function update(): void
+    public function update($params): void
     {
-        if (isset($_POST['id']) && isset($_POST['role_name']) && isset($_POST['role_description'])) {
-            $id = trim($_POST['id']);
+        var_dump($params);
+        if (isset($params['id']) && isset($_POST['role_name']) && isset($_POST['role_description'])) {
+            $id = trim($params['id']);
             $role_name = trim($_POST['role_name']);
             $role_description = trim($_POST['role_description']);
 
@@ -79,6 +80,6 @@ class RoleController
             $roleModel->updateRole($id, $role_name, $role_description);
         }
 
-        header('Location: index.php?page=roles');
+        header('Location: /roles');
     }
 }

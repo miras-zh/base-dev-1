@@ -1,6 +1,10 @@
 <?php
 
-namespace models;
+namespace models\user;
+
+use models\Database;
+use PDO;
+use PDOException;
 
 class User
 {
@@ -87,6 +91,7 @@ class User
         $created_at = date('Y-m-d H:i:s');
 
         $query = "INSERT INTO users (username, email, password, role, created_at) VALUES (?,?,?,?,?)";
+        var_dump($query);
 
         try {
             $stmt = $this->db->prepare($query);
