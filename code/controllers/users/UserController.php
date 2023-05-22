@@ -71,7 +71,6 @@ class UserController
         $roles = $roleModel->getAllRoles();
 
         include ROOT_DIR . "/app/view/users/edit.php";
-//        header('Location: index.php?page=users');
     }
 
     public function update($params): void
@@ -81,5 +80,11 @@ class UserController
         $userModel->update($params['id'], $_POST);
 
         header('Location: /users');
+    }
+
+    public function getAllUsers(): bool|array
+    {
+        $userModel = new User();
+        return $userModel->readAll();
     }
 }

@@ -76,13 +76,13 @@ class Pages
         }
     }
 
-    public function createPage($title, $slug, $role)
+    public function createPage($title, $slug, $roles)
     {
         $query = "INSERT INTO pages (title,slug, role) VALUES (?,?,?)";
         try {
             $stmt = $this->db->prepare($query);
             var_dump($stmt);
-            $res = $stmt->execute([$title, $slug, $role]);
+            $res = $stmt->execute([$title, $slug, $roles]);
             var_dump('->', $res);
 
             return true;
@@ -92,13 +92,13 @@ class Pages
         }
     }
 
-    public function updatePage($id, $title, $slug)
+    public function updatePage($id, $title, $slug, $roles)
     {
-        $query = "UPDATE pages SET title=?,slug=? WHERE id=?";
+        $query = "UPDATE pages SET title=?,slug=?, role=? WHERE id=?";
 
         try {
             $stmnt = $this->db->prepare($query);
-            $stmnt->execute([$title, $slug, $id]);
+            $stmnt->execute([$title, $slug, $roles, $id]);
             return true;
         } catch (PDOException $e) {
 

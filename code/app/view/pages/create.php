@@ -18,13 +18,14 @@ ob_start();
             <label for="slug">Slug </label>
             <input type="text" class="form-control" id="slug" name="slug" required />
         </div>
-        <div class="form-group mt-3">
+        <div class="form-group mt-3 d-flex flex-column">
             <label for="role">Role:</label>
-            <select name="role" id="role" class="form-control">
                 <?php foreach ($roles as $role): ?>
-                    <option value="<?=$role['id'];?>"><?=$role['role_name'];?></option>
+                    <label class="mb-2 pointer-event">
+                        <input class="form-check-input" type="checkbox" name="roles[]" value="<?=$role['id']; ?>" />
+                        <?=$role['role_name'];?>
+                    </label>
                 <?php endforeach; ?>
-            </select>
         </div>
         <button type="submit" class="btn btn-primary mt-5">Create page</button>
     </form>

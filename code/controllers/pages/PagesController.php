@@ -26,10 +26,10 @@ class PagesController
 
     public function store(): void
     {
-        if (isset($_POST['title']) && isset($_POST['slug'])) {
+        if (isset($_POST['title']) && isset($_POST['slug']) && isset($_POST['roles'])) {
             $title = trim($_POST['title']);
             $slug = trim($_POST['slug']);
-            $role = isset($_POST['role']) && trim($_POST['role'])!== '' ? trim($_POST['role']):'1';
+            $roles = implode(",",$_POST['roles']);
 
             if (empty($title) && empty($title)) {
                 echo "title is required";
@@ -40,7 +40,7 @@ class PagesController
             $pageModel->createPage(
                 $title,
                 $slug,
-                $role
+                $roles
             );
         }
         header('Location: /pages');
@@ -59,6 +59,9 @@ class PagesController
         $pageModel = new Pages();
         $page = $pageModel->getPageById($params['id']);
 
+        $roleModel = new Role();
+        $roles = $roleModel->getAllRoles();
+
         if (!$page) {
             echo "Page not found";
             return;
@@ -69,10 +72,11 @@ class PagesController
 
     public function update($params): void
     {
-        if (isset($params['id']) && isset($_POST['title']) && isset($_POST['slug'])) {
+        if (isset($params['id']) && isset($_POST['title']) && isset($_POST['slug']) && isset($_POST['roles'])) {
             $id = trim($_POST['id']);
             $title = trim($_POST['title']);
             $slug = trim($_POST['slug']);
+            $roles = implode(",",$_POST['roles']);
 
             if (empty($title)) {
                 echo "title is required";
@@ -80,7 +84,7 @@ class PagesController
             }
 
             $pageModel = new Pages();
-            $page = $pageModel->updatePage($id, $title, $slug);
+            $page = $pageModel->updatePage($id, $title, $slug, $roles);
         }
 
         header('Location: /pages');

@@ -28,19 +28,12 @@ class ApiController
 
         try {
             $method_class = self::getMethodClass($route_parts);
-
-
-
-            var_dump('$method_class:',$method_class);
-            echo '<br/>';
             if (!class_exists($method_class)) {
                 throw new ApiException(404, 'Method not found');
             }
 
             try {
                 $method_result = $method_class::execute($params);
-                var_dump('----------------------------- $method_result:',$method_result);
-                echo '<br/>';
                 $result = [
                     'ok' => true,
                     'result' => $method_result,
