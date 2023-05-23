@@ -5,7 +5,7 @@ namespace controllers\auth;
 use models\auth\AuthUser;
 use models\user\User;
 
-require_once ROOT_DIR . '/app/models/AuthUser.php';
+require_once ROOT_DIR . '/models/auth/AuthUser.php';
 
 class AuthController
 {
@@ -42,7 +42,7 @@ class AuthController
                 $role,
             );
         }
-        header('Location: index.php?page=login');
+        header('Location: /auth/login');
     }
 
     public function login(): void
@@ -55,7 +55,6 @@ class AuthController
         $authModel = new AuthUser();
         var_dump($_POST);
 
-
         if ($_POST['email'] !== null && $_POST['password'] !== null) {
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -67,13 +66,15 @@ class AuthController
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_role'] = $user['role'];
-
+//                var_dump('sesion:',$_SESSION);
+//                exit();
+//
                 if ($remember === 'on') {
                     setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
                     setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
                 }
 
-                header('Location: index.php');
+                header('Location: /');
             } else {
                 echo 'INVALID';
             }

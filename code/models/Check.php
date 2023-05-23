@@ -9,6 +9,6 @@ class Check {
         $parseUrl = parse_url($url);
         $path = $parseUrl['path'];
         $slug = str_replace(APP_BASE_PATH, '',$path);
-        return trim($slug,'/');
+        return $slug;
     }
 }

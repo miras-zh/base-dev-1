@@ -1,6 +1,6 @@
 <?php
 $title = 'Register';
-require_once ROOT_DIR . '/app/models/User.php';
+require_once ROOT_DIR . '/models/user/User.php';
 ob_start();
 ?>
 
@@ -9,7 +9,7 @@ ob_start();
         <h1>Authorization</h1>
     </div>
     <div class="row justify-content-center mt-5 col-lg-6 col-md-8 col-sm-10">
-        <form action="index.php?page=auth&action=authenticate" method="post">
+        <form action="/auth/authenticate" method="post">
             <div class="form-group">
                 <label for="email">Email address </label>
                 <input type="email" class="form-control" id="email" name="email" required />
@@ -27,7 +27,7 @@ ob_start();
         </form>
         <div class="mt-4">
             <p>
-                Already don't have an account? <a href="index.php?page=register">Register here</a>
+                Already don't have an account? <a href="/auth/register">Register here</a>
             </p>
         </div>
     </div>

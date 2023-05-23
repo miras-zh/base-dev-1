@@ -3,8 +3,8 @@
 namespace models\auth;
 
 use models\Database;
-use models\PDO;
-use models\PDOException;
+use PDO;
+use PDOException;
 
 class AuthUser
 {

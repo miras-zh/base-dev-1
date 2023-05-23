@@ -30,10 +30,10 @@
                     <a href="/regions" class="nav-link">Регионы</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="/registration" class="nav-link">Регистрация</a>
+                    <a href="/auth/register" class="nav-link">Регистрация</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="/login" class="nav-link">Логин</a>
+                    <a href="/auth/login" class="nav-link">Логин</a>
                 </li>
                 <li class="nav-item item-menu-box">
                     <a href="/logout" class="nav-link">Выход</a>

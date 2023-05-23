@@ -18,6 +18,13 @@ class PagesController
     public function index(): void
     {
         $slug = $this->check->getCurrentUrlSlug();
+//        var_dump($_SESSION);
+//        exit();
+        if(!$this->checkPermission($slug)){
+            header("Location: /");
+            return;
+        }
+
         $pagesModel = new Pages();
         $pages = $pagesModel->getAllPages();
 
@@ -95,5 +102,22 @@ class PagesController
         }
 
         header('Location: /pages');
+    }
+
+    public function checkPermission($slug){
+        $pageModel = new Pages();
+        $page = $pageModel->findBySlug($slug);
+
+        if(!$page){
+            return false;
+        }
+
+        $allowedRoles = explode(',',$page['role']);
+
+        if(isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], $allowedRoles)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
