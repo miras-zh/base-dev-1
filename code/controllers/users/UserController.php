@@ -29,7 +29,7 @@ class UserController
         if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
-            var_dump($_POST);
+
             if ($password !== $confirm_password) {
                 echo "password do not match";
                 return;
@@ -41,7 +41,7 @@ class UserController
                 'username' => $_POST['username'],
                 'email' => $_POST['email'],
                 'password' => password_hash($password, PASSWORD_DEFAULT),
-                'role' => $config['start_role']
+                'role' => START_ROLE
             ];
 
             $userModel->create(

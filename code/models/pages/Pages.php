@@ -76,6 +76,21 @@ class Pages
         }
     }
 
+    public function findBySlug($slug): bool|array
+    {
+        $query = "SELECT * FROM pages WHERE slug=?";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$slug]);
+            $page = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $page;
+
+        } catch (PDOException $err) {
+            return false;
+        }
+    }
+
     public function createPage($title, $slug, $roles)
     {
         $query = "INSERT INTO pages (title,slug, role) VALUES (?,?,?)";

@@ -3,14 +3,21 @@
 namespace controllers\pages;
 use models\pages\Pages;
 use models\role\Role;
+use models\Check;
 
 require_once ROOT_DIR . '/models/pages/Pages.php';
 
 class PagesController
 {
+    private $check;
+
+    public function __construct(){
+        $this->check = new Check();
+    }
 
     public function index(): void
     {
+        $slug = $this->check->getCurrentUrlSlug();
         $pagesModel = new Pages();
         $pages = $pagesModel->getAllPages();
 
