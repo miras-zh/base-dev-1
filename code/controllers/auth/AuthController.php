@@ -38,7 +38,7 @@ class AuthController
             $userModel->create(
                 $username,
                 $email,
-                $password,
+                password_hash($password,PASSWORD_DEFAULT),
                 $role,
             );
         }

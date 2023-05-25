@@ -26,7 +26,7 @@ function is_active($path,$currentPath): string
         <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">
             <ul class="navbar-nav d-flex flex-column">
                 <h6 class="mx-2">To Do</h6>
-                <li class="nav-item item-menu-box ">
+                <li class="nav-item item-menu-box <?php echo is_active('/todo/category',$currentPath);?>">
                     <a href="/todo/category" class="nav-link">Category</a>
                 </li>
                 <hr/>

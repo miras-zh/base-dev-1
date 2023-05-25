@@ -1,31 +1,37 @@
 <?php
+/**
+ * @var string $title
+ * @var string $content
+ * @var array $categories
+ */
 
-
-$title = 'Role list';
-require_once ROOT_DIR . '/models/role/Role.php';
+$title = 'category list';
+require_once ROOT_DIR . '/models/todo/category/TodoCategoryModel.php';
 ob_start();
 
 ?>
-<h1>Список ролей</h1>
-<a href="/roles/create" class="btn btn-success">Создать роль</a>
+<h1>Список todo категорий</h1>
+<a href="/todo/category/create" class="btn btn-success">Создать категорию</a>
 <table class="table  table-dark">
     <thead>
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">Role name</th>
-        <th scope="col">Role description</th>
+        <th scope="col">title</th>
+        <th scope="col">description</th>
+        <th scope="col">usability</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($roles as $role): ?>
+    <?php foreach ($categories as $cat): ?>
         <tr>
-            <th scope="row"><?php echo $role['id']; ?></th>
-            <td><?php echo $role['role_name']; ?></td>
-            <td><?php echo $role['role_description']; ?></td>
+            <th scope="row"><?php echo $cat['id']; ?></th>
+            <td><?php echo $cat['title']; ?></td>
+            <td><?php echo $cat['description']; ?></td>
+            <td><?php echo $cat['usability']; ?></td>
             <td>
-                <a href="/roles/edit/<?=$role['id']?>" class="btn btn-primary">Edit</a>
-                <a href="/roles/delete/<?=$role['id']?>" class="btn btn-danger">Delete</a>
+                <a href="/todo/category/edit/<?=$cat['id']?>" class="btn btn-primary">Edit</a>
+                <a href="/todo/category/delete/<?=$cat['id']?>" class="btn btn-danger">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>

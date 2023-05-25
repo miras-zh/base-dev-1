@@ -1,17 +1,18 @@
 <?php
 
-namespace controllers\todo;
-use models\Check;
-use models\todo\category\TodoCategory;
+namespace controllers\todo\category;
 
-require_once ROOT_DIR . '/models/role/Role.php';
+use models\Check;
+use models\todo\category\TodoCategoryModel;
+
 
 class TodoCategoryController
 {
     private Check $check;
 
-    public function __construct(){
-        $userRole = isset($_SESSION['user_role']) ? $_SESSION['user_role']:null;
+    public function __construct()
+    {
+        $userRole = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : null;
         $this->check = new Check($userRole);
     }
 
@@ -19,84 +20,87 @@ class TodoCategoryController
     {
 //        $this->check->requirePermission();
 
-        $roleModel = new Role();
-        $roles = $roleModel->getAllRoles();
+        $todoCategoryModel = new TodoCategoryModel();
+        $categories = $todoCategoryModel->getAllCategories();
 
-        require_once ROOT_DIR . '/app/view/role/index.php';
+        require_once ROOT_DIR . '/app/view/todo/category/index.php';
     }
 
     public function create(): void
     {
 //        $this->check->requirePermission();
 
-        require_once ROOT_DIR . '/app/view/role/create.php';
+        require_once ROOT_DIR . '/app/view/todo/category/create.php';
     }
 
     public function store(): void
     {
 //        $this->check->requirePermission();
 
-        if (isset($_POST['role_name']) && isset($_POST['role_description'])) {
-            $role_name = trim($_POST['role_name']);
-            $role_description = trim($_POST['role_description']);
+        if (isset($_POST['title']) && isset($_POST['description'])) {
+            $title = trim($_POST['title']);
+            $description = trim($_POST['description']);
+            $user_id = $_SESSION['user_id'] ?? 0;
 
-            if (empty($role_name)) {
-                echo "Role name is required";
+            if (empty($title)) {
+                echo "Category title is required";
                 return;
             }
 
-            $roleModel = new Role();
-            $roleModel->createRole(
-                $role_name,
-                $role_description
+            $todoCategoryModel = new TodoCategoryModel();
+            $todoCategoryModel->createCategory(
+                $title,
+                $description,
+                $user_id
             );
         }
-        header('Location: /roles');
+        header('Location: /todo/category');
     }
 
     public function delete($params): void
     {
 //        $this->check->requirePermission();
 
-        $roleModel = new Role();
-        $roleModel->deleteRole($params['id']);
+        $todoCategoryModel = new TodoCategoryModel();
+        $todoCategoryModel->deleteCategory($params['id']);
 
-        header('Location: /roles');
+        header('Location: /todo/category');
     }
 
     public function edit($params): void
     {
 //        $this->check->requirePermission();
 
-        $roleModel = new Role();
-        $role = $roleModel->getRoleById($params['id']);
+        $todoCategoryModel = new TodoCategoryModel();
+        $category = $todoCategoryModel->getCategoryById($params['id']);
 
-        if (!$role) {
-            echo "Role not found";
+        if (!$category) {
+            echo "Category not found";
             return;
         }
 
-        include ROOT_DIR . "/app/view/role/edit.php";
+        include ROOT_DIR . "/app/view/todo/category/edit.php";
     }
 
     public function update($params): void
     {
 //        $this->check->requirePermission();
-        var_dump($params);
-        if (isset($params['id']) && isset($_POST['role_name']) && isset($_POST['role_description'])) {
-            $id = trim($params['id']);
-            $role_name = trim($_POST['role_name']);
-            $role_description = trim($_POST['role_description']);
 
-            if (empty($role_name)) {
-                echo "Role name is required";
+        if (isset($params['id']) && isset($_POST['title'])) {
+            $id = trim($params['id']);
+            $title = trim($_POST['title']);
+            $description = isset($_POST['description'])?trim($_POST['description']):'';
+            $usability = isset($_POST['usability'])?trim($_POST['usability']):0;
+
+            if (empty($title)) {
+                echo "title is required";
                 return;
             }
 
-            $roleModel = new Role();
-            $roleModel->updateRole($id, $role_name, $role_description);
+            $todoCategoryModel = new TodoCategoryModel();
+            $todoCategoryModel->updateCategory($id, $title, $description, $usability);
         }
 
-        header('Location: /roles');
+        header('Location: /todo/category');
     }
 }
