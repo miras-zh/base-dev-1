@@ -19,6 +19,7 @@ class Router
         '|^/companies(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'company\\CompanyController'],
         '|^/roles(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'role\\RoleController'],
         '|^/pages(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'pages\\PagesController'],
+        '|^/todo\/category(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\\TodoCategory'],
         '|^/auth(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'auth\\AuthController'],
     ];
 

@@ -10,5 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="feather-icons" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
   </component>
 </module>

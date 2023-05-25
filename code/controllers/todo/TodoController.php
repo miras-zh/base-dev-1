@@ -1,12 +1,12 @@
 <?php
 
-namespace controllers\role;
+namespace controllers\todo;
 use models\Check;
 use models\role\Role;
 
 require_once ROOT_DIR . '/models/role/Role.php';
 
-class RoleController
+class TodoController
 {
     private Check $check;
 
@@ -17,7 +17,7 @@ class RoleController
 
     public function index(): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
 
         $roleModel = new Role();
         $roles = $roleModel->getAllRoles();
@@ -27,14 +27,14 @@ class RoleController
 
     public function create(): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
 
         require_once ROOT_DIR . '/app/view/role/create.php';
     }
 
     public function store(): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
 
         if (isset($_POST['role_name']) && isset($_POST['role_description'])) {
             $role_name = trim($_POST['role_name']);
@@ -56,7 +56,7 @@ class RoleController
 
     public function delete($params): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
 
         $roleModel = new Role();
         $roleModel->deleteRole($params['id']);
@@ -66,7 +66,7 @@ class RoleController
 
     public function edit($params): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
 
         $roleModel = new Role();
         $role = $roleModel->getRoleById($params['id']);
@@ -81,7 +81,7 @@ class RoleController
 
     public function update($params): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
         var_dump($params);
         if (isset($params['id']) && isset($_POST['role_name']) && isset($_POST['role_description'])) {
             $id = trim($params['id']);

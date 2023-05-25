@@ -53,7 +53,6 @@ class AuthController
     public function authenticate(): void
     {
         $authModel = new AuthUser();
-        var_dump($_POST);
 
         if ($_POST['email'] !== null && $_POST['password'] !== null) {
             $email = $_POST['email'];
@@ -61,14 +60,22 @@ class AuthController
             $remember = $_POST['remember'] ?? '';
 
             $user = $authModel->findByEmail($email);
+            var_dump($_POST);
+            echo '<br />';
+            var_dump('USER : ',$user);
+            echo '<br />';
+            echo '<br />';
+            echo '<br />';
+//            if(!$user){
+//                header('Location: /auth/login');
+//            }
 
-            if ($user['password'] == $_POST['password']) {
+            if (password_verify($_POST['password'],$user['password']) ) {
+//            var_dump('USER ------- > ', $user);
+//            echo '<br />';
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_role'] = $user['role'];
-//                var_dump('sesion:',$_SESSION);
-//                exit();
-//
                 if ($remember === 'on') {
                     setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
                     setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
@@ -76,7 +83,7 @@ class AuthController
 
                 header('Location: /');
             } else {
-                echo 'INVALID';
+                header('Location: /auth/login');
             }
         }
     }
@@ -87,6 +94,6 @@ class AuthController
         session_unset();
         session_destroy();
 
-        header('Location: index.php');
+        header('Location: /auth/login');
     }
 }

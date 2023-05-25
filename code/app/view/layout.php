@@ -1,4 +1,15 @@
-<?php ?>
+<?php
+
+/**
+ * @var string $title
+ * @var string $content
+ */
+$currentPath = $_SERVER['REQUEST_URI'];
+function is_active($path,$currentPath): string
+{
+    return $path == $currentPath ? 'active':'';
+}
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="dark">
 <head>
@@ -14,21 +25,27 @@
         <a href="/" class="navbar-brand mb-2">CRM</a>
         <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">
             <ul class="navbar-nav d-flex flex-column">
-                <li class="nav-item item-menu-box">
+                <h6 class="mx-2">To Do</h6>
+                <li class="nav-item item-menu-box ">
+                    <a href="/todo/category" class="nav-link">Category</a>
+                </li>
+                <hr/>
+                <li class="nav-item item-menu-box mt-2 <?php echo is_active('/companies',$currentPath);?>">
                     <a href="/companies" class="nav-link">База компании</a>
                 </li>
-                <li class="nav-item item-menu-box">
+                <li class="nav-item item-menu-box <?= is_active('/users',$currentPath);?>">
                     <a href="/users" class="nav-link">Пользователи</a>
                 </li>
-                <li class="nav-item item-menu-box">
+                <li class="nav-item item-menu-box <?= is_active('/roles',$currentPath)?>">
                     <a href="/roles" class="nav-link">Роли Пользователей</a>
                 </li>
-                <li class="nav-item item-menu-box">
+                <li class="nav-item item-menu-box <?= is_active('/pages',$currentPath)?>">
                     <a href="/pages" class="nav-link">Страницы</a>
                 </li>
-                <li class="nav-item item-menu-box">
+                <li class="nav-item item-menu-box <?= is_active('/regions',$currentPath)?>">
                     <a href="/regions" class="nav-link">Регионы</a>
                 </li>
+                <hr/>
                 <li class="nav-item item-menu-box">
                     <a href="/auth/register" class="nav-link">Регистрация</a>
                 </li>
@@ -36,7 +53,7 @@
                     <a href="/auth/login" class="nav-link">Логин</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="/logout" class="nav-link">Выход</a>
+                    <a href="/auth/logout" class="nav-link">Выход</a>
                 </li>
             </ul>
         </div>

@@ -21,6 +21,7 @@ if ($_SERVER['HTTP_HOST'] === 'minicrm.local:6080') {
     define("DB_NAME", 'minicrm');
     define("START_ROLE", 1);
 } else {
+    define("APP_BASE_PATH", 'https://crm.kazcic.kz');
     define("DB_HOST", 'srv-pleskdb19.ps.kz');
     define("DB_USER", 'kazcickz_miko');
     define("DB_PASS", '999887Ww+');

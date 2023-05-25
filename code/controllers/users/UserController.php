@@ -1,6 +1,7 @@
 <?php
 
 namespace controllers\users;
+use models\Check;
 use models\role\Role;
 use models\user\User;
 
@@ -8,7 +9,12 @@ require_once ROOT_DIR . '/models/user/User.php';
 require_once ROOT_DIR . '/models/role/Role.php';
 
 class UserController
-{
+{   private Check $check;
+
+    public function __construct(){
+        $userRole = isset($_SESSION['user_role']) ? $_SESSION['user_role']:null;
+        $this->check = new Check($userRole);
+    }
 
     public function index(): void
     {
@@ -75,7 +81,14 @@ class UserController
 
     public function update($params): void
     {
-        echo "test update";
+        if(isset($_POST['role'])){
+            $newRole = $_POST['role'];
+            if($this->check->isCurrentUserRole($newRole)){
+                header('Location: /login');
+                exit();
+            }
+        }
+
         $userModel = new User();
         $userModel->update($params['id'], $_POST);
 

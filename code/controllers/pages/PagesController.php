@@ -9,21 +9,16 @@ require_once ROOT_DIR . '/models/pages/Pages.php';
 
 class PagesController
 {
-    private $check;
+    private Check $check;
 
     public function __construct(){
-        $this->check = new Check();
+        $userRole = isset($_SESSION['user_role']) ? $_SESSION['user_role']:null;
+        $this->check = new Check($userRole);
     }
 
     public function index(): void
     {
-        $slug = $this->check->getCurrentUrlSlug();
-//        var_dump($_SESSION);
-//        exit();
-        if(!$this->checkPermission($slug)){
-            header("Location: /");
-            return;
-        }
+        $this->check->requirePermission();
 
         $pagesModel = new Pages();
         $pages = $pagesModel->getAllPages();
@@ -33,13 +28,16 @@ class PagesController
 
     public function create(): void
     {
+        $this->check->requirePermission();
+
         $roleModel = new Role();
         $roles = $roleModel->getAllRoles();
         require_once ROOT_DIR . '/app/view/pages/create.php';
     }
 
-    public function store(): void
-    {
+    public function store(): void{
+        $this->check->requirePermission();
+
         if (isset($_POST['title']) && isset($_POST['slug']) && isset($_POST['roles'])) {
             $title = trim($_POST['title']);
             $slug = trim($_POST['slug']);
@@ -62,6 +60,8 @@ class PagesController
 
     public function delete($params): void
     {
+        $this->check->requirePermission();
+
         $pageModel = new Pages();
         $pageModel->deletePage($params['id']);
 
@@ -70,6 +70,8 @@ class PagesController
 
     public function edit($params): void
     {
+        $this->check->requirePermission();
+
         $pageModel = new Pages();
         $page = $pageModel->getPageById($params['id']);
 
@@ -86,6 +88,8 @@ class PagesController
 
     public function update($params): void
     {
+        $this->check->requirePermission();
+
         if (isset($params['id']) && isset($_POST['title']) && isset($_POST['slug']) && isset($_POST['roles'])) {
             $id = trim($_POST['id']);
             $title = trim($_POST['title']);
@@ -104,20 +108,4 @@ class PagesController
         header('Location: /pages');
     }
 
-    public function checkPermission($slug){
-        $pageModel = new Pages();
-        $page = $pageModel->findBySlug($slug);
-
-        if(!$page){
-            return false;
-        }
-
-        $allowedRoles = explode(',',$page['role']);
-
-        if(isset($_SESSION['user_role']) && in_array($_SESSION['user_role'], $allowedRoles)){
-            return true;
-        }else{
-            return false;
-        }
-    }
 }
