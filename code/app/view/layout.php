@@ -29,6 +29,9 @@ function is_active($path,$currentPath): string
                 <li class="nav-item item-menu-box <?php echo is_active('/todo/category',$currentPath);?>">
                     <a href="/todo/category" class="nav-link">Category</a>
                 </li>
+                <li class="nav-item item-menu-box <?php echo is_active('/todo/tasks',$currentPath);?>">
+                    <a href="/todo/tasks" class="nav-link">Tasks</a>
+                </li>
                 <hr/>
                 <li class="nav-item item-menu-box mt-2 <?php echo is_active('/companies',$currentPath);?>">
                     <a href="/companies" class="nav-link">База компании</a>

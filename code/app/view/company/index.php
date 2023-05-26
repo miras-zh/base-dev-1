@@ -7,7 +7,22 @@ ob_start();
 ?>
 <h1>Компании</h1>
 <a href="/companies/create" class="btn btn-success">Создать компанию</a>
-<div class="shadow-grey mt-5">
+<div class="shadow-grey mt-5 mb-4 d-flex flex-row mx-1 p-3 align-items-center">
+    <div class="form-group mx-2">
+        <label for="company-bin-filter">БИН:</label>
+        <input type="text" class="form-control" id="company-bin-filter">
+    </div>
+    <div class="form-group mx-2">
+        <label for="company-name-filter">Наименование:</label>
+        <input type="text" class="form-control" id="company-name-filter">
+    </div>
+    <div class="form-group mx-2">
+        <label for="company-region-filter">Регион:</label>
+        <input type="text" class="form-control" id="company-region-filter">
+    </div>
+    <button class="mx-5 btn btn-primary" style="padding: 4px; font-size: 14px; height: 40px">Фильтр</button>
+</div>
+<div class="shadow-grey">
     <table class="table">
         <thead>
         <tr>

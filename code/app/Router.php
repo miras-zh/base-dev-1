@@ -20,6 +20,7 @@ class Router
         '|^/roles(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'role\\RoleController'],
         '|^/pages(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'pages\\PagesController'],
         '|^/todo\/category(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\category\\TodoCategoryController'],
+        '|^/todo\/tasks(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\tasks\\TasksController'],
         '|^/auth(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'auth\\AuthController'],
     ];
 

@@ -28,7 +28,7 @@ ob_start();
             <th scope="row"><?php echo $cat['id']; ?></th>
             <td><?php echo $cat['title']; ?></td>
             <td><?php echo $cat['description']; ?></td>
-            <td><?php echo $cat['usability']; ?></td>
+            <td><?php echo $cat['usability']==1?'yes':'no'; ?></td>
             <td>
                 <a href="/todo/category/edit/<?=$cat['id']?>" class="btn btn-primary">Edit</a>
                 <a href="/todo/category/delete/<?=$cat['id']?>" class="btn btn-danger">Delete</a>

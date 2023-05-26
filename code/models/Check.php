@@ -28,7 +28,6 @@ class Check
 
     public function checkPermission($slug): bool
     {
-
         $pageModel = new Pages();
         $page = $pageModel->findBySlug($slug);
         if (!$page) {
@@ -55,7 +54,7 @@ class Check
         }
     }
 
-    public function isCurrentUserRole($role)
+    public function isCurrentUserRole($role): bool
     {
         return $this->userRole == $role;
     }

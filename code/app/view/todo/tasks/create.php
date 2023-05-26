@@ -1,6 +1,6 @@
 <?php
 $title = 'Category list';
-require_once ROOT_DIR . '/models/todo/category/TodoCategoryModel.php';
+require_once ROOT_DIR . '/models/todo/tasks/TasksModel.php';
 ob_start();
 ?>
 

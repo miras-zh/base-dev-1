@@ -1,11 +1,11 @@
 <?php
-namespace models\todo\category;
+namespace models\todo\tasks;
 
 use models\Database;
 use PDO;
 use PDOException;
 
-class TodoCategoryModel
+class TasksModel
 {
     private PDO $db;
 
@@ -14,7 +14,7 @@ class TodoCategoryModel
         $this->db = Database::getInstance()->getConnection();
 
         try {
-            $result = $this->db->query("SELECT 1 FROM `todo_category` LIMIT 1");
+            $result = $this->db->query("SELECT 1 FROM `tasks` LIMIT 1");
         } catch (PDOException $error) {
             $this->createTable();
         }
@@ -22,18 +22,27 @@ class TodoCategoryModel
 
     public function createTable(): bool
     {
-        $todoCategoryTableQuery = "CREATE TABLE IF NOT EXISTS `todo_category` (
-            `id` INT(11) NOT NULL PRIMARY KEY ,
+        $tasksTableQuery = "CREATE TABLE IF NOT EXISTS `tasks` (
+            `id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            `user_id` INT NOT NULL,
             `title` VARCHAR(255) NOT NULL,
             `description` TEXT,
-            `usability` TINYINT DEFAULT 1,
-            `user` INT NOT NULL,
-            FOREIGN KEY (user) REFERENCES users(id) ON DELETE CASCADE 
-            )";
+            `category_id` INT NOT NULL ,
+            `status` ENUM('new','in_progress','completed','on_hold','canceled') NOT NULL ,
+            `priority` ENUM('low','medium','high','urgent') NOT NULL ,
+            `assigned_to` INT,
+            `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+            `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            `finish_date` DATETIME,
+            `completed_at` DATETIME,
+            `reminder_at` DATETIME,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, 
+            FOREIGN KEY (category_id) REFERENCES todo_category(id) ON DELETE SET NULL, 
+            FOREIGN KEY (assigned_to) REFERENCES users(id) ON DELETE SET NULL )";
 
         $this->db->beginTransaction();
         try {
-            $this->db->exec($todoCategoryTableQuery);
+            $this->db->exec($tasksTableQuery);
             $this->db->commit();
             return true;
         } catch (PDOException $err) {
@@ -42,43 +51,43 @@ class TodoCategoryModel
         }
     }
 
-    public function getAllCategories()
+    public function getAllTasks()
     {
-        $query = "SELECT * FROM `todo_category`";
+        $query = "SELECT * FROM `tasks`";
 
         try {
-            $stmnt = $this->db->query("SELECT * FROM `todo_category`");
-            $categories = [];
+            $stmnt = $this->db->query("SELECT * FROM `tasks`");
+            $tasks = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                $categories[] = $row;
+                $tasks[] = $row;
             }
 
-            return $categories;
+            return $tasks;
         } catch (PDOException $e) {
 
         }
     }
 
-    public function getCategoryById($id): bool|array
+    public function getTasksById($id): bool|array
     {
-        $query = "SELECT * FROM todo_category WHERE id=?";
+        $query = "SELECT * FROM tasks WHERE id=?";
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            $category = $stmt->fetch(PDO::FETCH_ASSOC);
+            $task = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $category;
+            return $task;
 
         } catch (PDOException $err) {
             return false;
         }
     }
 
-    public function createCategory($title, $description, $user_id)
+    public function createTask($title, $description, $user_id)
     {
         var_dump('model create category', $user_id);
         echo '<br />';
-        $query = "INSERT INTO todo_category (title,description, user) VALUES (?,?,?)";
+        $query = "INSERT INTO tasks (title,description, user) VALUES (?,?,?)";
         try {
             $stmt = $this->db->prepare($query);
             $res = $stmt->execute([$title, $description, $user_id]);

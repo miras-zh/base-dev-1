@@ -1,12 +1,12 @@
 <?php
 
-namespace controllers\todo\category;
+namespace controllers\todo\tasks;
 
 use models\Check;
-use models\todo\category\TodoCategoryModel;
+use models\todo\tasks\TasksModel;
 
 
-class TodoCategoryController
+class TasksController
 {
     private Check $check;
 
@@ -18,19 +18,19 @@ class TodoCategoryController
 
     public function index(): void
     {
-        $this->check->requirePermission();
+//        $this->check->requirePermission();
 
-        $todoCategoryModel = new TodoCategoryModel();
-        $categories = $todoCategoryModel->getAllCategories();
+        $tasksModel = new TasksModel();
+        $tasks = $tasksModel->getAllTasks();
 
-        require_once ROOT_DIR . '/app/view/todo/category/index.php';
+        require_once ROOT_DIR . '/app/view/todo/tasks/index.php';
     }
 
     public function create(): void
     {
         $this->check->requirePermission();
 
-        require_once ROOT_DIR . '/app/view/todo/category/create.php';
+        require_once ROOT_DIR . '/app/view/todo/tasks/create.php';
     }
 
     public function store(): void
@@ -54,31 +54,31 @@ class TodoCategoryController
             }
 
 
-            $todoCategoryModel = new TodoCategoryModel();
+            $tasksModel = new TasksModel();
             $todoCategoryModel->createCategory(
                 $title,
                 $description,
                 $user_id
             );
         }
-        header('Location: /todo/category');
+        header('Location: /todo/tasks');
     }
 
     public function delete($params): void
     {
         $this->check->requirePermission();
 
-        $todoCategoryModel = new TodoCategoryModel();
+        $tasksModel = new TasksModel();
         $todoCategoryModel->deleteCategory($params['id']);
 
-        header('Location: /todo/category');
+        header('Location: /todo/tasks');
     }
 
     public function edit($params): void
     {
         $this->check->requirePermission();
 
-        $todoCategoryModel = new TodoCategoryModel();
+        $tasksModel = new TasksModel();
         $category = $todoCategoryModel->getCategoryById($params['id']);
 
         if (!$category) {
@@ -86,7 +86,7 @@ class TodoCategoryController
             return;
         }
 
-        include ROOT_DIR . "/app/view/todo/category/edit.php";
+        include ROOT_DIR . "/app/view/todo/tasks/edit.php";
     }
 
     public function update($params): void
@@ -104,10 +104,10 @@ class TodoCategoryController
                 return;
             }
 
-            $todoCategoryModel = new TodoCategoryModel();
+            $tasksModel = new TasksModel();
             $todoCategoryModel->updateCategory($id, $title, $description, $usability);
         }
 
-        header('Location: /todo/category');
+        header('Location: /todo/tasks');
     }
 }
