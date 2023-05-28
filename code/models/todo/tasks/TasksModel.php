@@ -85,12 +85,19 @@ class TasksModel
 
     public function createTask($title, $description, $user_id)
     {
-        var_dump('model create category', $user_id);
+        $category_id = 1;
+        var_dump('model create task', $user_id);
         echo '<br />';
-        $query = "INSERT INTO tasks (title,description, user) VALUES (?,?,?)";
+        var_dump('model create title:', $title);
+        echo '<br />';
+        var_dump('model create description', $description);
+        echo '<br />';
+        echo '<br />';
+        echo '<br />';
+        $query = "INSERT INTO tasks (title,description, user_id, category_id,status,priority) VALUES (?,?,?,?,?,?)";
         try {
             $stmt = $this->db->prepare($query);
-            $res = $stmt->execute([$title, $description, $user_id]);
+            $res = $stmt->execute([$title, $description, $user_id,$category_id,'new','low']);
             var_dump('res', $res);
             echo '<br />';
             return true;
@@ -101,22 +108,24 @@ class TasksModel
         }
     }
 
-    public function updateCategory($id, $title, $description, $usability)
+    public function updateTask($id, $title, $description, $status, $priority,$category_id)
     {
-        $query = "UPDATE todo_category SET title=?,description=?,usability=? WHERE id=?";
+        $query = "UPDATE tasks SET title=?,description=?,status=?, priority=?, category_id=? WHERE id=?";
+
 
         try {
             $stmnt = $this->db->prepare($query);
-            $stmnt->execute([$title, $description, $usability, $id]);
+            $stmnt->execute([$title, $description, $status,$priority,$category_id, $id]);
             return true;
         } catch (PDOException $e) {
-
+            var_dump($e);
+            exit();
         }
     }
 
-    public function deleteCategory($id): bool
+    public function deleteTask($id): bool
     {
-        $query = "DELETE FROM todo_category WHERE id= ?";
+        $query = "DELETE FROM tasks WHERE id= ?";
 
         try {
             $stmt = $this->db->prepare($query);

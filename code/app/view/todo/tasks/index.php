@@ -18,6 +18,8 @@ ob_start();
         <th scope="col">ID</th>
         <th scope="col">title</th>
         <th scope="col">description</th>
+        <th scope="col">status</th>
+        <th scope="col">category</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -27,6 +29,8 @@ ob_start();
             <th scope="row"><?php echo $task['id']; ?></th>
             <td><?php echo $task['title']; ?></td>
             <td><?php echo $task['description']; ?></td>
+            <td><?php echo $task['status']; ?></td>
+            <td><?php echo $task['category_id']; ?></td>
             <td>
                 <a href="/todo/tasks/edit/<?=$task['id']?>" class="btn btn-primary">Edit</a>
                 <a href="/todo/tasks/delete/<?=$task['id']?>" class="btn btn-danger">Delete</a>
