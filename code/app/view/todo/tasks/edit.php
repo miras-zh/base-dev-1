@@ -16,12 +16,28 @@ ob_start();
             <input type="text" class="form-control" id="title" name="title" value="<?=$task['title'] ?>" required />
         </div>
         <div class="form-group">
-            <label for="description">Описание категорий</label>
+            <label for="description">Описание задачи</label>
             <input type="text" class="form-control" id="description" name="description" value="<?=$task['description'] ?>" required/>
         </div>
-        <div class="form-group mb-4">
-            <label for="status">status</label>
-            <input type="checkbox" class="form-check-label" id="status" name="status" value="1" <?=$task['status']?'checked':''; ?>/>
+        <div class="form-group mt-3">
+            <label for="role">Status:</label>
+            <select name="role" id="role" class="form-control">
+                <?php foreach (['new','in_progress','completed','on_hold','canceled'] as $item): ?>
+                    <option value="<?=$item;?>" <?php echo $item===$task['status'] ? 'selected': '' ;?>><?=$item;?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group mt-3">
+            <label for="role">Категория:</label>
+            <select name="role" id="role" class="form-control">
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?=$category['id'];?>" <?php echo $task['category_id']===$category['id'] ? 'selected': '' ;?>><?=$category['title'];?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="finish_date">Дата завершения</label>
+            <input type="datetime-local" class="form-control" id="finish_date" name="finish_date"/>
         </div>
         <button type="submit" class="btn btn-primary">Обновить категорию</button>
     </form>

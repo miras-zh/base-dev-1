@@ -5,6 +5,7 @@ namespace controllers\todo\tasks;
 use models\Check;
 use models\todo\category\TodoCategoryModel;
 use models\todo\tasks\TasksModel;
+use models\todo\tasks\TagsModel;
 
 
 class TasksController
@@ -32,7 +33,7 @@ class TasksController
         $this->check->requirePermission();
 
         $categoryModel = new TodoCategoryModel();
-        $categories = $categoryModel->getAllCategories();
+        $categories = $categoryModel->getAllCategoriesUsability();
         require_once ROOT_DIR . '/app/view/todo/tasks/create.php';
     }
 
@@ -83,6 +84,11 @@ class TasksController
 
         $taskModel = new TasksModel();
         $task = $taskModel->getTasksById($params['id']);
+
+        $categoryModel = new TodoCategoryModel();
+        $categories = $categoryModel->getAllCategoriesUsability();
+
+        $tagsModel = new TagsModel();
 
         if (!$task) {
             echo "Task not found";

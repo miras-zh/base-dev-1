@@ -1,4 +1,5 @@
 <?php
+
 namespace models\todo\category;
 
 use models\Database;
@@ -8,11 +9,12 @@ use PDOException;
 class TodoCategoryModel
 {
     private PDO $db;
+    private mixed $userId;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
-
+        $this->userId = $_SESSION['user_id'] ?? null;
         try {
             $result = $this->db->query("SELECT 1 FROM `todo_category` LIMIT 1");
         } catch (PDOException $error) {
@@ -44,10 +46,30 @@ class TodoCategoryModel
 
     public function getAllCategories()
     {
-        $query = "SELECT * FROM `todo_category`";
+        $query = "SELECT * FROM `todo_category` WHERE user=?";
+        try {
+            $stmnt = $this->db->prepare($query);
+            $stmnt->execute([$this->userId]);
+            $categories = [];
+
+            while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+                $categories[] = $row;
+            }
+
+            return $categories;
+        } catch (PDOException $e) {
+                var_dump('errrrorrrr>>>>', $e);
+                exit();
+        }
+    }
+
+    public function getAllCategoriesUsability()
+    {
+        $query = "SELECT * FROM `todo_category` WHERE user = ? AND usability = 1";
 
         try {
-            $stmnt = $this->db->query("SELECT * FROM `todo_category`");
+            $stmnt = $this->db->prepare($query);
+            $stmnt->execute([$this->userId]);
             $categories = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
                 $categories[] = $row;
@@ -88,7 +110,7 @@ class TodoCategoryModel
         } catch (PDOException $e) {
 
             var_dump('error->', $e);
-        exit();
+            exit();
         }
     }
 

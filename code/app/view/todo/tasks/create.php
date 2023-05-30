@@ -5,10 +5,10 @@ ob_start();
 ?>
 
 <div class="bg-dark h-100">
-    <div class="container">
+    <div class="container mx-auto w-50 mb-4">
         <h1>Создание задачи</h1>
     </div>
-    <form action="/todo/tasks/store" method="post">
+    <form action="/todo/tasks/store" method="post" class="w-50 mx-auto">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" required />
