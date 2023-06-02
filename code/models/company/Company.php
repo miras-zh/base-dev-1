@@ -64,6 +64,20 @@ class Company
         }
     }
 
+    public function filter($name){
+        try {
+            $stmnt = $this->db->query("SELECT * FROM `companies` WHERE company_name LIKE '%$name%'");
+            $companies = [];
+            while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+                $companies[] = $row;
+            }
+
+            return $companies;
+        } catch (PDOException $e) {
+
+        }
+    }
+
     public function getCompanyById($id): bool|array
     {
         $query = "SELECT * FROM companies WHERE id=?";

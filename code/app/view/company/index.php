@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @var array $companies
+ * @var string $content
+ */
 
 $title = 'Company list';
 require_once ROOT_DIR . '/models/company/Company.php';
@@ -7,20 +10,22 @@ ob_start();
 ?>
 <h1>Компании</h1>
 <a href="/companies/create" class="btn btn-success">Создать компанию</a>
-<div class="shadow-grey mt-5 mb-4 d-flex flex-row mx-1 p-3 align-items-center">
-    <div class="form-group mx-2">
-        <label for="company-bin-filter">БИН:</label>
-        <input type="text" class="form-control" id="company-bin-filter">
-    </div>
-    <div class="form-group mx-2">
-        <label for="company-name-filter">Наименование:</label>
-        <input type="text" class="form-control" id="company-name-filter">
-    </div>
-    <div class="form-group mx-2">
-        <label for="company-region-filter">Регион:</label>
-        <input type="text" class="form-control" id="company-region-filter">
-    </div>
-    <button class="mx-5 btn btn-primary" style="padding: 4px; font-size: 14px; height: 40px">Фильтр</button>
+<div class="shadow-grey mt-5 mb-4 mx-1 p-3 align-items-center">
+    <form action="/companies" method="post" class="d-flex flex-row">
+        <div class="form-group mx-2">
+            <label for="bin-filter">БИН:</label>
+            <input type="text" class="form-control" id="bin-filter" name="bin-filter">
+        </div>
+        <div class="form-group mx-2">
+            <label for="company_name_filter">Наименование:</label>
+            <input type="text" class="form-control" id="company_name_filter" name="company_name_filter" value="<?=$valueName?>">
+        </div>
+        <div class="form-group mx-2">
+            <label for="company-region-filter">Регион:</label>
+            <input type="text" class="form-control" id="company-region-filter">
+        </div>
+        <button type="submit" class="mx-5 btn btn-primary" style="padding: 4px; font-size: 14px; height: 40px">Фильтр</button>
+    </form>
 </div>
 <div class="shadow-grey">
     <table class="table">

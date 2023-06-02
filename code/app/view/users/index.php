@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var array $users;
+ */
 $title = 'User list';
 require_once ROOT_DIR . '/models/user/User.php';
 ob_start();

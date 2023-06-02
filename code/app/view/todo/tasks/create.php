@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var array $categories;
+ */
 $title = 'Task create';
 require_once ROOT_DIR . '/models/todo/tasks/TasksModel.php';
 ob_start();

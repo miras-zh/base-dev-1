@@ -22,7 +22,10 @@ function is_active($path,$currentPath): string
 </head>
 <body>
 <div class="w-100 h-100 bg-dark m-auto d-flex flex-row">
-    <div class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative" style="width: 300px;height: 100vh; background: #34249252;">
+    <div style="width: 285px">
+
+    </div>
+    <div class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative position-fixed" style="width: 242px;height: 100vh; background: #34249252;">
         <a href="/" class="navbar-brand mb-2">CRM</a>
         <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">
             <ul class="navbar-nav d-flex flex-column">

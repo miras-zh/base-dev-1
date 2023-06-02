@@ -89,7 +89,8 @@ class TasksController
         $categories = $categoryModel->getAllCategoriesUsability();
 
         $tagsModel = new TagsModel();
-
+        $resTags = $tagsModel->getTagsByTaskId($task['id']);
+        $tags = $resTags !== false ? $resTags : [];
         if (!$task) {
             echo "Task not found";
             return;
@@ -109,6 +110,7 @@ class TasksController
             $description = isset($_POST['description']) ? trim($_POST['description']) : '';
             $status = isset($_POST['status']) ? trim($_POST['status']) : 'new';
             $priority = isset($_POST['priority']) ? trim($_POST['priority']) : 'low';
+            $finish_date = isset($_POST['finish_date']) ? $_POST['finish_date'] : '';
             $category_id = isset($_POST['category_id']) ? trim($_POST['category_id']) : 1;
 
             if (empty($title)) {
@@ -117,7 +119,7 @@ class TasksController
             }
 
             $taskModel = new TasksModel();
-            $taskModel->updateTask($id, $title, $description, $status,$priority,$category_id);
+            $taskModel->updateTask($id, $title, $description, $status,$priority,$category_id,$finish_date);
         }
 
         header('Location: /todo/tasks');

@@ -108,14 +108,14 @@ class TasksModel
         }
     }
 
-    public function updateTask($id, $title, $description, $status, $priority,$category_id)
+    public function updateTask($id, $title, $description, $status, $priority,$category_id,$finish_date)
     {
-        $query = "UPDATE tasks SET title=?,description=?,status=?, priority=?, category_id=? WHERE id=?";
+        $query = "UPDATE tasks SET title=?,description=?,status=?, priority=?, category_id=?,finish_date=? WHERE id=?";
 
 
         try {
             $stmnt = $this->db->prepare($query);
-            $stmnt->execute([$title, $description, $status,$priority,$category_id, $id]);
+            $stmnt->execute([$title, $description, $status,$priority,$category_id,$finish_date, $id]);
             return true;
         } catch (PDOException $e) {
             var_dump($e);

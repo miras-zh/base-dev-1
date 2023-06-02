@@ -8,12 +8,16 @@ require_once ROOT_DIR . '/models/company/Company.php';
 
 class CompanyController
 {
+    public $filterCompanies = null;
+    public $filterCompaniesValue = null;
 
     public function index(): void
     {
+        $this->filter();
+        $valueName = $this->filterCompaniesValue !== null ? $this->filterCompaniesValue : '';
         $companyModel = new Company();
-        $companies = $companyModel->getAllCompanies();
-
+        $companiesAll = $companyModel->getAllCompanies();
+        $companies = $this->filterCompanies !== null ? $this->filterCompanies : $companiesAll;
         require_once ROOT_DIR . '/app/view/company/index.php';
     }
 
@@ -64,6 +68,17 @@ echo '<br />';
             );
         }
         header('Location: /companies');
+    }
+
+    public function filter(){
+        $this->filterCompaniesValue = $_POST['company_name_filter'] ?? null;
+        if (isset($_POST['company_name_filter'])) {
+            $company_name = trim($_POST['company_name_filter']);
+            $companyModel = new Company();
+            $this->filterCompanies = $companyModel->filter($company_name);
+        }else{
+            $this->filterCompanies = null;
+        }
     }
 
     public function delete($params): void
