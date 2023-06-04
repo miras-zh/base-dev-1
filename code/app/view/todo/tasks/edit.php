@@ -83,13 +83,31 @@ ob_start();
 </div>
 <script>
     const tagInput = document.querySelector('#tag-input')
-    const tagContainer = document.querySelector('.tags-container')
+    const tagsContainer = document.querySelector('.tags-container')
     const hiddenTags = document.querySelector('#hidden-tags')
     const existingTags = "<?= htmlspecialchars(isset($task['tags']) ? $task['tags'] : '' )?>";
     console.log('existingTags')
 
     console.log('tagInput>',tagInput)
     console.log('tagContainer>',tagContainer)
+
+    function createTag(text){
+        const tag = document.createElement('div');
+        tag.classList.add('tag');
+        const tagText = document.createElement('span');
+        tagText.textContent = text;
+        const closeBtn = document.createElement('button');
+        closeBtn.innerHTML = '&times;';
+
+        closeBtn.addEventListener('click',()=>{
+            tagsContainer.removeChild(tag);
+            updateHidenTags();
+        })
+
+        tag.appendChild(tagText);
+        tag.appendChild(closeBtn);
+        return tag;
+    }
 </script>
 
 

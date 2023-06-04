@@ -1,5 +1,12 @@
+.top-bar-main{
+    height: 42px;
+    background: #34249252;
+    width: 100%;
+    top: 0;
+}
+
 .item-menu-box{
-    background: #4e369e4d;
+    background: #3d2f6c4d;
     width: 180px;
     border-radius: 4px;
     padding-left: 10px;
@@ -23,9 +30,28 @@
 }
 
 .active{
-    background: cornflowerblue;
+    background: rgba(241, 38, 223, 0.84);
+}
+.active .icon-nav-item{
+    color: black;
+}
+.active a{
+    color: #3f3e3e;
+    font-weight: 600;
+}
+.active a:hover{
+    color: #3f3e3e;
+    font-weight: 600;
+}
+.active:hover{
+    background: #84a3b0 !important;
 }
 
-.active:hover{
-    background: #81a4e1 !important;
+.mr-10{
+    margin-right: 10px;
+}
+
+.icon-nav-item{
+    color: #c1c1c1c4;
+    font-size: 19px;
 }

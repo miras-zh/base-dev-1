@@ -17,8 +17,67 @@ function is_active($path,$currentPath): string
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=$title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../css/app.css">
+<!--    <link rel="stylesheet" href="../../css/app.css">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        .top-bar-main{
+            height: 42px;
+            background: #34249252;
+            width: 100%;
+            top: 0;
+        }
+
+        .item-menu-box{
+            background: #3d2f6c4d;
+            width: 180px;
+            border-radius: 4px;
+            padding-left: 10px;
+            color: white !important;
+            margin-bottom: 7px;
+        }
+
+        .item-menu-box:hover{
+            background: #4e369e80;
+        }
+
+        .item-menu-box a:hover{
+            color: white;
+        }
+
+        .item-menu-box a {
+            color: white;
+        }
+        .shadow-grey{
+            box-shadow: 1px 1px 11px -3px rgba(147, 148, 148, 0.2);
+        }
+
+        .active{
+            background: rgba(176, 194, 255, 0.84);
+        }
+        .active .icon-nav-item{
+            color: black;
+        }
+        .active a{
+            color: #3f3e3e;
+            font-weight: 600;
+        }
+        .active a:hover{
+            color: #3f3e3e;
+            font-weight: 600;
+        }
+        .active:hover{
+            background: #84a3b0 !important;
+        }
+
+        .mr-10{
+            margin-right: 10px;
+        }
+
+        .icon-nav-item{
+            color: #c1c1c1c4;
+            font-size: 19px;
+        }
+    </style>
 </head>
 <body>
 <div class="w-100 h-100 bg-dark m-auto d-flex flex-row">
@@ -31,42 +90,51 @@ function is_active($path,$currentPath): string
             <ul class="navbar-nav d-flex flex-column">
                 <h6 class="mx-2">To Do</h6>
                 <li class="nav-item item-menu-box <?php echo is_active('/todo/category',$currentPath);?>">
-                    <a href="/todo/category" class="nav-link">Category</a>
+                    <a href="/todo/category" class="nav-link"><i class="bi bi-journals mr-10 icon-nav-item"></i>Category</a>
                 </li>
                 <li class="nav-item item-menu-box <?php echo is_active('/todo/tasks',$currentPath);?>">
-                    <a href="/todo/tasks" class="nav-link">Tasks</a>
+                    <a href="/todo/tasks" class="nav-link"><i class="bi bi-list-task mr-10 icon-nav-item"></i>Tasks</a>
                 </li>
                 <hr/>
                 <li class="nav-item item-menu-box mt-2 <?php echo is_active('/companies',$currentPath);?>">
-                    <a href="/companies" class="nav-link">База компании</a>
+                    <a href="/companies" class="nav-link"><i class="bi bi-card-heading mr-10 icon-nav-item"></i>База компании</a>
                 </li>
                 <li class="nav-item item-menu-box <?= is_active('/users',$currentPath);?>">
-                    <a href="/users" class="nav-link">Пользователи</a>
+                    <a href="/users" class="nav-link"><i class="bi bi-people-fill mr-10 icon-nav-item"></i>Пользователи</a>
                 </li>
                 <li class="nav-item item-menu-box <?= is_active('/roles',$currentPath)?>">
-                    <a href="/roles" class="nav-link">Роли Пользователей</a>
+                    <a href="/roles" class="nav-link"><i class="bi bi-person-vcard mr-10 icon-nav-item"></i>Роли</a>
                 </li>
                 <li class="nav-item item-menu-box <?= is_active('/pages',$currentPath)?>">
-                    <a href="/pages" class="nav-link">Страницы</a>
+                    <a href="/pages" class="nav-link"><i class="bi bi-body-text mr-10 icon-nav-item"></i>Страницы</a>
                 </li>
                 <li class="nav-item item-menu-box <?= is_active('/regions',$currentPath)?>">
-                    <a href="/regions" class="nav-link">Регионы</a>
+                    <a href="/regions" class="nav-link"><i class="bi bi-globe-asia-australia mr-10 icon-nav-item"></i>Регионы</a>
                 </li>
                 <hr/>
                 <li class="nav-item item-menu-box">
-                    <a href="/auth/register" class="nav-link">Регистрация</a>
+                    <a href="/auth/register" class="nav-link"><i class="bi bi-pencil-square mr-10 icon-nav-item"></i>Регистрация</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="/auth/login" class="nav-link">Логин</a>
+                    <a href="/auth/login" class="nav-link"><i class="bi bi-box-arrow-in-right mr-10 icon-nav-item"></i>Логин</a>
                 </li>
                 <li class="nav-item item-menu-box">
-                    <a href="/auth/logout" class="nav-link">Выход</a>
+                    <a href="/auth/logout" class="nav-link"><i class="bi bi-door-open mr-10 icon-nav-item"></i>Выход</a>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="w-100 mt-4 m-auto px-4 py-4">
-        <?php  echo $content; ?>
+    <div class="w-100 mt-4 m-auto py-4">
+        <div class="position-fixed top-bar-main px-2 d-flex flex-row align-items-center">
+            <ul class="d-flex flex-row align-items-center">
+                <li>
+                    <a href="#"><i class="bi bi-calendar3"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="px-4 py-4 ">
+            <?php  echo $content; ?>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
