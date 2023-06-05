@@ -55,3 +55,22 @@
     color: #c1c1c1c4;
     font-size: 19px;
 }
+
+div.tags-container div.tag{
+    display: inline-block;
+    background: #55add5;
+    color: aliceblue;
+    padding: 1px 6px;
+    border-radius: 20px;
+    margin: 2px;
+}
+
+div.tags-container div.tag button{
+    background: none;
+    border: none;
+    font-size: 18px;
+}
+
+div.tags-container input{
+    margin-top: 5px;
+}
