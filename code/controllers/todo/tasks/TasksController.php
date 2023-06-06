@@ -2,6 +2,7 @@
 
 namespace controllers\todo\tasks;
 
+use Exception;
 use models\Check;
 use models\todo\category\TodoCategoryModel;
 use models\todo\tasks\TasksModel;
@@ -11,11 +12,13 @@ use models\todo\tasks\TagsModel;
 class TasksController
 {
     private Check $check;
+    private $tagsModel;
 
     public function __construct()
     {
         $userRole = $_SESSION['user_role'] ?? null;
         $this->check = new Check($userRole);
+        $this->tagsModel = new TagsModel();
     }
 
     public function index(): void
@@ -92,6 +95,9 @@ class TasksController
         include ROOT_DIR . "/app/view/todo/tasks/edit.php";
     }
 
+    /**
+     * @throws Exception
+     */
     public function update($params): void
     {
         $this->check->requirePermission();
@@ -138,13 +144,8 @@ class TasksController
                     $interval = new \DateInterval('P7D');
                     break;
             }
-            var_dump('$interval>',$interval);
-            echo '</br>';
-            var_dump('$reminder_at >',$reminder_at );
-            echo '</br>';
 
             $reminder_at = $finish_date->sub($interval);
-
             $finish_date = $finish_date->format('Y-m-d H:i:s');
             $reminder_at=$reminder_at->format('Y-m-d H:i:s');
 
@@ -154,10 +155,18 @@ class TasksController
             }
 
             $taskModel = new TasksModel();
-
-
-
             $taskModel->updateTask($id, $title, $description, $status,$priority,$category_id,$finish_date,$reminder_at);
+
+            //обработка тегов
+            $tags = explode(',', $_POST['tags']);
+            $tags = array_map('trim', $tags);
+
+            //получение тегов с базы по задаче редактируемой
+            $tagsModel = new TagsModel();
+            $oldTags = $tagsModel->getTagsByTaskId($params['id']);
+
+            //удаление старых связей между тегами
+            $tagsModel->removeAllTagsByTaskId($params['id']);
         }
 
         header('Location: /todo/tasks');

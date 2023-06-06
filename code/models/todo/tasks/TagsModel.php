@@ -151,4 +151,8 @@ class TagsModel {
             return false;
         }
     }
+
+    public function removeAllTagsByTaskId($id){
+
+    }
 }

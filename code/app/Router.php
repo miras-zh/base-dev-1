@@ -18,6 +18,7 @@ class Router
         '|^/users(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'users\\UserController'],
         '|^/companies(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'company\\CompanyController'],
         '|^/roles(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'role\\RoleController'],
+        '|^/regions(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'regions\\RegionsController'],
         '|^/pages(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'pages\\PagesController'],
         '|^/todo\/category(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\category\\TodoCategoryController'],
         '|^/todo\/tasks(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\tasks\\TasksController'],

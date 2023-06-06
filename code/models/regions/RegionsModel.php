@@ -8,14 +8,14 @@ use PDOException;
 
 class RegionsModel
 {
-    private $db;
+    private PDO $db;
 
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
 
         try {
-            $result = $this->db->query("SELECT 1 FROM `roles` LIMIT 1");
+            $result = $this->db->query("SELECT 1 FROM `regions` LIMIT 1");
         } catch (PDOException $error) {
             $this->createTable();
         }
@@ -23,14 +23,14 @@ class RegionsModel
 
     public function createTable(): bool
     {
-        $roleTableQuery = "CREATE TABLE IF NOT EXISTS `roles` (
+        $regionTableQuery = "CREATE TABLE IF NOT EXISTS `regions` (
             `id` INT(11) NOT NULL PRIMARY KEY ,
-            `role_name` VARCHAR(255) NOT NULL,
-            `role_description` TEXT)";
+            `region_name` VARCHAR(255) NOT NULL,
+            `region_description` TEXT)";
 
         $this->db->beginTransaction();
         try {
-            $this->db->exec($roleTableQuery);
+            $this->db->exec($regionTableQuery);
             $this->db->commit();
             return true;
         } catch (PDOException $err) {
@@ -39,75 +39,67 @@ class RegionsModel
         }
     }
 
-    public function getAllRoles()
+    public function getAllRegion()
     {
-        $query = "SELECT * FROM `roles`";
+        $query = "SELECT * FROM `regions`";
 
         try {
-            $stmnt = $this->db->query("SELECT * FROM `roles`");
-            $roles = [];
+            $stmnt = $this->db->query("SELECT * FROM `regions`");
+            $regions = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                $roles[] = $row;
+                $regions[] = $row;
             }
-
-            return $roles;
+            return $regions;
         } catch (PDOException $e) {
 
         }
     }
 
-    public function getRoleById($id): bool|array
+    public function getRegionById($id): bool|array
     {
-        $query = "SELECT * FROM roles WHERE id=?";
+        $query = "SELECT * FROM regions WHERE id=?";
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            $role = $stmt->fetch(PDO::FETCH_ASSOC);
+            $region = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            return $role;
+            return $region;
 
         } catch (PDOException $err) {
             return false;
         }
     }
 
-    public function createRole($role_name, $role_description)
+    public function createRegion($region_name, $region_description)
     {
-        $query = "INSERT INTO roles (role_name,role_description) VALUES (?,?)";
-        var_dump($role_name, ' - ', $role_description);
-        var_dump($query);
+        $query = "INSERT INTO regions (region_name,region_description) VALUES (?,?)";
+
         try {
             $stmt = $this->db->prepare($query);
-            var_dump($stmt);
-            $res = $stmt->execute([$role_name, $role_description]);
-            echo '<br/>';
-            var_dump('->', $res);
+            $res = $stmt->execute([$region_name, $region_description]);
 
             return true;
         } catch (PDOException $e) {
-            echo '<br/>';
-            echo '<br/>';
-            echo '<br/>';
-            var_dump('error->', $e);
+
         }
     }
 
-    public function updateRole($id, $role_name, $role_description)
+    public function updateRegion($id, $region_name, $region_description)
     {
-        $query = "UPDATE roles SET role_name=?,role_description=? WHERE id=?";
+        $query = "UPDATE regions SET region_name=?,region_description=? WHERE id=?";
 
         try {
             $stmnt = $this->db->prepare($query);
-            $stmnt->execute([$role_name, $role_description, $id]);
+            $stmnt->execute([$region_name, $region_description, $id]);
             return true;
         } catch (PDOException $e) {
 
         }
     }
 
-    public function deleteRole($id): bool
+    public function deleteRegion($id): bool
     {
-        $query = "DELETE FROM roles WHERE id= ?";
+        $query = "DELETE FROM regions WHERE id= ?";
 
         try {
             $stmt = $this->db->prepare($query);

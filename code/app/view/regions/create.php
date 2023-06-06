@@ -1,23 +1,23 @@
 <?php
-$title = 'Role list';
-require_once ROOT_DIR . '/models/role/Role.php';
+$title = 'Region list';
+require_once ROOT_DIR . '/models/regions/RegionsModel.php';
 ob_start();
 ?>
 
 <div class="bg-dark h-100">
     <div class="container">
-        <h1>Создание роли пользователей</h1>
+        <h1>Создание региона</h1>
     </div>
-    <form action="/roles/store" method="post">
+    <form action="/regions/store" method="post">
         <div class="form-group">
-            <label for="rolename">Роли пользователей</label>
-            <input type="text" class="form-control" id="rolename" name="role_name" required />
+            <label for="region_name">Наименование региона</label>
+            <input type="text" class="form-control" id="region_name" name="region_name" required />
         </div>
         <div class="form-group">
-            <label for="role_description">Описание роли </label>
-            <input type="text" class="form-control" id="role_description" name="role_description" required />
+            <label for="region_description">Описание региона </label>
+            <input type="text" class="form-control" id="region_description" name="region_description" required />
         </div>
-        <button type="submit" class="btn btn-primary mt-5">Создать роль</button>
+        <button type="submit" class="btn btn-primary mt-5">Создать регион</button>
     </form>
 </div>
 
