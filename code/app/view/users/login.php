@@ -15,7 +15,7 @@ require_once ROOT_DIR . '/models/user/User.php';
 <div class="bg-dark w-100 mx-auto container d-flex" style="height: 100vh">
     <div class="row justify-content-center col-lg-6 col-md-8 col-sm-10 mx-auto my-auto">
         <h1>Authorization</h1>
-        <form action="/auth/authenticate" method="post">
+        <form action="/auth/authenticate" method="post" class="w-75">
             <div class="form-group">
                 <label for="email">Email address </label>
                 <input type="email" class="form-control" id="email" name="email" required/>

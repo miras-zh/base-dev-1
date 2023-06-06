@@ -56,12 +56,12 @@ ob_start();
         <div class="form-group">
             <label for="reminder_at">Reminder at:</label>
             <select class="form-control" name="reminder_at" id="reminder_at">
-                <option value="30_minutes">30 min</option>
-                <option value="1_hour">1 h</option>
-                <option value="2_hour">2 h</option>
-                <option value="12_hour">12 h</option>
-                <option value="24_hour">24 h</option>
-                <option value="7_days">7 days</option>
+                <option value="30_min">30_min</option>
+                <option value="60_min">60_min</option>
+                <option value="120_min">120_min</option>
+                <option value="12_h">12_h</option>
+                <option value="24_h">24_h</option>
+                <option value="7_days">7_days</option>
             </select>
         </div>
         <div>
