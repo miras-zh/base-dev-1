@@ -28,13 +28,14 @@ class Router
     public function run(): void
     {
         $uri = $_SERVER['REQUEST_URI'];
+        $url = preg_replace('|\?.*$|', '', $uri);
 
         $controller = null;
         $action = null;
         $params = null;
 
         foreach ($this->routes as $pattern => $route){
-            if(preg_match($pattern,$uri,$matches)){
+            if(preg_match($pattern,$url,$matches)){
                 $controller = "controllers\\" . $route['controller'];
                 $action = $route['action'] ?? $matches['action'] ?? 'index';
 //                получаем параметры из совпавших с регулярным выражением подстрок

@@ -114,15 +114,7 @@ class TasksController
             $reminder_at = isset($_POST['reminder_at']) ? $_POST['reminder_at'] : '';
             $category_id = isset($_POST['category_id']) ? trim($_POST['category_id']) : 1;
 
-            var_dump('$finish_date',$finish_date);
-            echo '<br>';
-            var_dump('$reminder_at',$reminder_at);
-            echo '<br>';
-
-
             $finish_date = new \DateTime($finish_date);
-
-
             $interval;
             switch ($reminder_at){
                 case '30_min';
@@ -167,6 +159,18 @@ class TasksController
 
             //удаление старых связей между тегами
             $tagsModel->removeAllTagsByTaskId($params['id']);
+
+            $user_id = $_SESSION['user_id'] ?? 0;
+            //дбавляем новые теги и связываем  с задачей
+            foreach ($tags as $tag_name){
+                $tagsModel = new TagsModel();
+                $tag=$tagsModel->getTagByNameAndUserId($tag_name,$user_id);
+                if(!$tag){
+                    $tag_id = $tagsModel->addTag($tag_name);
+                }else{
+                    $tag_id = $tag['id'];
+                }
+            }
         }
 
         header('Location: /todo/tasks');

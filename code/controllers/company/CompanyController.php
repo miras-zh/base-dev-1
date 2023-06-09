@@ -9,14 +9,23 @@ require_once ROOT_DIR . '/models/company/Company.php';
 class CompanyController
 {
     public $filterCompanies = null;
-    public $filterCompaniesValue = null;
+    public $filterCompaniesName = null;
+    public $filterCompaniesBin = null;
+    public $filterCompaniesRegion = null;
 
     public function index(): void
     {
+        $page = (int)($_GET['page'] ?? null);
+        if ($page < 1) {
+            $page = null;
+        }
+
         $this->filter();
-        $valueName = $this->filterCompaniesValue !== null ? $this->filterCompaniesValue : '';
+        $valueName = $this->filterCompaniesName !== null ? $this->filterCompaniesName : '';
+        $valueBin = $this->filterCompaniesBin !== null ? $this->filterCompaniesBin : '';
+        $valueRegion = $this->filterCompaniesRegion !== null ? $this->filterCompaniesRegion : '';
         $companyModel = new Company();
-        $companiesAll = $companyModel->getAllCompanies();
+        $companiesAll = $companyModel->getAllCompanies(page: $page);
         $companies = $this->filterCompanies !== null ? $this->filterCompanies : $companiesAll;
         require_once ROOT_DIR . '/app/view/company/index.php';
     }
@@ -38,19 +47,6 @@ class CompanyController
             $phone = isset($_POST['phone']) && trim($_POST['phone']) !== ''? $_POST['phone']:'phone none';;
             $email = isset($_POST['email']) && trim($_POST['email']) !== ''? $_POST['email']:'email@email.com';;
 
-            var_dump($_POST);
-echo '<br />';
-echo '<br />';
-echo '<br />';
-            var_dump('$company_bin >',$company_bin);echo '<br />';
-            var_dump('$company_name >',$company_name);echo '<br />';
-            var_dump('$region >',$region);echo '<br />';
-            var_dump('$address >',$address);echo '<br />';
-            var_dump('$otrasl >',$otrasl);echo '<br />';
-            var_dump('$phone >',$phone);echo '<br />';
-            var_dump('$email >',$email);echo '<br />';
-
-
             if (empty($company_name)) {
                 echo "Company name is required";
                 return;
@@ -71,11 +67,16 @@ echo '<br />';
     }
 
     public function filter(){
-        $this->filterCompaniesValue = $_POST['company_name_filter'] ?? null;
-        if (isset($_POST['company_name_filter'])) {
-            $company_name = trim($_POST['company_name_filter']);
+        $this->filterCompaniesName = $_POST['company_name_filter'] ?? null;
+        $this->filterCompaniesBin = $_POST['company_bin_filter'] ?? null;
+        $this->filterCompaniesRegion = $_POST['company_region_filter'] ?? null;
+        if (isset($_POST['company_name_filter']) || isset($_POST['company_bin_filter']) || isset($_POST['company_region_filter'])) {
+            $company_name = trim($_POST['company_name_filter']) ?? '';
+            $company_bin = trim($_POST['company_bin_filter']) ?? '';
+            $company_region = isset($_POST['company_region_filter'])? trim($_POST['company_region_filter']) : '';
+
             $companyModel = new Company();
-            $this->filterCompanies = $companyModel->filter($company_name);
+            $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region);
         }else{
             $this->filterCompanies = null;
         }
@@ -106,12 +107,6 @@ echo '<br />';
     public function update($params): void
     {
         if (isset($params['id']) && isset($_POST['company_name']) && isset($_POST['email'])) {
-            var_dump($params);
-            echo '<br/>';
-            var_dump($_POST);
-            echo '<br/>';
-            echo '-----';
-            echo '<br/>';
             $id = trim($params['id']);
             $company_name = trim($_POST['company_name']);
             $company_bin = trim($_POST['company_bin']);
@@ -137,5 +132,18 @@ echo '<br />';
         }
 
         header('Location: /companies');
+    }
+
+    public function qa($title = 'QA:', $value = ''): void
+    {
+        echo '<br/>';
+        var_dump("$title __: ", $value);
+        echo '<br/>';
+    }
+
+    public function getAllRowsCompanies(){
+        $companyModel = new Company();
+        $rows = $companyModel->getCompanies();
+        return $rows;
     }
 }

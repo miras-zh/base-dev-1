@@ -10,8 +10,8 @@ ob_start();
     </div>
     <form action="/companies/update/<?=$company['id'] ?>" method="post" class="w-50">
         <div class="form-group mt-1">
-            <label for="company_name">Название компании:<?=$company['company_name']; ?></label>
-            <input type="text" class="form-control" id="company_name" name="company_name" value="<?php echo $company['company_name']; ?>" required />
+            <label for="company_name">Название компании:<?=htmlspecialchars($company['company_name']) ?></label>
+            <input type="text" class="form-control" id="company_name" name="company_name" value="<?php echo htmlspecialchars($company['company_name']); ?>" required />
         </div>
         <div class="form-group mt-1">
             <label for="company_bin">БИН компании:</label>

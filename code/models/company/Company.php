@@ -47,12 +47,11 @@ class Company
         }
     }
 
-    public function getAllCompanies()
-    {
+    public function getCompanies(){
         $query = "SELECT * FROM `companies`";
 
         try {
-            $stmnt = $this->db->query("SELECT * FROM `companies`");
+            $stmnt = $this->db->query($query);
             $companies = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
                 $companies[] = $row;
@@ -64,9 +63,39 @@ class Company
         }
     }
 
-    public function filter($name){
+    public function getCompaniesNumber(): int
+    {
+        $query = "SELECT COUNT(*) FROM `companies`";
+        $stmnt = $this->db->query($query);
+        $row = $stmnt->fetch(PDO::FETCH_NUM);
+        return $row[0];
+    }
+
+    public function getAllCompanies($page, $limit = null)
+    {
+        $limit ??= 5;
+        $offset = $page === null ? 0 : ($limit * ($page - 1));
+        $query = $page !== null ? "SELECT * FROM `companies` LIMIT $limit OFFSET $offset":"SELECT * FROM `companies`";
+
+
+
         try {
-            $stmnt = $this->db->query("SELECT * FROM `companies` WHERE company_name LIKE '%$name%'");
+            $stmnt = $this->db->query($query);
+            $companies = [];
+            while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+                $companies[] = $row;
+            }
+
+            return $companies;
+        } catch (PDOException $e) {
+
+        }
+    }
+
+    public function filter($name, $bin, $region){
+        try {
+            $stmnt = $this->db->prepare("SELECT * FROM `companies` WHERE company_name LIKE ? AND company_bin LIKE ? AND region LIKE  ?");
+            $stmnt->execute(["%$name%", "%$bin%", "%$region%"]);
             $companies = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
                 $companies[] = $row;
@@ -85,9 +114,6 @@ class Company
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
             $company = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            var_dump($company);
-            echo '<br/>';
 
             return $company;
 

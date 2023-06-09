@@ -153,6 +153,23 @@ class TagsModel {
     }
 
     public function removeAllTagsByTaskId($id){
+        $query = "DELETE FROM task_tags WHERE task_id=:task_id";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute(['task_id'=>$id]);
+        }catch (PDOException $e){
 
+        }
+    }
+
+    public function getTagByNameAndUserId($tag_name, $user_id){
+        $query = "SELECT * FROM tags WHERE name=? AND user_id=?";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$tag_name, $user_id]);
+            return true;
+        }catch (PDOException $e){
+
+        }
     }
 }
