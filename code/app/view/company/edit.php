@@ -1,5 +1,10 @@
 <?php
 $title = 'Edit';
+/**
+ * @var $regions;
+ * @var $countries;
+ * @var $company;
+ */
 require_once ROOT_DIR . '/models/company/Company.php';
 ob_start();
 ?>
@@ -18,10 +23,22 @@ ob_start();
             <input type="text" class="form-control" id="company_name" name="company_bin" value="<?=$company['company_bin']; ?>" required />
         </div>
         <div class="form-group mt-3">
+            <label for="region">Страна:</label>
+            <select name="region" id="role" class="form-control">
+                <?php foreach ($countries as $country): ?>
+                    <option value="<?=$country['id'];?>" <?php echo $company['country']===$country['id'] ? 'selected': '';?>>
+                        <?=$country['name'];?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="form-group mt-3">
             <label for="region">Регион:</label>
             <select name="region" id="role" class="form-control">
                 <?php foreach ($regions as $region): ?>
-                    <option value="<?=$region['id'];?>" <?php echo $company['region']===$region['id'] ? 'selected': '' ;?>><?=$region['region'];?></option>
+                    <option value="<?=$region['id'];?>" <?php echo $company['region']===$region['id'] ? 'selected': '';?>>
+                        <?=$region['region_name'];?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </div>

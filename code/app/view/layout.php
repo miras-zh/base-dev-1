@@ -28,7 +28,7 @@ function is_active($path,$currentPath): string
         }
 
         .item-menu-box{
-            background: #3d2f6c4d;
+            background: #59498f4d;
             width: 180px;
             border-radius: 4px;
             padding-left: 10px;
@@ -84,16 +84,16 @@ function is_active($path,$currentPath): string
     <div style="width: 285px">
 
     </div>
-    <div class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative position-fixed" style="width: 242px;height: 100vh; background: #34249252;">
+    <div class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative position-fixed" style="width: 242px;height: 100vh; background: #34249294;">
         <a href="/" class="navbar-brand mb-2">CRM</a>
         <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">
             <ul class="navbar-nav d-flex flex-column">
                 <h6 class="mx-2">To Do</h6>
                 <li class="nav-item item-menu-box <?php echo is_active('/todo/category',$currentPath);?>">
-                    <a href="/todo/category" class="nav-link"><i class="bi bi-journals mr-10 icon-nav-item"></i>Category</a>
+                    <a href="/todo/category" class="nav-link"><i class="bi bi-journals mr-10 icon-nav-item"></i>Категории</a>
                 </li>
                 <li class="nav-item item-menu-box <?php echo is_active('/todo/tasks',$currentPath);?>">
-                    <a href="/todo/tasks" class="nav-link"><i class="bi bi-list-task mr-10 icon-nav-item"></i>Tasks</a>
+                    <a href="/todo/tasks" class="nav-link"><i class="bi bi-list-task mr-10 icon-nav-item"></i>Задачи</a>
                 </li>
                 <hr/>
                 <li class="nav-item item-menu-box mt-2 <?php echo is_active('/companies',$currentPath);?>">

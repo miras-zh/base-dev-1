@@ -3,6 +3,7 @@
 namespace controllers\company;
 
 use models\company\Company;
+use models\regions\RegionsModel;
 
 require_once ROOT_DIR . '/models/company/Company.php';
 
@@ -94,6 +95,9 @@ class CompanyController
     {
         $companyModel = new Company();
         $company = $companyModel->getCompanyById($params['id']);
+
+        $regionModel = new RegionsModel();
+        $regions = $regionModel->getAllRegion();
 
         if (!$company) {
             echo "Company not found";

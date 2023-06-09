@@ -10,7 +10,7 @@ require_once ROOT_DIR . '/controllers/company/CompanyController.php';
 ob_start();
 ?>
 <div class="flex-row d-flex w-100 justify-content-between">
-    <div><h1>Компании</h1></div>
+    <div><h4>Список компании</h4></div>
     <div>
         <a href="/companies/create" class="btn" style="background: #3b8ad0; color: whitesmoke"><i class="bi bi-plus-square-fill mx-1"></i>Создать компанию</a>
     </div>
