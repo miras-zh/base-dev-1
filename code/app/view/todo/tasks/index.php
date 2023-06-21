@@ -9,6 +9,7 @@ $title = 'tasks list';
 require_once ROOT_DIR . '/models/todo/tasks/TasksModel.php';
 ob_start();
 
+
 ?>
 <h1>Список задач</h1>
 <a href="/todo/tasks/create" class="btn btn-success">Создать задачу</a>

@@ -27,7 +27,6 @@ class TasksController
 
         $tasksModel = new TasksModel();
         $tasks = $tasksModel->getAllTasks();
-
         require_once ROOT_DIR . '/app/view/todo/tasks/index.php';
     }
 
@@ -87,6 +86,8 @@ class TasksController
         $tagsModel = new TagsModel();
         $resTags = $tagsModel->getTagsByTaskId($task['id']);
         $tags = $resTags !== false ? $resTags : [];
+        var_dump('****-',$tags);
+        echo '<br/>';
         if (!$task) {
             echo "Task not found";
             return;
@@ -110,12 +111,12 @@ class TasksController
             $description = isset($_POST['description']) ? trim($_POST['description']) : '';
             $status = isset($_POST['status']) ? trim($_POST['status']) : 'new';
             $priority = isset($_POST['priority']) ? trim($_POST['priority']) : 'low';
-            $finish_date = isset($_POST['finish_date']) ? $_POST['finish_date'] : '';
-            $reminder_at = isset($_POST['reminder_at']) ? $_POST['reminder_at'] : '';
+            $finish_date = $_POST['finish_date'] ?? '';
+            $reminder_at = $_POST['reminder_at'] ?? '';
             $category_id = isset($_POST['category_id']) ? trim($_POST['category_id']) : 1;
 
             $finish_date = new \DateTime($finish_date);
-            $interval;
+            $interval='';
             switch ($reminder_at){
                 case '30_min';
                     $interval = new \DateInterval('PT30M');
@@ -161,15 +162,21 @@ class TasksController
             $tagsModel->removeAllTagsByTaskId($params['id']);
 
             $user_id = $_SESSION['user_id'] ?? 0;
+
             //дбавляем новые теги и связываем  с задачей
             foreach ($tags as $tag_name){
-                $tagsModel = new TagsModel();
                 $tag=$tagsModel->getTagByNameAndUserId($tag_name,$user_id);
                 if(!$tag){
-                    $tag_id = $tagsModel->addTag($tag_name);
+                    $tag_id = $tagsModel->addTag($tag_name, $user_id);
                 }else{
                     $tag_id = $tag['id'];
                 }
+                $tagsModel->addTaskTag($id, $tag_id);
+            }
+
+            //удаляем не используемые теги
+            foreach ($oldTags as $oldTag){
+                $tagsModel->removeUnUsedTags($oldTag['id']);
             }
         }
 

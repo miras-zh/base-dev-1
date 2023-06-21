@@ -73,7 +73,7 @@ class Company
 
     public function getAllCompanies($page, $limit = null)
     {
-        $limit ??= 5;
+        $limit ??= 30;
         $offset = $page === null ? 0 : ($limit * ($page - 1));
         $query = $page !== null ? "SELECT * FROM `companies` LIMIT $limit OFFSET $offset":"SELECT * FROM `companies`";
 

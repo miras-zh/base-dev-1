@@ -11,7 +11,38 @@ const ROOT_DIR = __DIR__;
 require_once ROOT_DIR . '/models/Database.php';
 
 require 'config.php';
+require 'vendor/autoload.php';
 require 'autoload.php';
+
+if (!empty($argv)) {
+    $client = new \GuzzleHttp\Client();
+    $parser = new \Miko\UchetKz\Parser($client);
+    $i = 1;
+    $list = [];
+    $base_company_file = fopen("base_company.txt", "w");
+
+    while ($i <= 5){
+        $organizations = $parser->searchOrganizations($i,'1');
+        print_r($organizations);
+        foreach ($organizations as $organization) {
+            echo $organization->name, PHP_EOL;
+            if ($organization->biin->bin !== null) {
+                echo "\tBIN; {$organization->biin->getValue()}\n";
+                echo "\tType: {$organization->biin->bin->getType()->name}\n";
+                echo "\tSign: {$organization->biin->bin->getSign()->name}\n";
+            } else {
+                echo "\tIIN: {$organization->biin->getValue()}\n";
+                echo "\tGender: ", ($organization->biin->iin->isMale() ? 'Male' : "Female"), PHP_EOL;
+                echo "\tAge: {$organization->biin->iin->getAge()}\n";
+            }
+
+            fwrite($base_company_file, json_encode($organization));
+        }
+        $i++;
+    }
+    fclose($base_company_file);
+    exit;
+}
 
 use controllers\Api\ApiController;
 

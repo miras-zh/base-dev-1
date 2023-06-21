@@ -1,0 +1,15 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+        "kuvardin/data-filter": " dev-master",
+        "kuvardin/kz-identifiers": " dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Miko\\": "src/Miko/",
+            "controllers\\": "controllers/",
+            "models\\": "models/",
+            "app\\": "app/"
+        }
+    }
+}

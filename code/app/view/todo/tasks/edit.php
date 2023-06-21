@@ -69,9 +69,14 @@ ob_start();
             <div class="tt">
                 <div class="tags-container">
                     <?php
+                    var_dump('$tags ->',$tags);
                     $tagNames = array_map(function ($tag) {
+                        var_dump('>> ',$tag);
+                        echo '<br>';
                         return $tag['name'];
                     }, $tags ?? []);
+                    var_dump('$tagNames >',$tagNames);
+                        echo '<br>';
                     foreach ($tagNames as $tagName) {
                         echo "<div class='tag'><span>$tagName</span><button type='button'>x</button></div>";
                     }

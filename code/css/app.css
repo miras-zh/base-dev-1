@@ -1,5 +1,13 @@
+body{
+    color: #b2b9bf;
+    background: #3e4b59;
+}
+
+.topbar{
+    background: #233242;
+}
 .top-bar-main{
-    height: 42px;
+    height: 40px;
     background: #34249252;
     width: 100%;
     top: 0;
@@ -12,6 +20,35 @@
     padding-left: 10px;
     color: white !important;
     margin-bottom: 7px;
+    transition: ease-in-out all 0.3s;
+}
+
+.navbar-brand{
+    transition: ease-in-out all 0.3s;
+}
+
+.title-item-block{
+    transition: ease-in-out all 0.3s;
+}
+
+
+.toggle{
+    width: 0 !important;
+    transition: ease-in-out all .3s;
+}
+
+.toggle .item-menu-box {
+    width: 0;
+    display: none;
+}
+
+.toggle .navbar-brand{
+    width: 0;
+    display: none;
+}
+.toggle .title-item-block{
+    width: 0;
+    display: none;
 }
 
 .item-menu-box:hover{

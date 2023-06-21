@@ -12,7 +12,17 @@
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/code/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/code/vendor/composer" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/code/vendor/guzzlehttp/guzzle" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/code/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/code/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/code/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/code/vendor/guzzlehttp/promises" />
+      <path value="$PROJECT_DIR$/code/vendor/kuvardin/data-filter" />
+      <path value="$PROJECT_DIR$/code/vendor/kuvardin/kz-identifiers" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

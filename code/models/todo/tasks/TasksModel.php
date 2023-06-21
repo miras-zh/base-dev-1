@@ -51,21 +51,15 @@ class TasksModel
         }
     }
 
-    public function getAllTasks()
+    public function getAllTasks(): array
     {
-        $query = "SELECT * FROM `tasks`";
-
-        try {
-            $stmnt = $this->db->query("SELECT * FROM `tasks`");
-            $tasks = [];
-            while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                $tasks[] = $row;
-            }
-
-            return $tasks;
-        } catch (PDOException $e) {
-
+        $stmnt = $this->db->query("SELECT * FROM `tasks`");
+        $tasks = [];
+        while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+            $tasks[] = $row;
         }
+
+        return $tasks;
     }
 
     public function getTasksById($id): bool|array
