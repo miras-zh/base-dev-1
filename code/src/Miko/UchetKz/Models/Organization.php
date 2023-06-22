@@ -12,6 +12,8 @@ class Organization
         public Biin $biin,
         public string $name,
         public ?string $rnn = null,
+        public ?string $address = null,
+        public ?string $boss = null,
     )
     {
 

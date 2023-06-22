@@ -1,4 +1,14 @@
 <?php
+//\s  \S  \i  \w  \W  \d  \D  [a-zA-Z2]  \t
+$str = "    Dota is game tester has mas kola doctor5 100velo 9 paddr shot";
+
+$res = preg_match_all("/a(s|\s)/",$str,$matches);
+
+var_dump($res);
+
+var_dump($matches);
+
+
 
 //preg_match("@^(?:http://)?([^/]+)@i","http://php.net/index.html", $matches);
 //$host = $matches[1];
@@ -8,14 +18,14 @@
 
 //    "<div class='container'><span>TARGET</span><div class='info'>INFO</div></div>",
 
-if(
-    preg_match("/^#([a-z.-]{3})$/", "#www",$matches)
-){
-    echo PHP_EOL . ">";
-    print_r($matches);
-}else{
-    echo PHP_EOL . 'NO' . PHP_EOL;
-}
+//if(
+//    preg_match("/^#.*([a-z.-]{3})|([A-Z]{6}).*$/", "#ABCDRFasdwdawf",$matches)
+//){
+//    echo PHP_EOL . ">";
+//    print_r($matches);
+//}else{
+//    echo PHP_EOL . 'NO' . PHP_EOL;
+//}
 
 
 

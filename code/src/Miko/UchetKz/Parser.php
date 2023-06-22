@@ -14,6 +14,8 @@ class Parser
 {
     protected const ORG_OPTION_BIIN = 'БИН';
     protected const ORG_OPTION_RNN = 'РНН';
+    protected const ORG_OPTION_ADDR = 'ЮРИДИЧЕСКИЙ АДРЕС';
+    protected const ORG_OPTION_BOSS = 'РУКОВОДИТЕЛЬ';
 
     protected const HOST = 'https://pk.uchet.kz';
 
@@ -59,6 +61,7 @@ class Parser
             throw new RuntimeException('Organizations containers not found');
         }
 
+
         $organizations = [];
         foreach ($organizations_matches as $organizations_match) {
             $organization_container_html = $organizations_match[0];
@@ -80,6 +83,32 @@ class Parser
             )) {
                 throw new RuntimeException('Info title options not found');
             }
+
+            if(!preg_match_all('|<div class="info-item">\s*<span class="info-title">(.*?)</span>\s*(&nbsp;)?\s*<span class="info-value">(.+?)</span>|sui',
+              $organization_container_html,
+            $company_info_items_matches, PREG_SET_ORDER
+            )){
+                throw new RuntimeException('Info title options not found');
+            }
+
+            $company_info_items = [];
+            foreach ($company_info_items_matches as $company_info_items_match) {
+                $company_info_item_title = DataFilter::getStringEmptyToNull(rtrim(trim($company_info_items_match[1]), ':'), true);
+                if ($company_info_item_title === null) {
+                    continue;
+                } else {
+                    $company_info_item_title = mb_strtoupper($company_info_item_title);
+                }
+
+                $company_info_item_value = DataFilter::getStringEmptyToNull($company_info_items_match[3], true);
+                if ($company_info_item_value === null) {
+                    continue;
+                }
+
+                $company_info_item_value = preg_replace('|<\s*/?\s*strong\s*>|i', '', $company_info_item_value);
+                $company_info_items[$company_info_item_title] = $company_info_item_value;
+            }
+
 
             $options = [];
             foreach ($info_options_matches as $info_options_match) {
@@ -103,9 +132,9 @@ class Parser
                 biin: $biin,
                 name: $company_name,
                 rnn: $options[self::ORG_OPTION_RNN] ?? NULL,
+                address: $company_info_items[self::ORG_OPTION_ADDR],
+                boss: $company_info_items[self::ORG_OPTION_BOSS]
             );
-
-
         }
 
         return  $organizations;
@@ -145,3 +174,39 @@ class Parser
         return $response->getBody()->getContents();
     }
 }
+
+//
+//<div class="company-item container" data-id="201915">
+//                    <a href="/c/bin/140440028795/" class="company-title" title="ТОО &quot;BURNOYE SOLAR-1&quot; (&quot;БУРНОЕ СОЛАР-1&quot;)"><SPAN>ТОО</SPAN> "BURNOYE SOLAR-1" ("БУРНОЕ СОЛАР-1")</a>
+//                    <div class="company-main-info">
+//                             <div class="info-item">
+//                                <div class="info-title">БИН:</div>
+//                                <div class="info-value">140440028795</div>
+//                            </div>
+//
+//                            <div class="info-item">
+//                                <div class="info-title">РНН:</div>
+//                                <div class="info-value">211500263041</div>
+//                            </div>
+//
+//                            <div class="info-item extra">
+//                                <div class="info-title">КАТО:</div>
+//                                <div class="info-value">314230100</div>
+//                            </div>
+//                    </div>
+//                    <div class="company-info">
+//                        <div class="info-item">
+//                           <span class="info-title">Юридический адрес:</span>&nbsp;
+//                           <span class="info-value"><strong>ЖАМБЫЛСКАЯ ОБЛАСТЬ, ЖУАЛЫНСКИЙ РАЙОН, Б.МОМЫШУЛЫ С.О., С.ИМ.Б.МОМЫШУЛЫ</strong>, УЛИЦА ЖАМБЫЛ, ДОМ 14</span>
+//                        </div>
+//                       <div class="info-item">
+//                                    <span class="info-title">Руководитель:</span>&nbsp;
+//                                    <span class="info-value">ГЛАДЬЕВ ЕВГЕНИЙ ВАЛЕРЬЕВИЧ</span>
+//                                </div>
+//
+//                        <div class="info-item">
+//                                                                                </div>
+//
+//                    </div>
+//
+//                    <div class="company-links">"

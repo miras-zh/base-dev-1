@@ -21,7 +21,7 @@ if (!empty($argv)) {
     $list = [];
     $base_company_file = fopen("base_company.txt", "w");
 
-    while ($i <= 5){
+    while ($i <= 1){
         $organizations = $parser->searchOrganizations($i,'1');
         print_r($organizations);
         foreach ($organizations as $organization) {
@@ -30,10 +30,14 @@ if (!empty($argv)) {
                 echo "\tBIN; {$organization->biin->getValue()}\n";
                 echo "\tType: {$organization->biin->bin->getType()->name}\n";
                 echo "\tSign: {$organization->biin->bin->getSign()->name}\n";
+                echo "\tAddress: {$organization->address}\n";
+                echo "\tBoss: {$organization->boss}\n";
             } else {
                 echo "\tIIN: {$organization->biin->getValue()}\n";
                 echo "\tGender: ", ($organization->biin->iin->isMale() ? 'Male' : "Female"), PHP_EOL;
                 echo "\tAge: {$organization->biin->iin->getAge()}\n";
+                echo "\tAddress: {$organization->address}\n";
+                echo "\tBoss: {$organization->boss}\n";
             }
 
             fwrite($base_company_file, json_encode($organization));
