@@ -17,6 +17,7 @@ class CompanyController
     public function index(): void
     {
         $page = (int)($_GET['page'] ?? null);
+        $count = (int)($_GET['count'] ?? null);
         if ($page < 1) {
             $page = null;
         }
@@ -26,7 +27,7 @@ class CompanyController
         $valueBin = $this->filterCompaniesBin !== null ? $this->filterCompaniesBin : '';
         $valueRegion = $this->filterCompaniesRegion !== null ? $this->filterCompaniesRegion : '';
         $companyModel = new Company();
-        $companiesAll = $companyModel->getAllCompanies(page: $page);
+        $companiesAll = $companyModel->getAllCompanies(page: $page,limit: $count);
         $companies = $this->filterCompanies !== null ? $this->filterCompanies : $companiesAll;
         require_once ROOT_DIR . '/app/view/company/index.php';
     }
@@ -65,6 +66,20 @@ class CompanyController
             );
         }
         header('Location: /companies');
+    }
+
+    public function info($params){
+        $companyModel = new Company();
+        $company = $companyModel->getCompanyById($params['id']);
+
+        $regionModel = new RegionsModel();
+        $regions = $regionModel->getAllRegion();
+
+        if (!$company) {
+            echo "Company not found";
+            return;
+        }
+        require_once ROOT_DIR . '/app/view/company/info.php';
     }
 
     public function filter(){

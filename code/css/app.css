@@ -111,3 +111,14 @@ div.tags-container div.tag button{
 div.tags-container input{
     margin-top: 5px;
 }
+
+/*//table action*/
+.item-action{
+    background: #494d4d;
+    color: whitesmoke;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 1px;
+    margin: 1px;
+}

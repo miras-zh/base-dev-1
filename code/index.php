@@ -6,7 +6,9 @@ ini_set('display_errors', 1);
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: *");
-
+$page = 1;
+$count = 30;
+$ccc = 'ccc test';
 const ROOT_DIR = __DIR__;
 require_once ROOT_DIR . '/models/Database.php';
 
@@ -32,6 +34,12 @@ if (!empty($argv)) {
                 echo "\tSign: {$organization->biin->bin->getSign()->name}\n";
                 echo "\tAddress: {$organization->address}\n";
                 echo "\tBoss: {$organization->boss}\n";
+                $companyModel = new \models\company\Company();
+                $companyFound = $companyModel->getCompanyByBin($organization->biin->getValue());
+
+//                if(!$companyFound){
+//                    $companyModel->createCompany($organization->name,$organization->biin->getValue(),'Kazakhstan',$organization->address,'','','', $organization->boss);
+//                }
             } else {
                 echo "\tIIN: {$organization->biin->getValue()}\n";
                 echo "\tGender: ", ($organization->biin->iin->isMale() ? 'Male' : "Female"), PHP_EOL;

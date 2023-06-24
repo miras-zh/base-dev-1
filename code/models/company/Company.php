@@ -122,22 +122,14 @@ class Company
         }
     }
 
-    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email)
+    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email,$boss)
     {
-        $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email) VALUES (?,?,?,?,?,?,?)";
-
-        echo '<br/>';
-        echo '<div class="container bg-info text-black">';
-        var_dump($company_name, ' - ', $company_bin, ' - ', $region, ' - ', $address, ' - ', $otrasl, ' - ', $phone, ' - ', $email);
-        echo '</div>';
-        echo '<br/>';
-        echo '<br/>';
-
+        $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email,boss) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
             $stmt = $this->db->prepare($query);
             var_dump($stmt);
-            $res = $stmt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email]);
+            $res = $stmt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $boss]);
 
             return true;
         } catch (PDOException $e) {
@@ -170,6 +162,18 @@ class Company
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
+
+            return true;
+        } catch (PDOException $error) {
+            return false;
+        }
+    }
+
+    function getCompanyByBin($bin):bool{
+        $query = "select * from companies where company_bin =?";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$bin]);
 
             return true;
         } catch (PDOException $error) {

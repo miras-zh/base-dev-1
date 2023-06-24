@@ -117,7 +117,7 @@ function is_active($path, $currentPath): string
                 </li>
                 <hr/>
                 <li class="nav-item item-menu-box mt-2 <?php echo is_active('/companies', $currentPath); ?>">
-                    <a href="/companies" class="nav-link"><i class="bi bi-card-heading mr-10 icon-nav-item"></i>База
+                    <a href="/companies?page=1&count=30" class="nav-link"><i class="bi bi-card-heading mr-10 icon-nav-item"></i>База
                         компании</a>
                 </li>
                 <li class="nav-item item-menu-box <?= is_active('/users', $currentPath); ?>">

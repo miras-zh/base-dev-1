@@ -3,7 +3,8 @@
         "guzzlehttp/guzzle": "^7.0",
         "kuvardin/data-filter": " dev-master",
         "kuvardin/kz-identifiers": " dev-main",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+      "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
