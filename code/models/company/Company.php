@@ -2,6 +2,8 @@
 
 namespace models\company;
 
+use Kuvardin\KzIdentifiers\Biin;
+use Kuvardin\KzIdentifiers\Bin;
 use models\Database;
 use PDO;
 use PDOException;
@@ -169,13 +171,14 @@ class Company
         }
     }
 
-    function getCompanyByBin($bin):bool{
-        $query = "select * from companies where company_bin =?";
+    function checkCompanyByBiin(Biin $biin):bool
+    {
+        $query = "select COUNT(*) from companies where company_bin =? LIMIT 1";
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$bin]);
-
-            return true;
+            $stmt->execute([$biin->getValue()]);
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            return (bool)$result[0];
         } catch (PDOException $error) {
             return false;
         }

@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Kuvardin\DataFilter\DataFilter;
 use Kuvardin\KzIdentifiers\Biin;
+use Miko\UchetKz\Models\OrganizationsList;
 use RuntimeException;
 
 class Parser
@@ -29,12 +30,7 @@ class Parser
     }
 
     /**
-     * @param int|null $page
-     * @param string|null $query
-     * @param int|null $region
-     * @param array $okeds
-     * @param string|null $krp
-     * @return Models\Organization[]
+     * @param string[] $okeds
      */
     public function searchOrganizations(
         int $page = null,
@@ -42,7 +38,7 @@ class Parser
         int $region = null,
         array $okeds = [],
         string $krp = null,
-    ): array
+    ): OrganizationsList
     {
         $response = $this->request('c/search/', [
             'search' => $query,
@@ -51,6 +47,17 @@ class Parser
             'krp' => $krp,
             'page' => $page ?? 1
         ]);
+        $pages_total = 0;
+//        var_dump('$response>',$response);
+//        if(!preg_match('|<div class="search-result">\s*<div class="container">\s*<p>\s*<span style="margin-right: 10px;">Найдено.*предприятий\s*</span>\s*<span>1-страница из 332 страниц</span>\s*</p>\s*</div>|sui',$response,$pages_matches)){
+//        if(!preg_match('|<div class="search-result"\s+>\s*<div class="container">\s*<span>\s*.*страница\s*.*из\s*.*([^<]+)\s*.*страниц\s*.*</span>|sui',$response,$pages_matches)){
+
+//        if (preg_match('|<span>[^<]*?(\d+)\s*страниц[^<]*?<\/span>|sui', $response, $pages_matches)) {
+        if (preg_match('|<span>\s*\d+\s*\S*\s+из\s+(\d+)\s+страниц.*<\/span>|sui', $response, $pages_matches)) {
+            $pages_total = $pages_matches[1];
+//            echo $pages_total;
+//            exit;
+        }
 
         if (!preg_match_all(
             '|<div class="company-item container" data-id="(\d+)">(.*?)<div class="company-links">|sui',
@@ -61,8 +68,8 @@ class Parser
             throw new RuntimeException('Organizations containers not found');
         }
 
+        $result = new OrganizationsList($pages_total);
 
-        $organizations = [];
         foreach ($organizations_matches as $organizations_match) {
             $organization_container_html = $organizations_match[0];
 
@@ -84,31 +91,28 @@ class Parser
                 throw new RuntimeException('Info title options not found');
             }
 
-            if(!preg_match_all('|<div class="info-item">\s*<span class="info-title">(.*?)</span>\s*(&nbsp;)?\s*<span class="info-value">(.+?)</span>|sui',
+            $company_info_items = [];
+            if(preg_match_all('|<div class="info-item">\s*<span class="info-title">(.*?)</span>\s*(&nbsp;)?\s*<span class="info-value">(.+?)</span>|sui',
               $organization_container_html,
             $company_info_items_matches, PREG_SET_ORDER
             )){
-                throw new RuntimeException('Info title options not found');
-            }
+                foreach ($company_info_items_matches as $company_info_items_match) {
+                    $company_info_item_title = DataFilter::getStringEmptyToNull(rtrim(trim($company_info_items_match[1]), ':'), true);
+                    if ($company_info_item_title === null) {
+                        continue;
+                    } else {
+                        $company_info_item_title = mb_strtoupper($company_info_item_title);
+                    }
 
-            $company_info_items = [];
-            foreach ($company_info_items_matches as $company_info_items_match) {
-                $company_info_item_title = DataFilter::getStringEmptyToNull(rtrim(trim($company_info_items_match[1]), ':'), true);
-                if ($company_info_item_title === null) {
-                    continue;
-                } else {
-                    $company_info_item_title = mb_strtoupper($company_info_item_title);
+                    $company_info_item_value = DataFilter::getStringEmptyToNull($company_info_items_match[3], true);
+                    if ($company_info_item_value === null) {
+                        continue;
+                    }
+
+                    $company_info_item_value = preg_replace('|<\s*/?\s*strong\s*>|i', '', $company_info_item_value);
+                    $company_info_items[$company_info_item_title] = $company_info_item_value;
                 }
-
-                $company_info_item_value = DataFilter::getStringEmptyToNull($company_info_items_match[3], true);
-                if ($company_info_item_value === null) {
-                    continue;
-                }
-
-                $company_info_item_value = preg_replace('|<\s*/?\s*strong\s*>|i', '', $company_info_item_value);
-                $company_info_items[$company_info_item_title] = $company_info_item_value;
             }
-
 
             $options = [];
             foreach ($info_options_matches as $info_options_match) {
@@ -128,12 +132,12 @@ class Parser
                 continue;
             }
 
-            $organizations[] = new Models\Organization(
+            $result->organizations[] = new Models\Organization(
                 biin: $biin,
                 name: $company_name,
                 rnn: $options[self::ORG_OPTION_RNN] ?? NULL,
-                address: $company_info_items[self::ORG_OPTION_ADDR],
-                boss: $company_info_items[self::ORG_OPTION_BOSS]
+                address: $company_info_items[self::ORG_OPTION_ADDR] ?? '',
+                boss: $company_info_items[self::ORG_OPTION_BOSS] ?? ''
             );
         }
 
