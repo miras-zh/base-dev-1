@@ -17,10 +17,14 @@ class Parser
     protected const ORG_OPTION_RNN = 'РНН';
     protected const ORG_OPTION_ADDR = 'ЮРИДИЧЕСКИЙ АДРЕС';
     protected const ORG_OPTION_BOSS = 'РУКОВОДИТЕЛЬ';
+    protected const EMPTY_RESULT = '<div class="not-found-anything ">';
 
     protected const HOST = 'https://pk.uchet.kz';
 
     protected Client $client;
+
+    public ?string $last_request_uri = null;
+
 
     public function __construct(
         Client $client,
@@ -38,7 +42,7 @@ class Parser
         int $region = null,
         array $okeds = [],
         string $krp = null,
-    ): OrganizationsList
+    ): ?OrganizationsList
     {
         $response = $this->request('c/search/', [
             'search' => $query,
@@ -47,17 +51,16 @@ class Parser
             'krp' => $krp,
             'page' => $page ?? 1
         ]);
-        $pages_total = 0;
-//        var_dump('$response>',$response);
-//        if(!preg_match('|<div class="search-result">\s*<div class="container">\s*<p>\s*<span style="margin-right: 10px;">Найдено.*предприятий\s*</span>\s*<span>1-страница из 332 страниц</span>\s*</p>\s*</div>|sui',$response,$pages_matches)){
-//        if(!preg_match('|<div class="search-result"\s+>\s*<div class="container">\s*<span>\s*.*страница\s*.*из\s*.*([^<]+)\s*.*страниц\s*.*</span>|sui',$response,$pages_matches)){
 
-//        if (preg_match('|<span>[^<]*?(\d+)\s*страниц[^<]*?<\/span>|sui', $response, $pages_matches)) {
-        if (preg_match('|<span>\s*\d+\s*\S*\s+из\s+(\d+)\s+страниц.*<\/span>|sui', $response, $pages_matches)) {
-            $pages_total = $pages_matches[1];
-//            echo $pages_total;
-//            exit;
+        if (str_contains($response, self::EMPTY_RESULT)) {
+            return null;
         }
+
+        if (!preg_match('|<span>\s*\d+\s*\S*\s+из\s+(\d+)\s+страниц.*<\/span>|sui', $response, $pages_matches)) {
+//            throw new RuntimeException('Pages number not found');
+        }
+
+        $pages_total = (int)$pages_matches[1] || 0;
 
         if (!preg_match_all(
             '|<div class="company-item container" data-id="(\d+)">(.*?)<div class="company-links">|sui',
@@ -68,7 +71,7 @@ class Parser
             throw new RuntimeException('Organizations containers not found');
         }
 
-        $result = new OrganizationsList($pages_total);
+        $result = new OrganizationsList((int)$pages_total);
 
         foreach ($organizations_matches as $organizations_match) {
             $organization_container_html = $organizations_match[0];
@@ -141,7 +144,7 @@ class Parser
             );
         }
 
-        return  $organizations;
+        return  $result;
     }
 
     public function request(string $path, array $get = null, array $post = null): string
@@ -150,6 +153,8 @@ class Parser
         if ($get !== null) {
             $uri .= '?' . http_build_query($get);
         }
+
+        $this->last_request_uri = $uri;
 
         $response = $this->client->request($post === null ? 'GET' : 'POST', $uri, [
             RequestOptions::HEADERS => [
@@ -178,39 +183,3 @@ class Parser
         return $response->getBody()->getContents();
     }
 }
-
-//
-//<div class="company-item container" data-id="201915">
-//                    <a href="/c/bin/140440028795/" class="company-title" title="ТОО &quot;BURNOYE SOLAR-1&quot; (&quot;БУРНОЕ СОЛАР-1&quot;)"><SPAN>ТОО</SPAN> "BURNOYE SOLAR-1" ("БУРНОЕ СОЛАР-1")</a>
-//                    <div class="company-main-info">
-//                             <div class="info-item">
-//                                <div class="info-title">БИН:</div>
-//                                <div class="info-value">140440028795</div>
-//                            </div>
-//
-//                            <div class="info-item">
-//                                <div class="info-title">РНН:</div>
-//                                <div class="info-value">211500263041</div>
-//                            </div>
-//
-//                            <div class="info-item extra">
-//                                <div class="info-title">КАТО:</div>
-//                                <div class="info-value">314230100</div>
-//                            </div>
-//                    </div>
-//                    <div class="company-info">
-//                        <div class="info-item">
-//                           <span class="info-title">Юридический адрес:</span>&nbsp;
-//                           <span class="info-value"><strong>ЖАМБЫЛСКАЯ ОБЛАСТЬ, ЖУАЛЫНСКИЙ РАЙОН, Б.МОМЫШУЛЫ С.О., С.ИМ.Б.МОМЫШУЛЫ</strong>, УЛИЦА ЖАМБЫЛ, ДОМ 14</span>
-//                        </div>
-//                       <div class="info-item">
-//                                    <span class="info-title">Руководитель:</span>&nbsp;
-//                                    <span class="info-value">ГЛАДЬЕВ ЕВГЕНИЙ ВАЛЕРЬЕВИЧ</span>
-//                                </div>
-//
-//                        <div class="info-item">
-//                                                                                </div>
-//
-//                    </div>
-//
-//                    <div class="company-links">"

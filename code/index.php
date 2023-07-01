@@ -1,6 +1,8 @@
 <?php
 
-use models\company\Company;
+use App\Controllers\Api\ApiController;
+use App\Models\company\Company;
+use App\Controllers\Api\ApiMethod;
 
 session_start();
 
@@ -11,75 +13,15 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers: *");
 
 const ROOT_DIR = __DIR__;
-require_once ROOT_DIR . '/models/Database.php';
 require 'config.php';
 require 'vendor/autoload.php';
 require 'autoload.php';
 
 if (!empty($argv)) {
-    $client = new \GuzzleHttp\Client();
-    $parser = new \Miko\UchetKz\Parser($client);
-    $page = 1;
-    $list = [];
-    $base_company_file = fopen("base_company.txt", "w");
-
-    do {
-        while (true) {
-            try {
-                $organizations = $parser->searchOrganizations($page,'A');
-                break;
-            } catch (GuzzleHttp\Exception\GuzzleException $exception) {
-                echo $exception, PHP_EOL;
-                sleep(10);
-            }
-        }
-
-//        print_r($organizations);
-        foreach ($organizations as $organization) {
-//            echo $organization->name, PHP_EOL;
-            if ($organization->biin->bin !== null) {
-                echo "\tBIN; {$organization->biin->getValue()}\n";
-//                echo "\tType: {$organization->biin->bin->getType()->name}\n";
-//                echo "\tSign: {$organization->biin->bin->getSign()->name}\n";
-//                echo "\tAddress: {$organization->address}\n";
-//                echo "\tBoss: {$organization->boss}\n";
-                $companyModel = new Company();
-                $companyFound = $companyModel->checkCompanyByBiin($organization->biin);
-//var_dump($companyFound);exit;
-                if(!$companyFound){
-                    $companyModel->createCompany($organization->name,$organization->biin->getValue(),'Kazakhstan',$organization->address,'','','', $organization->boss);
-                }
-            } else {
-//                echo "\tIIN: {$organization->biin->getValue()}\n";
-//                echo "\tGender: ", ($organization->biin->iin->isMale() ? 'Male' : "Female"), PHP_EOL;
-//                echo "\tAge: {$organization->biin->iin->getAge()}\n";
-//                echo "\tAddress: {$organization->address}\n";
-//                echo "\tBoss: {$organization->boss}\n";
-
-                $companyModel = new Company();
-                $companyFound = $companyModel->getCompanyByBin($organization->biin->iin->getValue());
-//                var_dump('$companyFound>',$companyFound);
-                if(!$companyFound){
-                    $companyModel->createCompany($organization->name,$organization->biin->getValue(),'Kazakhstan',$organization->address,'','','', $organization->boss);
-                }
-            }
-
-            fwrite($base_company_file, json_encode($organization));
-        }
-        $i++;
-        var_dump('--------------------->',$i);
-        sleep(2);
-    } while ($page < $organizations->pages_total);
-
-    fclose($base_company_file);
-    exit;
+    return App\Controllers\Cli\CliController::execute($argv);
 }
 
-use controllers\Api\ApiController;
-
-$router = new app\Router();
-
-
+$router = new App\Router();
 
 $real_route = preg_replace('|\?.*?$|', '', $_SERVER['REQUEST_URI']);
 $real_route = trim($real_route, '/');
@@ -95,7 +37,7 @@ if ($real_route_parts !== [] && $real_route_parts[0] === 'api') {
     array_shift($real_route_parts);
     ApiController::handleRequest($real_route_parts, $_GET, $_POST, $input);
 
-    $result = \controllers\Api\Methods\Users::execute();
+    $result = App\controllers\Api\Methods\Users::execute();
 
     exit;
 }

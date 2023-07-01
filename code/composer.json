@@ -9,9 +9,7 @@
     "autoload": {
         "psr-4": {
             "Miko\\": "src/Miko/",
-            "controllers\\": "controllers/",
-            "models\\": "models/",
-            "app\\": "app/"
+            "App\\": "src/App/"
         }
     }
 }
