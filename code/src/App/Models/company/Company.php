@@ -77,8 +77,13 @@ class Company
     public function getAllCompanies($page, $limit = null)
     {
         $limit ??= 30;
-        $offset = $page === null ? 0 : ($limit * ($page - 1));
-        $query = $page !== null ? "SELECT * FROM `companies` LIMIT $limit OFFSET $offset":"SELECT * FROM `companies`";
+        $page ??= 1;
+        if ($page < 1) {
+            $page = 1;
+        }
+
+        $offset = $limit * ($page - 1);
+        $query = "SELECT * FROM `companies` LIMIT $limit OFFSET $offset";
 
 
 
@@ -189,6 +194,19 @@ class Company
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$biin->getValue()]);
+            $result = $stmt->fetch(PDO::FETCH_NUM);
+            return (bool)$result[0];
+        } catch (PDOException $error) {
+            return false;
+        }
+    }
+
+    function checkCompanyByBin($bin):bool
+    {
+        $query = "select COUNT(*) from companies where company_bin =? LIMIT 1";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$bin]);
             $result = $stmt->fetch(PDO::FETCH_NUM);
             return (bool)$result[0];
         } catch (PDOException $error) {

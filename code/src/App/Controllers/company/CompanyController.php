@@ -107,6 +107,7 @@ class CompanyController
     }
 
     public function filter(){
+        var_dump($_POST);
         $this->filterCompaniesName = $_POST['company_name_filter'] ?? null;
         $this->filterCompaniesBin = $_POST['company_bin_filter'] ?? null;
         $this->filterCompaniesRegion = $_POST['company_region_filter'] ?? null;
@@ -117,6 +118,7 @@ class CompanyController
 
             $companyModel = new Company();
             $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region);
+            var_dump($this->filterCompanies);
         }else{
             $this->filterCompanies = null;
         }

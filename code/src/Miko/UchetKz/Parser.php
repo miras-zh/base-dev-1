@@ -59,8 +59,8 @@ class Parser
         if (!preg_match('|<span>\s*\d+\s*\S*\s+из\s+(\d+)\s+страниц.*<\/span>|sui', $response, $pages_matches)) {
 //            throw new RuntimeException('Pages number not found');
         }
-
-        $pages_total = (int)$pages_matches[1] || 0;
+//var_dump( '$pages_matches ------>',$pages_matches[1],"\n");
+        $pages_total = (int)$pages_matches[1];
 
         if (!preg_match_all(
             '|<div class="company-item container" data-id="(\d+)">(.*?)<div class="company-links">|sui',
