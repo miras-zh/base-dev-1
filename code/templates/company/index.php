@@ -16,7 +16,7 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
         </div>
     </div>
     <div class="shadow-grey mt-1 mb-2 mx-1 p-3 align-items-center" style="background: #2c3c4c!important;">
-        <form action="/companies" method="post" class="d-flex flex-row">
+        <form action="/companies?page=1&&count=30" method="post" class="d-flex flex-row">
             <div class="form-group mx-2">
                 <label for="company_bin_filter">БИН:</label>
                 <input type="text" class="form-control" id="company_bin_filter" name="company_bin_filter"

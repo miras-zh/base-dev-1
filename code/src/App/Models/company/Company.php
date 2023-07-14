@@ -37,7 +37,6 @@ class Company
              `email` VARCHAR(255) NOT NULL, 
              `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
 
-        var_dump($companyTableQuery);
         exit();
         $this->db->beginTransaction();
         try {
@@ -100,10 +99,17 @@ class Company
         }
     }
 
-    public function filter($name, $bin, $region){
+    public function filter($name, $bin, $region, $page, $limit = null){
+
+        $limit ??= 30;
+        $page ??= 1;
+        if ($page < 1) {
+            $page = 1;
+        }
+        $offset = $limit * ($page - 1);
         try {
-            $stmnt = $this->db->prepare("SELECT * FROM `companies` WHERE company_name LIKE ? AND company_bin LIKE ? AND region LIKE  ?");
-            $stmnt->execute(["%$name%", "%$bin%", "%$region%"]);
+            $stmnt = $this->db->prepare("SELECT * FROM `companies` WHERE company_name LIKE ? AND company_bin LIKE ? AND region LIKE  ? LIMIT ? OFFSET  ?");
+            $stmnt->execute(["%$name%", "%$bin%", "%$region%", "%$limit%", "%$offset%"]);
             $companies = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
                 $companies[] = $row;
@@ -130,6 +136,10 @@ class Company
         }
     }
 
+    public function runQuery(string $query){
+        return $this->db->query($query);
+    }
+
     public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email,$boss)
     {
         $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email,boss) VALUES (?,?,?,?,?,?,?,?)";
@@ -140,8 +150,8 @@ class Company
 
             return true;
         } catch (PDOException $e) {
-            ;
             var_dump('error->', $e);
+            return false;
         }
     }
 
@@ -160,13 +170,10 @@ class Company
     public function updateCompany($id, $company_name,$company_bin, $region, $address, $otrasl, $phone, $email)
     {
         $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
-        var_dump('query >', $query);
         echo '<br/>';
         try {
             $stmnt = $this->db->prepare($query);
             $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
-
-            var_dump('res->',$res);
 
             return true;
         } catch (PDOException $e) {

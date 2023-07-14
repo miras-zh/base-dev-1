@@ -2,29 +2,31 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers\Cli\Commands\Egov;
+namespace App\OrganizationsParsers\Parsers;
 
-use App\Controllers\Cli\CliCommand;
-use App\Controllers\Cli\CliInput;
 use App\Models\company\Company;
-use GuzzleHttp\Client;
+use App\OrganizationsParsers\Models\OrganizationsList;
+use App\OrganizationsParsers\Models\SelectionData;
+use App\OrganizationsParsers\ParserAbstract;
 use GuzzleHttp\Exception\GuzzleException;
 use Miko\EgovData\Api;
 
-class UpdateOrganizations extends CliCommand
+class Uchet extends ParserAbstract
 {
-    public static function execute(CliInput $cliInput): int
+    public static function getCode(): string
     {
-        $token = '504491c058d3439a8ebc7f666cd83b5d';
-        $client = new Client;
-        $api = new Api($client, $token);
+        return 'UCHET';
+    }
 
+    public function getOrganizationsList(SelectionData $selection_data = null): OrganizationsList
+    {
         $limit = 100;
 //        $offset = 468800;
         $offset = 815800;
 
         $companyModel = new Company();
         $beforeCompanies = $companyModel->getCompaniesNumber();
+        $api = new Api($this->client, $this->token);
 
         while (true) {
             echo "Limit: $limit; Offset: $offset\n";
@@ -40,9 +42,6 @@ class UpdateOrganizations extends CliCommand
 
 
             foreach ($response as $organization_data) {
-//                print_r($organization_data);
-//                echo "\n";
-//                echo $organization_data['id'] ."\n";
                 $companyModel = new Company();
                 $companyFound = $companyModel->checkCompanyByBin($organization_data['bin']);
                 if (!$companyFound) {

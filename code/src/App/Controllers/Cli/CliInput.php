@@ -15,6 +15,6 @@ class CliInput
 
     public function getParameter(int $index): ?string
     {
-        return $this->argv[$index - 2] ?? null;
+        return $this->argv[$index] ?? null;
     }
 }

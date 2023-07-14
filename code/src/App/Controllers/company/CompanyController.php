@@ -22,7 +22,7 @@ class CompanyController
             $page = null;
         }
 
-        $this->filter();
+        $this->filter(page: $page,limit: $count);
         $valueName = $this->filterCompaniesName !== null ? $this->filterCompaniesName : '';
         $valueBin = $this->filterCompaniesBin !== null ? $this->filterCompaniesBin : '';
         $valueRegion = $this->filterCompaniesRegion !== null ? $this->filterCompaniesRegion : '';
@@ -106,8 +106,7 @@ class CompanyController
         ]);
     }
 
-    public function filter(){
-        var_dump($_POST);
+    public function filter($page, $limit = null){
         $this->filterCompaniesName = $_POST['company_name_filter'] ?? null;
         $this->filterCompaniesBin = $_POST['company_bin_filter'] ?? null;
         $this->filterCompaniesRegion = $_POST['company_region_filter'] ?? null;
@@ -117,8 +116,7 @@ class CompanyController
             $company_region = isset($_POST['company_region_filter'])? trim($_POST['company_region_filter']) : '';
 
             $companyModel = new Company();
-            $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region);
-            var_dump($this->filterCompanies);
+            $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region, $page, $limit = null);
         }else{
             $this->filterCompanies = null;
         }
