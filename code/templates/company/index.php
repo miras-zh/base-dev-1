@@ -80,25 +80,23 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
             ?>
         </div>
     </div>
-    <div class="shadow-grey">
-        <table class="table">
-            <thead style='background: #494d4d; color: whitesmoke'>
+    <div>
+        <table id="fixed-header-datatable" class="table dt-responsive nowrap table-striped w-100">
+            <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">ID</th>
-                <th scope="col">БИН</th>
-                <th scope="col">Наименование</th>
-                <th scope="col">Адрес</th>
-                <th scope="col">Телефон</th>
-                <th scope="col">Регион</th>
-                <th scope="col">Email</th>
-                <th scope="col">Действия</th>
+                <th>ID</th>
+                <th>БИН</th>
+                <th>Наименование</th>
+                <th>Адрес</th>
+                <th>Телефон</th>
+                <th>Регион</th>
+                <th>Email</th>
+                <th>Действия</th>
             </tr>
             </thead>
-            <tbody style="background: #313131">
+            <tbody>
             <?php foreach ($companies as $key => $company): ?>
                 <tr>
-                    <th scope="row"><?php echo ($currentPage*$count-$count)+($key+1); ?></th>
                     <th scope="row"><?php echo $company['id']; ?></th>
                     <td ><?php echo $company['company_bin']; ?></td>
                     <td style="max-width: 230px"><?php echo $company['company_name']; ?></td>
@@ -108,19 +106,78 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                     <td><?php echo $company['email']; ?></td>
                     <td>
                         <a href="/companies/info/<?=$company['id']."?page=$currentPage&count=$count"?>" class="btn mx-1 item-action">
-                            <i class="bi bi-postcard"></i>
+                            <i class="mdi mdi-information-off" style="font-size: 20px"></i>
                         </a>
                         <a href="/companies/edit/<?= $company['id'] ?>" class="btn mx-1 item-action">
-                            <i class="bi bi-pencil-square"></i>
+                            <i class="mdi mdi-lead-pencil" style="font-size: 20px"></i>
                         </a>
                         <a href="/companies/delete/<?= $company['id'] ?>" class="btn mx-1 item-action">
-                            <i class="bi bi-trash3-fill"></i>
+                            <i class="mdi mdi-delete" style="font-size: 20px"></i>
                         </a>
                     </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
+        <div class="row">
+            <?php
+            $companyModel = new App\Models\company\Company();
+            $totalAmount = $companyModel->getCompaniesNumber();
+            $count = (int)($_GET['count'] ?? 30);
+            $totalPage = ceil($totalAmount / $count);
+            $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
+            ?>
+
+            <div class="col-sm-12 col-md-5">
+                <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Showing <?=(int)$currentPage*(int)$count?> to <?=$count*($currentPage+1)?> of <?=$totalAmount?> entries</div>
+            </div>
+            <div class="col-sm-12 col-md-7">
+                <div class="dataTables_paginate paging_simple_numbers" id="basic-datatable_paginate">
+                    <ul class="pagination pagination-rounded">
+                        <li class="paginate_button page-item previous disabled" id="basic-datatable_previous">
+                            <a href="#" aria-controls="basic-datatable" data-dt-idx="0" tabindex="0" class="page-link">
+                                <i class="mdi mdi-chevron-left"></i>
+                            </a>
+                        </li>
+                        <?php for ($btn = 1; $btn <= $totalPage; $btn++) {
+                        if($currentPage >= 4 && $btn == 1){
+                        echo "<li class='paginate_button page-item'>
+                            <a href='/companies?page=$btn&count=$count' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                        </li>";
+                        echo "..";
+                        }
+                        if($btn > $currentPage && ($btn-$currentPage)<3){
+                        echo "<li class='paginate_button page-item'>
+                            <a href='/companies?page=$btn&count=$count' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                        </li>";
+                        }
+                        if($btn < $currentPage && ($currentPage-$btn)<3){
+                        echo "<li class='paginate_button page-item'>
+                            <a href='/companies?page=$btn&count=$count' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                        </li>";
+                        }
+                        if($currentPage === $btn){
+                        echo "<li class='paginate_button page-item active'>
+                            <a href='/companies?page=$btn&count=$count' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                        </li>";
+                        }
+                        if(($totalPage-$currentPage) > 4 && $btn == $totalPage){
+                        echo "..";
+                        echo "<li class='paginate_button page-item'>
+                            <a href='/companies?page=$btn&count=$count' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                        </li>";
+                        }
+                        }
+                        ?>
+                        <li class="paginate_button page-item next" id="basic-datatable_next">
+                            <a href="#" aria-controls="basic-datatable" data-dt-idx="7" tabindex="0" class="page-link">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>

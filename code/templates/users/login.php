@@ -9,12 +9,25 @@ $title = 'Login';
     <title><?= $title ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<!--    <link href="/templates/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />-->
+    <style>
+        .logo-auth{
+            font-size: 40px;
+            font-family: ui-serif;
+            opacity: .8;
+        }
+    </style>
 </head>
 <body>
 <div class="bg-dark w-100 mx-auto container d-flex" style="height: 100vh">
     <div class="row justify-content-center col-lg-6 col-md-8 col-sm-10 mx-auto my-auto">
-        <h1>Authorization</h1>
+
         <form action="/auth/authenticate" method="post" class="w-75">
+            <h3 style="font-family: ui-serif;opacity: .8;" class="d-flex justify-content-center">Authorization CRM</h3>
+            <div class="w-50 align-items-center flex-row d-flex justify-content-center mb-4">
+                <img src="/templates/assets/images/logo_kazcic.png" style="height: 38px" alt="dark logo">
+                <span class="logo-text logo-text-dark logo-auth">KAZCIC</span>
+            </div>
             <div class="form-group">
                 <label for="email">Email address </label>
                 <input type="email" class="form-control" id="email" name="email" required/>
@@ -32,7 +45,7 @@ $title = 'Login';
         </form>
         <div class="mt-4">
             <p>
-                Already don't have an account? <a href="/auth/register">Register here</a>
+<!--                Already don't have an account? <a href="/auth/register">Register here</a>-->
             </p>
         </div>
     </div>

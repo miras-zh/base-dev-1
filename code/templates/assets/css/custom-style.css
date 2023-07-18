@@ -1,0 +1,17 @@
+
+
+
+/* logo */
+.logo-text{
+    font-size: 27px;
+    font-weight: 500;
+    font-family: sans-serif;
+    text-align: center;
+    position: relative;
+    top: 7px;
+    color: white;
+}
+
+.logo-text-dark{
+    color: #6c757d !important;
+}
