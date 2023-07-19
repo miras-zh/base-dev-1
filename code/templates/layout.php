@@ -15,10 +15,10 @@ function is_active($path, $currentPath): string
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Dashboard | CRM </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="crm_mikos" name="author" />
+    <meta content="crm_mikos" name="author"/>
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="/templates/assets/images/favicon.ico">
@@ -33,14 +33,15 @@ function is_active($path, $currentPath): string
     <script src="/templates/assets/js/hyper-config.js"></script>
 
     <!-- App css -->
-    <link href="/templates/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
-    <link href="/templates/assets/css/custom-style.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/templates/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style"/>
+    <link href="/templates/assets/css/custom-style.css" rel="stylesheet" type="text/css" id="app-style"/>
 
     <!-- Icons css -->
-    <link href="/templates/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/templates/assets/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!--    table-->
     <!-- Datatables css -->
-    <link href="/templates/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet" type="text/css" />
+    <link href="/templates/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
+          type="text/css"/>
 </head>
 <body>
 <div class="wrapper">
@@ -90,7 +91,8 @@ function is_active($path, $currentPath): string
                 <div class="app-search dropdown d-none d-lg-block">
                     <form>
                         <div class="input-group">
-                            <input type="search" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
+                            <input type="search" class="form-control dropdown-toggle" placeholder="Search..."
+                                   id="top-search">
                             <span class="mdi mdi-magnify search-icon"></span>
                             <button class="input-group-text btn btn-primary" type="submit">Search</button>
                         </div>
@@ -129,7 +131,9 @@ function is_active($path, $currentPath): string
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="d-flex">
-                                    <img class="d-flex me-2 rounded-circle" src="/templates/assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
+                                    <img class="d-flex me-2 rounded-circle"
+                                         src="/templates/assets/images/users/avatar-2.jpg"
+                                         alt="Generic placeholder image" height="32">
                                     <div class="w-100">
                                         <h5 class="m-0 font-14">Erwin Brown</h5>
                                         <span class="font-12 mb-0">UI Designer</span>
@@ -140,7 +144,9 @@ function is_active($path, $currentPath): string
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <div class="d-flex">
-                                    <img class="d-flex me-2 rounded-circle" src="/templates/assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
+                                    <img class="d-flex me-2 rounded-circle"
+                                         src="/templates/assets/images/users/avatar-5.jpg"
+                                         alt="Generic placeholder image" height="32">
                                     <div class="w-100">
                                         <h5 class="m-0 font-14">User</h5>
                                         <span class="font-12 mb-0">account</span>
@@ -154,48 +160,58 @@ function is_active($path, $currentPath): string
 
             <ul class="topbar-menu d-flex align-items-center gap-3">
                 <li class="dropdown d-lg-none">
-                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="false" aria-expanded="false">
                         <i class="ri-search-line font-22"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
                         <form class="p-3">
-                            <input type="search" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                            <input type="search" class="form-control" placeholder="Search ..."
+                                   aria-label="Recipient's username">
                         </form>
                     </div>
                 </li>
 
                 <li class="dropdown">
-                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="/templates/assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
-                        <span class="align-middle d-none d-lg-inline-block">English</span> <i class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
+                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#"
+                       role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="/templates/assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1"
+                             height="12">
+                        <span class="align-middle d-none d-lg-inline-block">English</span> <i
+                                class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="/templates/assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">German</span>
+                            <img src="/templates/assets/images/flags/germany.jpg" alt="user-image" class="me-1"
+                                 height="12"> <span class="align-middle">German</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="/templates/assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Italian</span>
+                            <img src="/templates/assets/images/flags/italy.jpg" alt="user-image" class="me-1"
+                                 height="12"> <span class="align-middle">Italian</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="/templates/assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Spanish</span>
+                            <img src="/templates/assets/images/flags/spain.jpg" alt="user-image" class="me-1"
+                                 height="12"> <span class="align-middle">Spanish</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="/templates/assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span class="align-middle">Russian</span>
+                            <img src="/templates/assets/images/flags/russia.jpg" alt="user-image" class="me-1"
+                                 height="12"> <span class="align-middle">Russian</span>
                         </a>
 
                     </div>
                 </li>
 
                 <li class="dropdown notification-list">
-                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#"
+                       role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="ri-notification-3-line font-22"></i>
                         <span class="noti-icon-badge"></span>
                     </a>
@@ -218,9 +234,11 @@ function is_active($path, $currentPath): string
                             <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
                             <!-- item-->
 
-                            <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
+                            <a href="javascript:void(0);"
+                               class="dropdown-item p-0 notify-item card unread-noti shadow-none mb-2">
                                 <div class="card-body">
-                                    <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                    <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="notify-icon bg-primary">
@@ -228,17 +246,21 @@ function is_active($path, $currentPath): string
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Datacorp <small class="fw-normal text-muted ms-1">1 min ago</small></h5>
-                                            <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
+                                            <h5 class="noti-item-title fw-semibold font-14">Datacorp <small
+                                                        class="fw-normal text-muted ms-1">1 min ago</small></h5>
+                                            <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on
+                                                Admin</small>
                                         </div>
                                     </div>
                                 </div>
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                            <a href="javascript:void(0);"
+                               class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                 <div class="card-body">
-                                    <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                    <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="notify-icon bg-info">
@@ -246,7 +268,8 @@ function is_active($path, $currentPath): string
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Admin <small class="fw-normal text-muted ms-1">1 hours ago</small></h5>
+                                            <h5 class="noti-item-title fw-semibold font-14">Admin <small
+                                                        class="fw-normal text-muted ms-1">1 hours ago</small></h5>
                                             <small class="noti-item-subtitle text-muted">New user registered</small>
                                         </div>
                                     </div>
@@ -256,18 +279,23 @@ function is_active($path, $currentPath): string
                             <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                            <a href="javascript:void(0);"
+                               class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                 <div class="card-body">
-                                    <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                    <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="notify-icon">
-                                                <img src="/templates/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                                <img src="/templates/assets/images/users/avatar-2.jpg"
+                                                     class="img-fluid rounded-circle" alt=""/>
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small class="fw-normal text-muted ms-1">1 day ago</small></h5>
-                                            <small class="noti-item-subtitle text-muted">Hi, How are you? What about our next meeting</small>
+                                            <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small
+                                                        class="fw-normal text-muted ms-1">1 day ago</small></h5>
+                                            <small class="noti-item-subtitle text-muted">Hi, How are you? What about our
+                                                next meeting</small>
                                         </div>
                                     </div>
                                 </div>
@@ -276,9 +304,11 @@ function is_active($path, $currentPath): string
                             <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                            <a href="javascript:void(0);"
+                               class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                 <div class="card-body">
-                                    <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                    <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="notify-icon bg-primary">
@@ -287,25 +317,30 @@ function is_active($path, $currentPath): string
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
                                             <h5 class="noti-item-title fw-semibold font-14">Datacorp</h5>
-                                            <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on Admin</small>
+                                            <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on
+                                                Admin</small>
                                         </div>
                                     </div>
                                 </div>
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
+                            <a href="javascript:void(0);"
+                               class="dropdown-item p-0 notify-item card read-noti shadow-none mb-2">
                                 <div class="card-body">
-                                    <span class="float-end noti-close-btn text-muted"><i class="mdi mdi-close"></i></span>
+                                    <span class="float-end noti-close-btn text-muted"><i
+                                                class="mdi mdi-close"></i></span>
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="notify-icon">
-                                                <img src="/templates/assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
+                                                <img src="/templates/assets/images/users/avatar-4.jpg"
+                                                     class="img-fluid rounded-circle" alt=""/>
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
                                             <h5 class="noti-item-title fw-semibold font-14">Karen Robinson</h5>
-                                            <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and awesome design</small>
+                                            <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and
+                                                awesome design</small>
                                         </div>
                                     </div>
                                 </div>
@@ -317,7 +352,8 @@ function is_active($path, $currentPath): string
                         </div>
 
                         <!-- All-->
-                        <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item border-top py-2">
+                        <a href="javascript:void(0);"
+                           class="dropdown-item text-center text-primary notify-item border-top py-2">
                             View All
                         </a>
 
@@ -325,7 +361,8 @@ function is_active($path, $currentPath): string
                 </li>
 
                 <li class="dropdown d-none d-sm-inline-block">
-                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#"
+                       role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="ri-apps-2-line font-22"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg p-0">
@@ -333,21 +370,21 @@ function is_active($path, $currentPath): string
                         <div class="p-2">
                             <div class="row g-0">
                                 <div class="col">
-                                    <a class="dropdown-icon-item" href="index.html#">
-                                        <img src="/templates/assets/images/brands/slack.png" alt="slack">
-                                        <span>Slack</span>
+                                    <a class="dropdown-icon-item" href="#">
+                                        <img src="/templates/assets/images/logo_kazcic.png" alt="kazcic">
+                                        <span>kazcic.kz</span>
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a class="dropdown-icon-item" href="index.html#">
-                                        <img src="/templates/assets/images/brands/github.png" alt="Github">
-                                        <span>GitHub</span>
+                                    <a class="dropdown-icon-item" href="#">
+                                      <img src="/templates/assets/images/logo_kazcic.png" alt="kazcic">
+                                        <span>atameken24</span>
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a class="dropdown-icon-item" href="index.html#">
-                                        <img src="/templates/assets/images/brands/dribbble.png" alt="dribbble">
-                                        <span>Dribbble</span>
+                                    <a class="dropdown-icon-item" href="#">
+                                     <img src="/templates/assets/images/logo_kazcic.png" alt="kazcic">
+                                        <span>gmail</span>
                                     </a>
                                 </div>
                             </div>
@@ -355,20 +392,20 @@ function is_active($path, $currentPath): string
                             <div class="row g-0">
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="index.html#">
-                                        <img src="/templates/assets/images/brands/bitbucket.png" alt="bitbucket">
-                                        <span>Bitbucket</span>
+                                      <img src="/templates/assets/images/logo_kazcic.png" alt="kazcic">
+                                        <span>events</span>
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="index.html#">
-                                        <img src="/templates/assets/images/brands/dropbox.png" alt="dropbox">
-                                        <span>Dropbox</span>
+                                       <img src="/templates/assets/images/logo_kazcic.png" alt="kazcic">
+                                        <span>cloud</span>
                                     </a>
                                 </div>
                                 <div class="col">
                                     <a class="dropdown-icon-item" href="index.html#">
-                                        <img src="/templates/assets/images/brands/g-suite.png" alt="G Suite">
-                                        <span>G Suite</span>
+                                      <img src="/templates/assets/images/logo_kazcic.png" alt="kazcic">
+                                        <span>contacts</span>
                                     </a>
                                 </div>
                             </div> <!-- end row-->
@@ -384,7 +421,8 @@ function is_active($path, $currentPath): string
                 </li>
 
                 <li class="d-none d-sm-inline-block">
-                    <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left" title="Theme Mode">
+                    <div class="nav-link" id="light-dark-mode" data-bs-toggle="tooltip" data-bs-placement="left"
+                         title="Theme Mode">
                         <i class="ri-moon-line font-22"></i>
                     </div>
                 </li>
@@ -397,9 +435,11 @@ function is_active($path, $currentPath): string
                 </li>
 
                 <li class="dropdown">
-                    <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="index.html#" role="button" aria-haspopup="false" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
+                       href="index.html#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" width="32"
+                                         class="rounded-circle">
                                 </span>
                         <span class="d-lg-flex flex-column gap-1 d-none">
                                     <h5 class="my-0">User</h5>
@@ -437,9 +477,9 @@ function is_active($path, $currentPath): string
                         </a>
 
                         <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">
+                        <a href="/auth/logout" class="dropdown-item">
                             <i class="mdi mdi-logout me-1"></i>
-                            <span>Logout</span>
+                            <span>Выход</span>
                         </a>
                     </div>
                 </li>
@@ -453,7 +493,8 @@ function is_active($path, $currentPath): string
         <!-- Brand Logo Light -->
         <a href="/" class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="/templates/assets/images/logo_kazcic.png" style="height: 46px" alt="logo"><span class="logo-text">KAZCIC</span>
+                        <img src="/templates/assets/images/logo_kazcic.png" style="height: 46px" alt="logo"><span
+                                class="logo-text">KAZCIC</span>
                     </span>
             <span class="logo-sm">
                         <img src="/templates/assets/images/logo_kazcic.png" style="height: 46px" alt="small logo">
@@ -462,7 +503,8 @@ function is_active($path, $currentPath): string
         <!-- Brand Logo Dark -->
         <a href="/" class="logo logo-dark">
                     <span class="logo-lg">
-                        <img src="/templates/assets/images/logo_kazcic.png" style="height: 46px" alt="dark logo"><span class="logo-text logo-text-dark">KAZCIC</span>
+                        <img src="/templates/assets/images/logo_kazcic.png" style="height: 46px" alt="dark logo"><span
+                                class="logo-text logo-text-dark">KAZCIC</span>
                     </span>
             <span class="logo-sm">
                         <img src="/templates/assets/images/logo_kazcic.png" style="height: 46px" alt="small logo">
@@ -481,17 +523,19 @@ function is_active($path, $currentPath): string
             <!-- Leftbar User -->
             <div class="leftbar-user">
                 <a href="#">
-                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" height="42"
+                         class="rounded-circle shadow-sm">
                     <span class="leftbar-user-name mt-2">User Manager</span>
                 </a>
             </div>
             <!--- Sidemenu -->
             <ul class="side-nav">
 
-                <li class="side-nav-title">Навигация</li>
+                <li class="side-nav-title">Рабочий стол</li>
 
                 <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                    <a data-bs-toggle="collapse" href="index.html#sidebarDashboards" aria-expanded="false"
+                       aria-controls="sidebarDashboards" class="side-nav-link">
                         <i class="uil-home-alt"></i>
                         <span class="badge bg-success float-end">5</span>
                         <span> Доска </span>
@@ -499,19 +543,19 @@ function is_active($path, $currentPath): string
                     <div class="collapse" id="sidebarDashboards">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="dashboard-analytics.html">Analytics</a>
+                                <a href="/">Аналитика</a>
                             </li>
                             <li>
-                                <a href="index.html">Ecommerce</a>
+                                <a href="#">Финансы</a>
                             </li>
                             <li>
-                                <a href="dashboard-projects.html">Projects</a>
+                                <a href="#">Проекты</a>
                             </li>
                             <li>
-                                <a href="dashboard-crm.html">CRM</a>
+                                <a href="#">CRM</a>
                             </li>
                             <li>
-                                <a href="dashboard-wallet.html">E-Wallet</a>
+                                <a href="#">Мероприятия</a>
                             </li>
                         </ul>
                     </div>
@@ -522,679 +566,144 @@ function is_active($path, $currentPath): string
                 <li class="side-nav-item">
                     <a href="/companies?page=1&count=30" class="side-nav-link">
                         <i class="uil-calender"></i>
-                        <span> База компаний</span>
+                        <span> *База компаний</span>
                     </a>
                 </li>
 
                 <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarTasks" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
+                    <a data-bs-toggle="collapse" href="index.html#sidebarTasks" aria-expanded="false"
+                       aria-controls="sidebarTasks" class="side-nav-link">
                         <i class="uil-clipboard-alt"></i>
-                        <span> Задачи </span>
+                        <span> *Задачи </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarTasks">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="apps-tasks.html">List</a>
+                                <a href="#">Канбан</a>
                             </li>
                             <li>
-                                <a href="apps-tasks-details.html">Details</a>
-                            </li>
-                            <li>
-                                <a href="apps-kanban.html">Kanban Board</a>
+                                <a href="/todo/tasks">*Список</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="side-nav-item">
-                    <a href="apps-chat.html" class="side-nav-link">
+                    <a href="#" class="side-nav-link">
                         <i class="uil-comments-alt"></i>
-                        <span> Chat </span>
+                        <span> Сообщения </span>
                     </a>
                 </li>
 
                 <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarCrm" aria-expanded="false" aria-controls="sidebarCrm" class="side-nav-link">
+                    <a data-bs-toggle="collapse" href="index.html#sidebarCrm" aria-expanded="false"
+                       aria-controls="sidebarCrm" class="side-nav-link">
                         <i class="uil uil-tachometer-fast"></i>
                         <span class="badge bg-danger text-white float-end">New</span>
-                        <span> CRM </span>
+                        <span> *CRM </span>
                     </a>
                     <div class="collapse" id="sidebarCrm">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="crm-projects.html">Projects</a>
+                                <a href="/users" >*Пользователи</a>
                             </li>
                             <li>
-                                <a href="crm-orders-list.html">Orders List</a>
+                                <a href="/roles" >*Роли</a>
                             </li>
                             <li>
-                                <a href="crm-clients.html">Clients</a>
+                                <a href="/pages" >*Страницы</a>
                             </li>
                             <li>
-                                <a href="crm-management.html">Management</a>
+                                <a href="/regions" >*Регионы</a>
+                            </li>
+                            <li>
+                                <a href="#">Проекты</a>
+                            </li>
+                            <li>
+                                <a href="#">Заявки</a>
+                            </li>
+                            <li>
+                                <a href="#">Клиенты</a>
+                            </li>
+                            <li>
+                                <a href="#">Менеджмент</a>
+                            </li>
+                            <li>
+                                <a href="#">Форс-мажор</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarEcommerce" aria-expanded="false" aria-controls="sidebarEcommerce" class="side-nav-link">
+                    <a data-bs-toggle="collapse" href="index.html#sidebarEcommerce" aria-expanded="false"
+                       aria-controls="sidebarEcommerce" class="side-nav-link">
                         <i class="uil-store"></i>
-                        <span> Ecommerce </span>
+                        <span> Бухгалтерия </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarEcommerce">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
+                                <a href="#">Отчеты</a>
                             </li>
                             <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                                <a href="#">Аналитика</a>
                             </li>
                             <li>
-                                <a href="apps-ecommerce-orders.html">Orders</a>
+                                <a href="#">Оплаты</a>
                             </li>
                             <li>
-                                <a href="apps-ecommerce-orders-details.html">Order Details</a>
+                                <a href="#">Счета</a>
                             </li>
                             <li>
-                                <a href="apps-ecommerce-customers.html">Customers</a>
+                                <a href="#">Продажи</a>
                             </li>
                             <li>
-                                <a href="apps-ecommerce-shopping-cart.html">Shopping Cart</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-checkout.html">Checkout</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-sellers.html">Sellers</a>
+                                <a href="#">Покупки</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
                 <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarEmail" aria-expanded="false" aria-controls="sidebarEmail" class="side-nav-link">
+                    <a data-bs-toggle="collapse" href="index.html#sidebarEmail" aria-expanded="false"
+                       aria-controls="sidebarEmail" class="side-nav-link">
                         <i class="uil-envelope"></i>
-                        <span> Email </span>
+                        <span> Почта </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarEmail">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="apps-email-inbox.html">Inbox</a>
+                                <a href="#">Входящие</a>
                             </li>
                             <li>
-                                <a href="apps-email-read.html">Read Email</a>
+                                <a href="#">Отправленные</a>
+                            </li>
+                            <li>
+                                <a href="#">Прочитанные</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarProjects" aria-expanded="false" aria-controls="sidebarProjects" class="side-nav-link">
-                        <i class="uil-briefcase"></i>
-                        <span> Projects </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarProjects">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="apps-projects-list.html">List</a>
-                            </li>
-                            <li>
-                                <a href="apps-projects-details.html">Details</a>
-                            </li>
-                            <li>
-                                <a href="apps-projects-gantt.html">Gantt <span class="badge rounded-pill bg-light text-dark font-10 float-end">New</span></a>
-                            </li>
-                            <li>
-                                <a href="apps-projects-add.html">Create Project</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
 
                 <li class="side-nav-item">
-                    <a href="apps-social-feed.html" class="side-nav-link">
+                    <a href="#" class="side-nav-link">
                         <i class="uil-rss"></i>
-                        <span> Social Feed </span>
+                        <span>Социальные сети</span>
                     </a>
                 </li>
 
 
-
                 <li class="side-nav-item">
-                    <a href="apps-file-manager.html" class="side-nav-link">
+                    <a href="#" class="side-nav-link">
                         <i class="uil-folder-plus"></i>
-                        <span> File Manager </span>
+                        <span>Файлы</span>
                     </a>
                 </li>
-
-                <li class="side-nav-title">Custom</li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                        <i class="uil-copy-alt"></i>
-                        <span> Pages </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarPages">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="pages-profile.html">Profile</a>
-                            </li>
-                            <li>
-                                <a href="pages-profile-2.html">Profile 2</a>
-                            </li>
-                            <li>
-                                <a href="pages-invoice.html">Invoice</a>
-                            </li>
-                            <li>
-                                <a href="pages-faq.html">FAQ</a>
-                            </li>
-                            <li>
-                                <a href="pages-pricing.html">Pricing</a>
-                            </li>
-                            <li>
-                                <a href="pages-maintenance.html">Maintenance</a>
-                            </li>
-                            <li class="side-nav-item">
-                                <a data-bs-toggle="collapse" href="index.html#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth">
-                                    <span> Authentication </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarPagesAuth">
-                                    <ul class="side-nav-third-level">
-                                        <li>
-                                            <a href="pages-login.html">Login</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-login-2.html">Login 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-register.html">Register</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-register-2.html">Register 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-logout.html">Logout</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-logout-2.html">Logout 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-recoverpw.html">Recover Password</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-recoverpw-2.html">Recover Password 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-lock-screen.html">Lock Screen</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-lock-screen-2.html">Lock Screen 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-confirm-mail.html">Confirm Mail</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-confirm-mail-2.html">Confirm Mail 2</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="side-nav-item">
-                                <a data-bs-toggle="collapse" href="index.html#sidebarPagesError" aria-expanded="false" aria-controls="sidebarPagesError">
-                                    <span> Error </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarPagesError">
-                                    <ul class="side-nav-third-level">
-                                        <li>
-                                            <a href="pages-404.html">Error 404</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404-alt.html">Error 404-alt</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-500.html">Error 500</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="pages-starter.html">Starter Page</a>
-                            </li>
-                            <li>
-                                <a href="pages-preloader.html">With Preloader</a>
-                            </li>
-                            <li>
-                                <a href="pages-timeline.html">Timeline</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="landing.html" target="_blank" class="side-nav-link">
-                        <i class="uil-globe"></i>
-                        <span class="badge text-bg-secondary float-end">New</span>
-                        <span> Landing </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
-                        <i class="uil-window"></i>
-                        <span> Layouts </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarLayouts">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="layouts-horizontal.html" target="_blank">Horizontal</a>
-                            </li>
-                            <li>
-                                <a href="layouts-detached.html" target="_blank">Detached</a>
-                            </li>
-                            <li>
-                                <a href="layouts-full.html" target="_blank">Full View</a>
-                            </li>
-                            <li>
-                                <a href="layouts-fullscreen.html" target="_blank">Fullscreen View</a>
-                            </li>
-                            <li>
-                                <a href="layouts-hover.html" target="_blank">Hover Menu</a>
-                            </li>
-                            <li>
-                                <a href="layouts-compact.html" target="_blank">Compact</a>
-                            </li>
-                            <li>
-                                <a href="layouts-icon-view.html" target="_blank">Icon View</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-title">Components</li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarBaseUI" aria-expanded="false" aria-controls="sidebarBaseUI" class="side-nav-link">
-                        <i class="uil-box"></i>
-                        <span> Base UI </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarBaseUI">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="ui-accordions.html">Accordions & Collapse</a>
-                            </li>
-                            <li>
-                                <a href="ui-alerts.html">Alerts</a>
-                            </li>
-                            <li>
-                                <a href="ui-avatars.html">Avatars</a>
-                            </li>
-                            <li>
-                                <a href="ui-badges.html">Badges</a>
-                            </li>
-                            <li>
-                                <a href="ui-breadcrumb.html">Breadcrumb</a>
-                            </li>
-                            <li>
-                                <a href="ui-buttons.html">Buttons</a>
-                            </li>
-                            <li>
-                                <a href="ui-cards.html">Cards</a>
-                            </li>
-                            <li>
-                                <a href="ui-carousel.html">Carousel</a>
-                            </li>
-                            <li>
-                                <a href="ui-dropdowns.html">Dropdowns</a>
-                            </li>
-                            <li>
-                                <a href="ui-embed-video.html">Embed Video</a>
-                            </li>
-                            <li>
-                                <a href="ui-grid.html">Grid</a>
-                            </li>
-                            <li>
-                                <a href="ui-list-group.html">List Group</a>
-                            </li>
-                            <li>
-                                <a href="ui-modals.html">Modals</a>
-                            </li>
-                            <li>
-                                <a href="ui-notifications.html">Notifications</a>
-                            </li>
-                            <li>
-                                <a href="ui-offcanvas.html">Offcanvas</a>
-                            </li>
-                            <li>
-                                <a href="ui-placeholders.html">Placeholders</a>
-                            </li>
-                            <li>
-                                <a href="ui-pagination.html">Pagination</a>
-                            </li>
-                            <li>
-                                <a href="ui-popovers.html">Popovers</a>
-                            </li>
-                            <li>
-                                <a href="ui-progress.html">Progress</a>
-                            </li>
-                            <li>
-                                <a href="ui-ribbons.html">Ribbons</a>
-                            </li>
-                            <li>
-                                <a href="ui-spinners.html">Spinners</a>
-                            </li>
-                            <li>
-                                <a href="ui-tabs.html">Tabs</a>
-                            </li>
-                            <li>
-                                <a href="ui-tooltips.html">Tooltips</a>
-                            </li>
-                            <li>
-                                <a href="ui-links.html">Links</a>
-                            </li>
-                            <li>
-                                <a href="ui-typography.html">Typography</a>
-                            </li>
-                            <li>
-                                <a href="ui-utilities.html">Utilities</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
-                        <i class="uil-package"></i>
-                        <span> Extended UI </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarExtendedUI">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="extended-dragula.html">Dragula</a>
-                            </li>
-                            <li>
-                                <a href="extended-range-slider.html">Range Slider</a>
-                            </li>
-                            <li>
-                                <a href="extended-ratings.html">Ratings</a>
-                            </li>
-                            <li>
-                                <a href="extended-scrollbar.html">Scrollbar</a>
-                            </li>
-                            <li>
-                                <a href="extended-scrollspy.html">Scrollspy</a>
-                            </li>
-                            <li>
-                                <a href="extended-treeview.html">Treeview</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a href="widgets.html" class="side-nav-link">
-                        <i class="uil-layer-group"></i>
-                        <span> Widgets </span>
-                    </a>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarIcons" aria-expanded="false" aria-controls="sidebarIcons" class="side-nav-link">
-                        <i class="uil-streering"></i>
-                        <span> Icons </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarIcons">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="icons-remixicons.html">Remix Icons</a>
-                            </li>
-                            <li>
-                                <a href="icons-mdi.html">Material Design</a>
-                            </li>
-                            <li>
-                                <a href="icons-unicons.html">Unicons</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
-                        <i class="uil-chart"></i>
-                        <span> Charts </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarCharts">
-                        <ul class="side-nav-second-level">
-                            <li class="side-nav-item">
-                                <a data-bs-toggle="collapse" href="index.html#sidebarApexCharts" aria-expanded="false" aria-controls="sidebarApexCharts">
-                                    <span> Apex Charts </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarApexCharts">
-                                    <ul class="side-nav-third-level">
-                                        <li>
-                                            <a href="charts-apex-area.html">Area</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-bar.html">Bar</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-bubble.html">Bubble</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-candlestick.html">Candlestick</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-column.html">Column</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-heatmap.html">Heatmap</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-line.html">Line</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-mixed.html">Mixed</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-timeline.html">Timeline</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-boxplot.html">Boxplot</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-treemap.html">Treemap</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-pie.html">Pie</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-radar.html">Radar</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-radialbar.html">RadialBar</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-scatter.html">Scatter</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-polar-area.html">Polar Area</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-apex-sparklines.html">Sparklines</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="side-nav-item">
-                                <a data-bs-toggle="collapse" href="index.html#sidebarChartJSCharts" aria-expanded="false" aria-controls="sidebarChartJSCharts">
-                                    <span> ChartJS </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarChartJSCharts">
-                                    <ul class="side-nav-third-level">
-                                        <li>
-                                            <a href="charts-chartjs-area.html">Area</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-chartjs-bar.html">Bar</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-chartjs-line.html">Line</a>
-                                        </li>
-                                        <li>
-                                            <a href="charts-chartjs-other.html">Other</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="charts-brite.html">Britecharts</a>
-                            </li>
-                            <li>
-                                <a href="charts-sparkline.html">Sparklines</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarForms" aria-expanded="false" aria-controls="sidebarForms" class="side-nav-link">
-                        <i class="uil-document-layout-center"></i>
-                        <span> Forms </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarForms">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="form-elements.html">Basic Elements</a>
-                            </li>
-                            <li>
-                                <a href="form-advanced.html">Form Advanced</a>
-                            </li>
-                            <li>
-                                <a href="form-validation.html">Validation</a>
-                            </li>
-                            <li>
-                                <a href="form-wizard.html">Wizard</a>
-                            </li>
-                            <li>
-                                <a href="form-fileuploads.html">File Uploads</a>
-                            </li>
-                            <li>
-                                <a href="form-editors.html">Editors</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarTables" aria-expanded="false" aria-controls="sidebarTables" class="side-nav-link">
-                        <i class="uil-table"></i>
-                        <span> Tables </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarTables">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="tables-basic.html">Basic Tables</a>
-                            </li>
-                            <li>
-                                <a href="tables-datatable.html">Data Tables</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarMaps" aria-expanded="false" aria-controls="sidebarMaps" class="side-nav-link">
-                        <i class="uil-location-point"></i>
-                        <span> Maps </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarMaps">
-                        <ul class="side-nav-second-level">
-                            <li>
-                                <a href="maps-google.html">Google Maps</a>
-                            </li>
-                            <li>
-                                <a href="maps-vector.html">Vector Maps</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="index.html#sidebarMultiLevel" aria-expanded="false" aria-controls="sidebarMultiLevel" class="side-nav-link">
-                        <i class="uil-folder-plus"></i>
-                        <span> Multi Level </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarMultiLevel">
-                        <ul class="side-nav-second-level">
-                            <li class="side-nav-item">
-                                <a data-bs-toggle="collapse" href="index.html#sidebarSecondLevel" aria-expanded="false" aria-controls="sidebarSecondLevel">
-                                    <span> Second Level </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarSecondLevel">
-                                    <ul class="side-nav-third-level">
-                                        <li>
-                                            <a href="javascript: void(0);">Item 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript: void(0);">Item 2</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="side-nav-item">
-                                <a data-bs-toggle="collapse" href="index.html#sidebarThirdLevel" aria-expanded="false" aria-controls="sidebarThirdLevel">
-                                    <span> Third Level </span>
-                                    <span class="menu-arrow"></span>
-                                </a>
-                                <div class="collapse" id="sidebarThirdLevel">
-                                    <ul class="side-nav-third-level">
-                                        <li>
-                                            <a href="javascript: void(0);">Item 1</a>
-                                        </li>
-                                        <li class="side-nav-item">
-                                            <a data-bs-toggle="collapse" href="index.html#sidebarFourthLevel" aria-expanded="false" aria-controls="sidebarFourthLevel">
-                                                <span> Item 2 </span>
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <div class="collapse" id="sidebarFourthLevel">
-                                                <ul class="side-nav-forth-level">
-                                                    <li>
-                                                        <a href="javascript: void(0);">Item 2.1</a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript: void(0);">Item 2.2</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-
 
             </ul>
             <!--- End Sidemenu -->
@@ -1222,7 +731,8 @@ function is_active($path, $currentPath): string
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <script>document.write(new Date().getFullYear())</script> © CRM - Mikos.zh8@gmail.com
+                        <script>document.write(new Date().getFullYear())</script>
+                        © CRM - Mikos.zh8@gmail.com
                     </div>
                     <div class="col-md-6">
                         <div class="text-md-end footer-links d-none d-md-block">
@@ -1245,7 +755,8 @@ function is_active($path, $currentPath): string
 <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
     <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
         <h5 class="text-white m-0">Theme Settings</h5>
-        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
     </div>
 
     <div class="offcanvas-body p-0">
@@ -1255,7 +766,8 @@ function is_active($path, $currentPath): string
                 <div class="row">
                     <div class="col-4">
                         <div class="form-check card-radio">
-                            <input id="customizer-layout01" name="data-layout" type="radio" value="vertical" class="form-check-input">
+                            <input id="customizer-layout01" name="data-layout" type="radio" value="vertical"
+                                   class="form-check-input">
                             <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout01">
                                         <span class="d-flex h-100">
                                             <span class="flex-shrink-0">
@@ -1279,7 +791,8 @@ function is_active($path, $currentPath): string
                     </div>
                     <div class="col-4">
                         <div class="form-check card-radio">
-                            <input id="customizer-layout02" name="data-layout" type="radio" value="horizontal" class="form-check-input">
+                            <input id="customizer-layout02" name="data-layout" type="radio" value="horizontal"
+                                   class="form-check-input">
                             <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout02">
                                         <span class="d-flex h-100 flex-column">
                                             <span class="bg-light d-flex p-1 align-items-center border-bottom border-secondary border-opacity-25">
@@ -1303,7 +816,8 @@ function is_active($path, $currentPath): string
                     <div class="row">
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-light" value="light">
+                                <input class="form-check-input" type="radio" name="data-bs-theme"
+                                       id="layout-color-light" value="light">
                                 <label class="form-check-label p-0 avatar-md w-100" for="layout-color-light">
                                     <div id="sidebar-size">
                                                 <span class="d-flex h-100">
@@ -1345,7 +859,8 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-dark" value="dark">
+                                <input class="form-check-input" type="radio" name="data-bs-theme" id="layout-color-dark"
+                                       value="dark">
                                 <label class="form-check-label p-0 avatar-md w-100 bg-black" for="layout-color-dark">
                                     <div id="sidebar-size">
                                                 <span class="d-flex h-100">
@@ -1391,7 +906,8 @@ function is_active($path, $currentPath): string
                     <div class="row">
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input class="form-check-input" type="radio" name="data-layout-mode" id="layout-mode-fluid" value="fluid">
+                                <input class="form-check-input" type="radio" name="data-layout-mode"
+                                       id="layout-mode-fluid" value="fluid">
                                 <label class="form-check-label p-0 avatar-md w-100" for="layout-mode-fluid">
                                     <div id="sidebar-size">
                                                 <span class="d-flex h-100">
@@ -1430,7 +946,8 @@ function is_active($path, $currentPath): string
                         </div>
                         <div class="col-4" id="layout-boxed">
                             <div class="form-check card-radio">
-                                <input class="form-check-input" type="radio" name="data-layout-mode" id="layout-mode-boxed" value="boxed">
+                                <input class="form-check-input" type="radio" name="data-layout-mode"
+                                       id="layout-mode-boxed" value="boxed">
                                 <label class="form-check-label p-0 avatar-md w-100 px-2" for="layout-mode-boxed">
                                     <div id="sidebar-size" class="border-start border-end">
                                                 <span class="d-flex h-100">
@@ -1470,7 +987,8 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4" id="layout-detached">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-layout-mode" id="data-layout-detached" value="detached">
+                                <input class="form-check-input" type="radio" name="data-layout-mode"
+                                       id="data-layout-detached" value="detached">
                                 <label class="form-check-label p-0 avatar-md w-100" for="data-layout-detached">
                                             <span class="d-flex h-100 flex-column">
                                                 <span class="bg-light d-flex p-1 align-items-center border-bottom ">
@@ -1504,7 +1022,8 @@ function is_active($path, $currentPath): string
                 <div class="row">
                     <div class="col-4">
                         <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-light" value="light">
+                            <input class="form-check-input" type="radio" name="data-topbar-color"
+                                   id="topbar-color-light" value="light">
                             <label class="form-check-label p-0 avatar-md w-100" for="topbar-color-light">
                                 <div id="sidebar-size">
                                             <span class="d-flex h-100">
@@ -1544,7 +1063,8 @@ function is_active($path, $currentPath): string
 
                     <div class="col-4" style="--ct-dark-rgb: 64,73,84;">
                         <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-dark" value="dark">
+                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-dark"
+                                   value="dark">
                             <label class="form-check-label p-0 avatar-md w-100" for="topbar-color-dark">
                                 <div id="sidebar-size">
                                             <span class="d-flex h-100">
@@ -1584,7 +1104,8 @@ function is_active($path, $currentPath): string
 
                     <div class="col-4">
                         <div class="form-check card-radio">
-                            <input class="form-check-input" type="radio" name="data-topbar-color" id="topbar-color-brand" value="brand">
+                            <input class="form-check-input" type="radio" name="data-topbar-color"
+                                   id="topbar-color-brand" value="brand">
                             <label class="form-check-label p-0 avatar-md w-100" for="topbar-color-brand">
                                 <div id="sidebar-size">
                                             <span class="d-flex h-100">
@@ -1629,7 +1150,8 @@ function is_active($path, $currentPath): string
                     <div class="row">
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-menu-color" id="leftbar-color-light" value="light">
+                                <input class="form-check-input" type="radio" name="data-menu-color"
+                                       id="leftbar-color-light" value="light">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-color-light">
                                     <div id="sidebar-size">
                                                 <span class="d-flex h-100">
@@ -1669,7 +1191,8 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4" style="--ct-dark-rgb: 64,73,84;">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-menu-color" id="leftbar-color-dark" value="dark">
+                                <input class="form-check-input" type="radio" name="data-menu-color"
+                                       id="leftbar-color-dark" value="dark">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-color-dark">
                                     <div id="sidebar-size">
                                                 <span class="d-flex h-100">
@@ -1708,7 +1231,8 @@ function is_active($path, $currentPath): string
                         </div>
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-menu-color" id="leftbar-color-brand" value="brand">
+                                <input class="form-check-input" type="radio" name="data-menu-color"
+                                       id="leftbar-color-brand" value="brand">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-color-brand">
                                     <div id="sidebar-size">
                                                 <span class="d-flex h-100">
@@ -1755,7 +1279,8 @@ function is_active($path, $currentPath): string
                     <div class="row">
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-default" value="default">
+                                <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                       id="leftbar-size-default" value="default">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-default">
                                             <span class="d-flex h-100">
                                                 <span class="flex-shrink-0">
@@ -1780,7 +1305,8 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-compact" value="compact">
+                                <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                       id="leftbar-size-compact" value="compact">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-compact">
                                             <span class="d-flex h-100">
                                                 <span class="flex-shrink-0">
@@ -1805,11 +1331,13 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
+                                <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                       id="leftbar-size-small" value="condensed">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-small">
                                             <span class="d-flex h-100">
                                                 <span class="flex-shrink-0">
-                                                    <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
+                                                    <span class="bg-light d-flex h-100 border-end flex-column"
+                                                          style="padding: 2px;">
                                                         <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
                                                         <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
                                                         <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
@@ -1830,11 +1358,13 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-small-hover" value="sm-hover">
+                                <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                       id="leftbar-size-small-hover" value="sm-hover">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-small-hover">
                                             <span class="d-flex h-100">
                                                 <span class="flex-shrink-0">
-                                                    <span class="bg-light d-flex h-100 border-end flex-column" style="padding: 2px;">
+                                                    <span class="bg-light d-flex h-100 border-end flex-column"
+                                                          style="padding: 2px;">
                                                         <span class="d-block p-1 bg-dark-lighten rounded mb-1"></span>
                                                         <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
                                                         <span class="d-block border border-3 border-secondary border-opacity-25 rounded w-100 mb-1"></span>
@@ -1855,7 +1385,8 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-full" value="full">
+                                <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                       id="leftbar-size-full" value="full">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-full">
                                             <span class="d-flex h-100">
                                                 <span class="flex-shrink-0">
@@ -1876,7 +1407,8 @@ function is_active($path, $currentPath): string
 
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
-                                <input class="form-check-input" type="radio" name="data-sidenav-size" id="leftbar-size-fullscreen" value="fullscreen">
+                                <input class="form-check-input" type="radio" name="data-sidenav-size"
+                                       id="leftbar-size-fullscreen" value="fullscreen">
                                 <label class="form-check-label p-0 avatar-md w-100" for="leftbar-size-fullscreen">
                                             <span class="d-flex h-100">
                                                 <span class="flex-grow-1">
@@ -1896,11 +1428,14 @@ function is_active($path, $currentPath): string
                     <h5 class="my-3 font-16 fw-bold">Layout Position</h5>
 
                     <div class="btn-group radio" role="group">
-                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-fixed" value="fixed">
+                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-fixed"
+                               value="fixed">
                         <label class="btn btn-soft-primary w-sm" for="layout-position-fixed">Fixed</label>
 
-                        <input type="radio" class="btn-check" name="data-layout-position" id="layout-position-scrollable" value="scrollable">
-                        <label class="btn btn-soft-primary w-sm ms-0" for="layout-position-scrollable">Scrollable</label>
+                        <input type="radio" class="btn-check" name="data-layout-position"
+                               id="layout-position-scrollable" value="scrollable">
+                        <label class="btn btn-soft-primary w-sm ms-0"
+                               for="layout-position-scrollable">Scrollable</label>
                     </div>
                 </div>
 
@@ -1923,7 +1458,8 @@ function is_active($path, $currentPath): string
                 <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
             </div>
             <div class="col-6">
-                <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" target="_blank" role="button" class="btn btn-primary w-100">Buy Now</a>
+                <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
+                   target="_blank" role="button" class="btn btn-primary w-100">Buy Now</a>
             </div>
         </div>
     </div>
@@ -1951,17 +1487,6 @@ function is_active($path, $currentPath): string
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!---------------------------------------------------------------------------------------------------OLD LAYOUT-->
