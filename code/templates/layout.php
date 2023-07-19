@@ -10,6 +10,8 @@ function is_active($path, $currentPath): string
     return $path == $currentPath ? 'active' : '';
 }
 
+$userModel = new App\Models\user\User();
+$user = $userModel->read($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +44,7 @@ function is_active($path, $currentPath): string
     <!-- Datatables css -->
     <link href="/templates/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
           type="text/css"/>
+    <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
 </head>
 <body>
 <div class="wrapper">
@@ -175,9 +178,9 @@ function is_active($path, $currentPath): string
                 <li class="dropdown">
                     <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="index.html#"
                        role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="/templates/assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1"
+                        <img src="/templates/assets/images/flags/kk.jpg" alt="user-image" class="me-0 me-sm-1"
                              height="12">
-                        <span class="align-middle d-none d-lg-inline-block">English</span> <i
+                        <span class="align-middle d-none d-lg-inline-block">Kazakh</span> <i
                                 class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
@@ -188,6 +191,10 @@ function is_active($path, $currentPath): string
                                  height="12"> <span class="align-middle">German</span>
                         </a>
 
+                        <a href="javascript:void(0);" class="dropdown-item">
+                            <img src="/templates/assets/images/flags/us.jpg" alt="user-image" class="me-1"
+                                 height="12"> <span class="align-middle">English</span>
+                        </a>
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
                             <img src="/templates/assets/images/flags/italy.jpg" alt="user-image" class="me-1"
@@ -219,11 +226,11 @@ function is_active($path, $currentPath): string
                         <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h6 class="m-0 font-16 fw-semibold"> Notification</h6>
+                                    <h6 class="m-0 font-16 fw-semibold"> Уведомления</h6>
                                 </div>
                                 <div class="col-auto">
                                     <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                        <small>Clear All</small>
+                                        <small>Очистить</small>
                                     </a>
                                 </div>
                             </div>
@@ -231,7 +238,7 @@ function is_active($path, $currentPath): string
 
                         <div class="px-2" style="max-height: 300px;" data-simplebar>
 
-                            <h5 class="text-muted font-13 fw-normal mt-2">Today</h5>
+                            <h5 class="text-muted font-13 fw-normal mt-2">Сегодня</h5>
                             <!-- item-->
 
                             <a href="javascript:void(0);"
@@ -246,10 +253,9 @@ function is_active($path, $currentPath): string
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Datacorp <small
+                                            <h5 class="noti-item-title fw-semibold font-14">Атамекен <small
                                                         class="fw-normal text-muted ms-1">1 min ago</small></h5>
-                                            <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on
-                                                Admin</small>
+                                            <small class="noti-item-subtitle text-muted">согласовать заявление</small>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +274,7 @@ function is_active($path, $currentPath): string
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Admin <small
+                                            <h5 class="noti-item-title fw-semibold font-14">Бексултан <small
                                                         class="fw-normal text-muted ms-1">1 hours ago</small></h5>
                                             <small class="noti-item-subtitle text-muted">New user registered</small>
                                         </div>
@@ -276,7 +282,7 @@ function is_active($path, $currentPath): string
                                 </div>
                             </a>
 
-                            <h5 class="text-muted font-13 fw-normal mt-0">Yesterday</h5>
+                            <h5 class="text-muted font-13 fw-normal mt-0">Вчера</h5>
 
                             <!-- item-->
                             <a href="javascript:void(0);"
@@ -292,16 +298,15 @@ function is_active($path, $currentPath): string
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Cristina Pride <small
+                                            <h5 class="noti-item-title fw-semibold font-14">Адиль <small
                                                         class="fw-normal text-muted ms-1">1 day ago</small></h5>
-                                            <small class="noti-item-subtitle text-muted">Hi, How are you? What about our
-                                                next meeting</small>
+                                            <small class="noti-item-subtitle text-muted">Здравствуйте! Согласование списков по мероприятию</small>
                                         </div>
                                     </div>
                                 </div>
                             </a>
 
-                            <h5 class="text-muted font-13 fw-normal mt-0">30 Dec 2021</h5>
+                            <h5 class="text-muted font-13 fw-normal mt-0">30 Июнь 2022</h5>
 
                             <!-- item-->
                             <a href="javascript:void(0);"
@@ -316,9 +321,8 @@ function is_active($path, $currentPath): string
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Datacorp</h5>
-                                            <small class="noti-item-subtitle text-muted">Caleb Flakelar commented on
-                                                Admin</small>
+                                            <h5 class="noti-item-title fw-semibold font-14">Бухгалтерия</h5>
+                                            <small class="noti-item-subtitle text-muted">Отчетность и платежи</small>
                                         </div>
                                     </div>
                                 </div>
@@ -333,14 +337,13 @@ function is_active($path, $currentPath): string
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="notify-icon">
-                                                <img src="/templates/assets/images/users/avatar-4.jpg"
+                                                <img src="/templates/assets/images/users/avatar-9.jpg"
                                                      class="img-fluid rounded-circle" alt=""/>
                                             </div>
                                         </div>
                                         <div class="flex-grow-1 text-truncate ms-2">
-                                            <h5 class="noti-item-title fw-semibold font-14">Karen Robinson</h5>
-                                            <small class="noti-item-subtitle text-muted">Wow ! this admin looks good and
-                                                awesome design</small>
+                                            <h5 class="noti-item-title fw-semibold font-14">Айман Шариповна</h5>
+                                            <small class="noti-item-subtitle text-muted">Отчетность за период</small>
                                         </div>
                                     </div>
                                 </div>
@@ -354,7 +357,7 @@ function is_active($path, $currentPath): string
                         <!-- All-->
                         <a href="javascript:void(0);"
                            class="dropdown-item text-center text-primary notify-item border-top py-2">
-                            View All
+                            Смотреть все
                         </a>
 
                     </div>
@@ -438,42 +441,37 @@ function is_active($path, $currentPath): string
                     <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown"
                        href="index.html#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" width="32"
-                                         class="rounded-circle">
+<!--                                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" width="32"-->
+<!--                                         class="rounded-circle">-->
+                                    <i class="ri-user-fill" style="font-size: 32px"></i>
                                 </span>
                         <span class="d-lg-flex flex-column gap-1 d-none">
-                                    <h5 class="my-0">User</h5>
+                                    <h5 class="my-0"><?=$user['email']?></h5>
                                     <h6 class="my-0 fw-normal">manager</h6>
                                 </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
                         <!-- item-->
                         <div class=" dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">Welcome !</h6>
+                            <h6 class="text-overflow m-0"></h6>
                         </div>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
                             <i class="mdi mdi-account-circle me-1"></i>
-                            <span>My Account</span>
+                            <span>мой профиль</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
                             <i class="mdi mdi-account-edit me-1"></i>
-                            <span>Settings</span>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <i class="mdi mdi-lifebuoy me-1"></i>
-                            <span>Support</span>
+                            <span>настройки</span>
                         </a>
 
                         <!-- item-->
                         <a href="javascript:void(0);" class="dropdown-item">
                             <i class="mdi mdi-lock-outline me-1"></i>
-                            <span>Lock Screen</span>
+                            <span>блокировка</span>
                         </a>
 
                         <!-- item-->
@@ -537,13 +535,12 @@ function is_active($path, $currentPath): string
                     <a data-bs-toggle="collapse" href="index.html#sidebarDashboards" aria-expanded="false"
                        aria-controls="sidebarDashboards" class="side-nav-link">
                         <i class="uil-home-alt"></i>
-                        <span class="badge bg-success float-end">5</span>
-                        <span> Доска </span>
+                        <span> *Доска </span>
                     </a>
                     <div class="collapse" id="sidebarDashboards">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="/">Аналитика</a>
+                                <a href="/">*Аналитика</a>
                             </li>
                             <li>
                                 <a href="#">Финансы</a>
@@ -567,6 +564,7 @@ function is_active($path, $currentPath): string
                     <a href="/companies?page=1&count=30" class="side-nav-link">
                         <i class="uil-calender"></i>
                         <span> *База компаний</span>
+                        <span class="badge bg-primary text-white float-end">New</span>
                     </a>
                 </li>
 
@@ -600,7 +598,6 @@ function is_active($path, $currentPath): string
                     <a data-bs-toggle="collapse" href="index.html#sidebarCrm" aria-expanded="false"
                        aria-controls="sidebarCrm" class="side-nav-link">
                         <i class="uil uil-tachometer-fast"></i>
-                        <span class="badge bg-danger text-white float-end">New</span>
                         <span> *CRM </span>
                     </a>
                     <div class="collapse" id="sidebarCrm">
@@ -1488,158 +1485,3 @@ function is_active($path, $currentPath): string
 </body>
 </html>
 
-
-<!---------------------------------------------------------------------------------------------------OLD LAYOUT-->
-<!--<!doctype html>-->
-<!--<html lang="en" data-bs-theme="dark">-->
-<!--<head>-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <title>--><?php //= $title ?><!--</title>-->
-<!--    <link href="/css/bootstrap.min.css" rel="stylesheet"-->
-<!--          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">-->
-<!--    <link rel="stylesheet" href="/css/app.css">-->
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">-->
-<!--    <style>-->
-<!--        .top-bar-main {-->
-<!--            height: 40px;-->
-<!--            background: #34249252;-->
-<!--            width: 100%;-->
-<!--            top: 0;-->
-<!--        }-->
-<!---->
-<!--        .item-menu-box {-->
-<!--            background: #59498f4d;-->
-<!--            width: 180px;-->
-<!--            border-radius: 4px;-->
-<!--            padding-left: 10px;-->
-<!--            color: white !important;-->
-<!--            margin-bottom: 7px;-->
-<!--        }-->
-<!---->
-<!--        .item-menu-box:hover {-->
-<!--            background: #4e369e80;-->
-<!--        }-->
-<!---->
-<!--        .item-menu-box a:hover {-->
-<!--            color: white;-->
-<!--        }-->
-<!---->
-<!--        .item-menu-box a {-->
-<!--            color: white;-->
-<!--        }-->
-<!---->
-<!--        .shadow-grey {-->
-<!--            box-shadow: 1px 1px 11px -3px rgba(147, 148, 148, 0.2);-->
-<!--        }-->
-<!---->
-<!--        .active {-->
-<!--            background: rgba(176, 194, 255, 0.84);-->
-<!--        }-->
-<!---->
-<!--        .active .icon-nav-item {-->
-<!--            color: black;-->
-<!--        }-->
-<!---->
-<!--        .active a {-->
-<!--            color: #3f3e3e;-->
-<!--            font-weight: 600;-->
-<!--        }-->
-<!---->
-<!--        .active a:hover {-->
-<!--            color: #3f3e3e;-->
-<!--            font-weight: 600;-->
-<!--        }-->
-<!---->
-<!--        .active:hover {-->
-<!--            background: #84a3b0 !important;-->
-<!--        }-->
-<!---->
-<!--        .mr-10 {-->
-<!--            margin-right: 10px;-->
-<!--        }-->
-<!---->
-<!--        .icon-nav-item {-->
-<!--            color: #c1c1c1c4;-->
-<!--            font-size: 19px;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<header class="topbar position-fixed w-100" data-navbarbg="skin5" style="min-height: 60px;background: #2c3c4c!important;border-bottom: 1px solid #ffffff8f;">-->
-<!--    <nav class="navbar top-navbar navbar-expand-md navbar-dark w-100 d-flex align-items-center">-->
-<!--        <div id="toggle-sidebar" class="position-relative" style="cursor: pointer; margin-top: 5px;"><i class="bi bi-list" style="font-size: 25px; margin-left: 20px"></i></div>-->
-<!--    </nav>-->
-<!--</header>-->
-<!--<!--<div class="position-fixed top-bar-main px-2 d-flex flex-row align-items-center">-->-->
-<!--<!--    <ul class="d-flex flex-row align-items-center">-->-->
-<!--<!--        <li>-->-->
-<!--<!--            <a href="#"><i class="bi bi-calendar3"></i></a>-->-->
-<!--<!--        </li>-->-->
-<!--<!--    </ul>-->-->
-<!--<!--</div>-->-->
-<!--<div class="w-100 h-100 m-auto d-flex flex-row">-->
-<!--    <div style="width: 285px">-->
-<!---->
-<!--    </div>-->
-<!--    <div id="sidebar" class="navbar navbar-expand-lg navbar-dark d-flex flex-column position-relative position-fixed sidebar"-->
-<!--         style="top: 60px;width: 242px;height: 100vh; background: #2c3c4c!important;">-->
-<!--        <a href="/" class="navbar-brand mb-2">CRM</a>-->
-<!--        <div class="collapse navbar-collapse align-items-baseline" id="navbarNav">-->
-<!--            <ul class="navbar-nav d-flex flex-column">-->
-<!--                <h6 class="mx-2 title-item-block">To Do</h6>-->
-<!--                <li class="nav-item item-menu-box --><?php //echo is_active('/todo/category', $currentPath); ?><!--">-->
-<!--                    <a href="/todo/category" class="nav-link"><i class="bi bi-journals mr-10 icon-nav-item"></i>Категории</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box --><?php //echo is_active('/todo/tasks', $currentPath); ?><!--">-->
-<!--                    <a href="/todo/tasks" class="nav-link"><i class="bi bi-list-task mr-10 icon-nav-item"></i>Задачи</a>-->
-<!--                </li>-->
-<!--                <hr/>-->
-<!--                <li class="nav-item item-menu-box mt-2 --><?php //echo is_active('/companies', $currentPath); ?><!--">-->
-<!--                    <a href="/companies?page=1&count=30" class="nav-link"><i class="bi bi-card-heading mr-10 icon-nav-item"></i>База-->
-<!--                        компании</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box --><?php //= is_active('/users', $currentPath); ?><!--">-->
-<!--                    <a href="/users" class="nav-link"><i class="bi bi-people-fill mr-10 icon-nav-item"></i>Пользователи</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box --><?php //= is_active('/roles', $currentPath) ?><!--">-->
-<!--                    <a href="/roles" class="nav-link"><i class="bi bi-person-vcard mr-10 icon-nav-item"></i>Роли</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box --><?php //= is_active('/pages', $currentPath) ?><!--">-->
-<!--                    <a href="/pages" class="nav-link"><i class="bi bi-body-text mr-10 icon-nav-item"></i>Страницы</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box --><?php //= is_active('/regions', $currentPath) ?><!--">-->
-<!--                    <a href="/regions" class="nav-link"><i class="bi bi-globe-asia-australia mr-10 icon-nav-item"></i>Регионы</a>-->
-<!--                </li>-->
-<!--                <hr/>-->
-<!--                <li class="nav-item item-menu-box">-->
-<!--                    <a href="/auth/register" class="nav-link"><i class="bi bi-pencil-square mr-10 icon-nav-item"></i>Регистрация</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box">-->
-<!--                    <a href="/auth/login" class="nav-link"><i class="bi bi-box-arrow-in-right mr-10 icon-nav-item"></i>Логин</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item item-menu-box">-->
-<!--                    <a href="/auth/logout" class="nav-link"><i class="bi bi-door-open mr-10 icon-nav-item"></i>Выход</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="w-100 mt-4 m-auto py-4">-->
-<!--        <div class="px-4 py-4 ">-->
-<!--            --><?php //echo $content; ?>
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
-<!--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
-<!--        crossorigin="anonymous">-->
-<!--</script>-->
-<!--<script>-->
-<!--    const toggle = document.querySelector('#toggle-sidebar');-->
-<!--    const sidebar = document.querySelector('#sidebar');-->
-<!--    toggle.addEventListener('click',()=>{-->
-<!--        sidebar.classList.toggle('toggle');-->
-<!--    })-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->

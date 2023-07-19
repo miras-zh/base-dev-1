@@ -8,6 +8,10 @@ $title = 'Company list';
 $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
 ?>
 
+<div class="mt-5 mb-5">
+    <span style="font-size: 18px" class="badge bg-danger text-white float-center">Раздел в разработке</span>
+    <span style="font-size: 18px" class="badge bg-info text-white float-center">сейчас этот раздел дорабатывается,технические работы...</span>
+</div>
 <div class="w-100" style="margin-top: 80px;overflow-x: scroll;">
     <div class="flex-row d-flex w-100 justify-content-between">
         <div><h4>Список компании</h4></div>
