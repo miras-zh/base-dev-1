@@ -64,14 +64,15 @@ class Sessions
 
     public function create(
         int $authorization_id,
-        string $user_name
+        string $user_name,
+        string $email
     ): self
     {
         $created_at = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO sessions ( secret_code, authorization_id,user_name, created_at) VALUES (?,?,?,?)";
+        $query = "INSERT INTO sessions (secret_code, authorization_id,user_name, email,created_at) VALUES (?,?,?,?,?)";
            $stmt = $this->db->prepare($query);
-            $stmt->execute([$this->secret_code, $authorization_id,$user_name, $created_at]);
+            $stmt->execute([$this->secret_code, $authorization_id,$user_name, $email,$created_at]);
             return $this;
     }
 

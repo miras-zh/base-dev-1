@@ -59,30 +59,22 @@ class AuthController
 //            $remember = $_POST['remember'] ?? '';
 
             $user = $authModel->findByEmail($email);
-            var_dump($_POST);
-            echo '<br />';
-            var_dump('USER : ',$user);
-            echo '<br />';
-            echo '<br />';
-            echo '<br />';
 //            if(!$user){
 //                header('Location: /auth/login');
 //            }
 
             if (password_verify($_POST['password'],$user['password']) ) {
-//            var_dump('USER ------- > ', $user);
-//            echo '<br />';
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_role'] = $user['role'];
-                if ($remember === 'on') {
-                    setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
-                    setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
-                }
+//                if ($remember === 'on') {
+//                    setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
+//                    setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
+//                }
                 $userModel = new User();
                 $userObj = $userModel->read($user['id']);
                 $sessionModel = new Sessions();
-                $sessionModel->create($user['id'], $userObj['username']);
+                $sessionModel->create($user['id'], $userObj['username'],$userObj['email']);
                 $sessionModel->setCookie();
 
                 header('Location: /');

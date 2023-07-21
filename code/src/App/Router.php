@@ -26,7 +26,6 @@ class Router
         $action = null;
         $params = null;
 
-        print_r($_COOKIE['session_id']);
 
 
         foreach ($this->routes as $pattern => $route){
