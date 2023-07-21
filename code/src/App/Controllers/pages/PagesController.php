@@ -85,6 +85,10 @@ class PagesController
         include ROOT_DIR . "/templates/pages/edit.php";
     }
 
+    public function calendar(){
+        include ROOT_DIR . "/templates/pages/calendar.php";
+    }
+
     public function update($params): void
     {
         $this->check->requirePermission();

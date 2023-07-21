@@ -16,6 +16,7 @@ const ROOT_DIR = __DIR__;
 require 'config.php';
 require 'vendor/autoload.php';
 require 'autoload.php';
+require 'src/App.php';
 
 if (!empty($argv)) {
     return App\Controllers\Cli\CliController::execute($argv);

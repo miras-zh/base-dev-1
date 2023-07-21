@@ -26,6 +26,9 @@ class Router
         $action = null;
         $params = null;
 
+        print_r($_COOKIE['session_id']);
+
+
         foreach ($this->routes as $pattern => $route){
             if(preg_match($pattern,$url,$matches)){
                 $controller = "App\\Controllers\\" . $route['controller'];

@@ -2,6 +2,7 @@
 
 namespace App\Controllers\auth;
 use App\Models\auth\AuthUser;
+use App\Models\sessions\Sessions;
 use App\Models\user\User;
 
 
@@ -55,7 +56,7 @@ class AuthController
         if ($_POST['email'] !== null && $_POST['password'] !== null) {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $remember = $_POST['remember'] ?? '';
+//            $remember = $_POST['remember'] ?? '';
 
             $user = $authModel->findByEmail($email);
             var_dump($_POST);
@@ -78,6 +79,11 @@ class AuthController
                     setcookie('user_email', $email, time() + (7 * 24 * 60 * 60), "/");
                     setcookie('user_password', $password, time() + (7 * 24 * 60 * 60), "/");
                 }
+                $userModel = new User();
+                $userObj = $userModel->read($user['id']);
+                $sessionModel = new Sessions();
+                $sessionModel->create($user['id'], $userObj['username']);
+                $sessionModel->setCookie();
 
                 header('Location: /');
             } else {

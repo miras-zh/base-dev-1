@@ -554,6 +554,9 @@ $user = $userModel->read($_SESSION['user_id']);
                             <li>
                                 <a href="#">Мероприятия</a>
                             </li>
+                            <li>
+                                <a href="/pages/calendar">Календарь</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -578,7 +581,7 @@ $user = $userModel->read($_SESSION['user_id']);
                     <div class="collapse" id="sidebarTasks">
                         <ul class="side-nav-second-level">
                             <li>
-                                <a href="#">Канбан</a>
+                                <a href="/todo/tasks/kanban">Канбан</a>
                             </li>
                             <li>
                                 <a href="/todo/tasks">*Список</a>
@@ -1481,6 +1484,12 @@ $user = $userModel->read($_SESSION['user_id']);
 
 <!-- App js -->
 <script src="/templates/assets/js/app.min.js"></script>
+
+<!-- dragula js-->
+<script src="/templates/assets/vendor/dragula/dragula.min.js"></script>
+
+<!-- demo js -->
+<script src="/templates/assets/js/ui/component.dragula.js"></script>
 
 </body>
 </html>

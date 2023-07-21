@@ -4,13 +4,14 @@ namespace App\Controllers\regions;
 use App\Models\Check;
 use App\Models\regions\RegionsModel;
 use App\Models\role\Role;
+use App\Models\sessions\Sessions;
 
 
 class RegionsController
 {
     private Check $check;
 
-    public function __construct(){
+    public function __construct(Sessions $sessions){
         $userRole = $_SESSION['user_role'] ?? null;
         $this->check = new Check($userRole);
     }

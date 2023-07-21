@@ -39,6 +39,10 @@ class TasksController
         require_once ROOT_DIR . '/templates/todo/tasks/create.php';
     }
 
+    public function kanban():void{
+        require_once ROOT_DIR . '/templates/todo/tasks/kanban.php';
+    }
+
     public function store(): void
     {
         $this->check->requirePermission();
