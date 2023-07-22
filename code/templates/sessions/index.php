@@ -28,6 +28,7 @@ function formattedDate(string $date): void
                 <th>User</th>
                 <th>Email</th>
                 <th>Time</th>
+                <th>Ip</th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +39,7 @@ function formattedDate(string $date): void
                     <td ><?php echo $session['user_name']; ?></td>
                     <td style="max-width: 230px"><?php echo $session['email']; ?></td>
                     <td><?php formattedDate($session['created_at']); ?></td>
+                    <td><?php echo $session['ip']; ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

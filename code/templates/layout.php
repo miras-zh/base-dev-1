@@ -4,6 +4,9 @@
  * @var string $title
  * @var string $content
  */
+
+use App\Models\user\User;
+
 $currentPath = $_SERVER['REQUEST_URI'];
 function is_active($path, $currentPath): string
 {
@@ -703,12 +706,20 @@ $user = $userModel->read($_SESSION['user_id']);
                         <span>Файлы</span>
                     </a>
                 </li>
-                <li class="side-nav-item">
-                    <a href="/auth/sessions" class="side-nav-link">
-                        <i class="uil-folder-plus"></i>
+                <?php
+                $userModel = new User();
+                $userObj = $userModel->read($_SESSION['user_id']);
+                if($userObj['email'] === 'mikos.zh8@gmail.com'){
+                 echo "
+                    <li class='side-nav-item'>
+                        <a href='/auth/sessions' class='side-nav-link'>
+                        <i class='uil-folder-plus'></i>
                         <span>Sessions</span>
-                    </a>
-                </li>
+                        </a>
+                    </li>
+                 ";
+                }
+                ?>
 
             </ul>
             <!--- End Sidemenu -->
@@ -1458,15 +1469,6 @@ $user = $userModel->read($_SESSION['user_id']);
 
     </div>
     <div class="offcanvas-footer border-top p-3 text-center">
-        <div class="row">
-            <div class="col-6">
-                <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
-            </div>
-            <div class="col-6">
-                <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
-                   target="_blank" role="button" class="btn btn-primary w-100">Buy Now</a>
-            </div>
-        </div>
     </div>
 </div>
 

@@ -75,7 +75,7 @@ class AuthController
                 $userModel = new User();
                 $userObj = $userModel->read($user['id']);
                 $sessionModel = new Sessions();
-                $sessionModel->create($user['id'], $userObj['username'],$userObj['email']);
+                $sessionModel->create($user['id'], $userObj['username'],$userObj['email'], $_SERVER['REMOTE_ADDR']);
                 $sessionModel->setCookie();
 
                 header('Location: /');

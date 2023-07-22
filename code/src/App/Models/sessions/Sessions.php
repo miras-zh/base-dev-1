@@ -32,6 +32,8 @@ class Sessions
             `id` INT(11) NOT NULL PRIMARY KEY ,
             `secret_code` BINARY(32) NOT NULL,
             `authorization_id` INT(1),
+            `email` VARCHAR(255),
+            `ip` VARCHAR(20),
             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
 
         $this->db->beginTransaction();
@@ -65,14 +67,15 @@ class Sessions
     public function create(
         int $authorization_id,
         string $user_name,
-        string $email
+        string $email,
+        string $ip
     ): self
     {
         $created_at = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO sessions (secret_code, authorization_id,user_name, email,created_at) VALUES (?,?,?,?,?)";
+        $query = "INSERT INTO sessions (secret_code, authorization_id,user_name, email,ip,created_at) VALUES (?,?,?,?,?,?)";
            $stmt = $this->db->prepare($query);
-            $stmt->execute([$this->secret_code, $authorization_id,$user_name, $email,$created_at]);
+            $stmt->execute([$this->secret_code, $authorization_id,$user_name, $email,$ip,$created_at]);
             return $this;
     }
 
