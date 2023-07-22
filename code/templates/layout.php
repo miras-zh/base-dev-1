@@ -521,9 +521,8 @@ $user = $userModel->read($_SESSION['user_id']);
             <!-- Leftbar User -->
             <div class="leftbar-user">
                 <a href="#">
-                    <img src="/templates/assets/images/users/avatar-1.jpg" alt="user-image" height="42"
-                         class="rounded-circle shadow-sm">
-                    <span class="leftbar-user-name mt-2">User Manager</span>
+                    <i class="ri-user-fill rounded-circle shadow-sm" style="font-size: 32px" height="42"></i>
+                    <span class="leftbar-user-name mt-2"><?=$user['email']?></span>
                 </a>
             </div>
             <!--- Sidemenu -->
@@ -702,6 +701,12 @@ $user = $userModel->read($_SESSION['user_id']);
                     <a href="#" class="side-nav-link">
                         <i class="uil-folder-plus"></i>
                         <span>Файлы</span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/auth/sessions" class="side-nav-link">
+                        <i class="uil-folder-plus"></i>
+                        <span>Sessions</span>
                     </a>
                 </li>
 

@@ -50,13 +50,13 @@ class Sessions
     public function readAll(): bool|array
     {
         try {
-            $stmnt = $this->db->query("SELECT * FROM `sessions`");
-            $users = [];
+            $stmnt = $this->db->query("SELECT * FROM sessions ORDER BY created_at DESC");
+            $sessions = [];
 
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                $users[] = $row;
+                $sessions[] = $row;
             }
-            return $users;
+            return $sessions;
         } catch (PDOException $err) {
             return false;
         }

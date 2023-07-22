@@ -4,6 +4,7 @@ namespace App\Controllers\auth;
 use App\Models\auth\AuthUser;
 use App\Models\sessions\Sessions;
 use App\Models\user\User;
+use App\Utils\TemplatesEngine;
 
 
 class AuthController
@@ -91,5 +92,21 @@ class AuthController
         session_destroy();
 
         header('Location: /auth/login');
+    }
+
+    public function sessions():void
+    {
+        $userModel = new User();
+        $userObj = $userModel->read($_SESSION['user_id']);
+        if($userObj['email'] !== 'mikos.zh8@gmail.com') header('Location: /');
+        $sessionModel = new Sessions();
+        $sessions = $sessionModel->readAll();
+        echo TemplatesEngine::render('layout', [
+            'content' => TemplatesEngine::render('sessions/index', [
+                'sessions' => $sessions,
+            ]),
+            'title' => 'Company list',
+        ]);
+//        require_once ROOT_DIR . '/templates/users/sessions.php';
     }
 }

@@ -40,7 +40,7 @@ class CompanyController
             'title' => 'Company list',
         ]);
 
-        require_once ROOT_DIR . '/templates/company/index.php';
+//        require_once ROOT_DIR . '/templates/company/index.php';
     }
 
     public function create(): void
