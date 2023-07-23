@@ -37,6 +37,8 @@ $user = $userModel->read($_SESSION['user_id']);
     <!-- Theme Config Js -->
     <script src="/templates/assets/js/hyper-config.js"></script>
 
+    <!--    full calendar-->
+    <link href="/templates/assets/vendor/fullcalendar/main.min.css" rel="stylesheet" type="text/css" />
     <!-- App css -->
     <link href="/templates/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style"/>
     <link href="/templates/assets/css/custom-style.css" rel="stylesheet" type="text/css" id="app-style"/>
@@ -538,6 +540,7 @@ $user = $userModel->read($_SESSION['user_id']);
                        aria-controls="sidebarDashboards" class="side-nav-link">
                         <i class="uil-home-alt"></i>
                         <span> *Доска </span>
+                        <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarDashboards">
                         <ul class="side-nav-second-level">
@@ -551,13 +554,10 @@ $user = $userModel->read($_SESSION['user_id']);
                                 <a href="#">Проекты</a>
                             </li>
                             <li>
-                                <a href="#">CRM</a>
-                            </li>
-                            <li>
                                 <a href="#">Мероприятия</a>
                             </li>
                             <li>
-                                <a href="/pages/calendar">Календарь</a>
+                                <a href="/pages/roadmap">Дорожная карта</a>
                             </li>
                         </ul>
                     </div>
@@ -570,6 +570,13 @@ $user = $userModel->read($_SESSION['user_id']);
                         <i class="uil-calender"></i>
                         <span> *База компаний</span>
                         <span class="badge bg-primary text-white float-end">New</span>
+                    </a>
+                </li>
+
+                <li class="side-nav-item">
+                    <a href="/pages/calendar" class="side-nav-link">
+                        <i class="uil-calender"></i>
+                        <span> Календарь</span>
                     </a>
                 </li>
 
@@ -604,6 +611,7 @@ $user = $userModel->read($_SESSION['user_id']);
                        aria-controls="sidebarCrm" class="side-nav-link">
                         <i class="uil uil-tachometer-fast"></i>
                         <span> *CRM </span>
+                        <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="sidebarCrm">
                         <ul class="side-nav-second-level">
@@ -769,8 +777,8 @@ $user = $userModel->read($_SESSION['user_id']);
 <!-- END wrapper -->
 <!-- Theme Settings -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
-    <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
-        <h5 class="text-white m-0">Theme Settings</h5>
+    <div class="d-flex align-items-center p-3 offcanvas-header" style="background: rgb(49,58,70)">
+        <h5 class="text-white m-0">Настройка темы</h5>
         <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="offcanvas"
                 aria-label="Close"></button>
     </div>
@@ -826,7 +834,7 @@ $user = $userModel->read($_SESSION['user_id']);
                     </div>
                 </div>
 
-                <h5 class="my-3 font-16 fw-bold">Color Scheme</h5>
+                <h5 class="my-3 font-16 fw-bold">Цветовая схема</h5>
 
                 <div class="colorscheme-cardradio">
                     <div class="row">
@@ -870,7 +878,7 @@ $user = $userModel->read($_SESSION['user_id']);
                                     </div>
                                 </label>
                             </div>
-                            <h5 class="font-14 text-center text-muted mt-2">Light</h5>
+                            <h5 class="font-14 text-center text-muted mt-2">Светлая</h5>
                         </div>
 
                         <div class="col-4">
@@ -911,7 +919,7 @@ $user = $userModel->read($_SESSION['user_id']);
                                     </div>
                                 </label>
                             </div>
-                            <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
+                            <h5 class="font-14 text-center text-muted mt-2">Темная</h5>
                         </div>
                     </div>
                 </div>
@@ -1457,7 +1465,7 @@ $user = $userModel->read($_SESSION['user_id']);
 
                 <div id="sidebar-user">
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <label class="font-16 fw-bold m-0" for="sidebaruser-check">Sidebar User Info</label>
+                        <label class="font-16 fw-bold m-0" for="sidebaruser-check">Информация о пользователе</label>
                         <div class="form-check form-switch">
                             <input type="checkbox" class="form-check-input" name="sidebar-user" id="sidebaruser-check">
                         </div>
@@ -1490,13 +1498,22 @@ $user = $userModel->read($_SESSION['user_id']);
 <script src="/templates/assets/js/pages/demo.dashboard.js"></script>
 
 <!-- App js -->
-<script src="/templates/assets/js/app.min.js"></script>
 
 <!-- dragula js-->
 <script src="/templates/assets/vendor/dragula/dragula.min.js"></script>
 
 <!-- demo js -->
 <script src="/templates/assets/js/ui/component.dragula.js"></script>
+
+
+<!-- Fullcalendar js -->
+<script src="/templates/assets/vendor/fullcalendar/main.min.js"></script>
+
+<!-- Calendar App Demo js -->
+<script src="/templates/assets/js/pages/demo.calendar.js"></script>
+
+
+<script src="/templates/assets/js/app.min.js"></script>
 
 </body>
 </html>
