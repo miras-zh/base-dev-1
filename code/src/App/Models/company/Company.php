@@ -99,25 +99,41 @@ class Company
         }
     }
 
-    public function filter($name, $bin, $region, $page, $limit = null){
-
-        $limit ??= 30;
-        $page ??= 1;
+    public function filter(string $name = null, string $bin = null, string $region = null,int $page = 1,int $limit = 30){
         if ($page < 1) {
             $page = 1;
         }
         $offset = $limit * ($page - 1);
+
+        $query_where = [];
+        $params = [];
+
+        if ($name !== null) {
+            $query_where[] = "`company_name` LIKE ?";
+            $params[] = "%$name%";
+        }
+
+        if ($bin !== null) {
+            $query_where[] = "`company_bin` LIKE ?";
+            $params[] = "%$bin%";
+        }
+
+        if ($region !== null) {
+            $query_where[] = "`region` LIKE ?";
+            $params[] = "%$region%";
+        }
+
+
         try {
-            $stmnt = $this->db->prepare("SELECT * FROM `companies` WHERE company_name LIKE ? AND company_bin LIKE ? AND region LIKE  ? LIMIT ? OFFSET  ?");
-            $stmnt->execute(["%$name%", "%$bin%", "%$region%", "%$limit%", "%$offset%"]);
+            $stmnt = $this->db->prepare("SELECT * FROM `companies` WHERE " . implode(' AND ', $query_where) . " LIMIT $limit OFFSET $offset");
+            $stmnt->execute($params);
             $companies = [];
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
                 $companies[] = $row;
             }
-
             return $companies;
         } catch (PDOException $e) {
-
+            exit($e);
         }
     }
 

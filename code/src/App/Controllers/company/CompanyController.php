@@ -29,7 +29,6 @@ class CompanyController
         $companyModel = new Company();
         $companiesAll = $companyModel->getAllCompanies(page: $page,limit: $count);
         $companies = $this->filterCompanies !== null ? $this->filterCompanies : $companiesAll;
-
         echo TemplatesEngine::render('layout', [
             'content' => TemplatesEngine::render('company/index', [
                 'companies' => $companies,
@@ -106,17 +105,17 @@ class CompanyController
         ]);
     }
 
-    public function filter($page, $limit = null){
-        $this->filterCompaniesName = $_POST['company_name_filter'] ?? null;
-        $this->filterCompaniesBin = $_POST['company_bin_filter'] ?? null;
-        $this->filterCompaniesRegion = $_POST['company_region_filter'] ?? null;
-        if (isset($_POST['company_name_filter']) || isset($_POST['company_bin_filter']) || isset($_POST['company_region_filter'])) {
-            $company_name = trim($_POST['company_name_filter']) ?? '';
-            $company_bin = trim($_POST['company_bin_filter']) ?? '';
-            $company_region = isset($_POST['company_region_filter'])? trim($_POST['company_region_filter']) : '';
+    public function filter($page, $limit = 30){
+        $this->filterCompaniesName = $_GET['company_name_filter'] ?? null;
+        $this->filterCompaniesBin = $_GET['company_bin_filter'] ?? null;
+        $this->filterCompaniesRegion = $_GET['company_region_filter'] ?? null;
+        if (isset($_GET['company_name_filter']) || isset($_GET['company_bin_filter']) || isset($_GET['company_region_filter'])) {
+            $company_name = trim($_GET['company_name_filter']) ?? '';
+            $company_bin = trim($_GET['company_bin_filter']) ?? '';
+            $company_region = isset($_GET['company_region_filter'])? trim($_GET['company_region_filter']) : '';
 
             $companyModel = new Company();
-            $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region, $page, $limit = null);
+            $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region, (int)$page, $limit = 30);
         }else{
             $this->filterCompanies = null;
         }
