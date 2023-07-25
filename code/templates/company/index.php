@@ -2,10 +2,18 @@
 /**
  * @var array $companies
  * @var string $content
+ * @var int $totalAmount
+ * @var string $valueName
+ * @var string $valueBin
+ * @var string $valueRegion
  */
 $limits = ['5','10','20','30','50','100','200','500','1000'];
 $title = 'Company list';
+
+$count = (int)($_GET['count'] ?? 30);
+$totalPage = ceil($totalAmount / $count);
 $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
+
 ?>
 
 <div class="mt-5 mb-5">
@@ -31,7 +39,7 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                 <div class="col-md-3">
                     <div class="mb-3">
                         <label for="company_name_filter" class="form-label">Наименование</label>
-                        <input class="form-control" type="text" placeholder="введите название организации" name="company_name_filter" id="company_name_filter">
+                        <input value="<?=$valueName ?>"class="form-control" type="text" placeholder="введите название организации" name="company_name_filter" id="company_name_filter">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -286,49 +294,45 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
             <label class="w-50" for="count">строки:</label>
             <div class="btn-group">
                         <?php $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1; ?>
-                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <?=$currentPage ?> <span class="caret"></span> </button>
+                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <?=$count ?> <span class="caret"></span> </button>
                 <div class="dropdown-menu">
                 <?php foreach ($limits as $item): ?>
                     <?php
-                    $next_page_url = http_build_query(array_merge($_GET, ['page' => $currentPage, 'count' =>$item]));
+                    $next_page_url = http_build_query(array_merge($_GET, ['page' => 1, 'count' =>$item]));
                     echo "<a class='dropdown-item' href='/companies?$next_page_url'>".$item."</a>";
                     ?>
                 <?php endforeach; ?>
                 </div>
             </div>
         </div>
-        <div class="my-1 px-1 d-flex flex-row mb-2 flex-wrap">
+        <div class="my-1 px-1 d-flex flex-row mb-2 flex-wrap align-items-center">
             <?php
-            $companyModel = new App\Models\company\Company();
-            $totalAmount = $companyModel->getCompaniesNumber();
-            $count = (int)($_GET['count'] ?? 30);
-            $totalPage = ceil($totalAmount / $count);
-            $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
-
-
-            echo "<a class='btn border-white mx-1' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies'>all</a>";
+            echo "<a class='btn border-white mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies'>all</a>";
             for ($btn = 1; $btn <= $totalPage; $btn++) {
                 $next_page_url = http_build_query(array_merge($_GET, ['page' => $btn, 'count' =>$count]));
-                if($currentPage >= 4 && $btn == 1){
-                    echo "<a class='btn border-white mx-1' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
-                    echo "..";
+
+                if($btn == 1 && $currentPage !== $btn){
+                    echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
+                    if($currentPage-4>=1){echo "..";}
                 }
-                if($btn > $currentPage && ($btn-$currentPage)<3){
-                    echo "<a class='btn border-white mx-1' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
+
+                if(($btn > $currentPage && ($btn-$currentPage)<=3) && $btn != $totalPage && $btn !== 1|| ($btn < $currentPage && ($currentPage-$btn)<=3 && $btn != $totalPage && $btn !== 1)){
+                    echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke; width: 30px;height: 30px;' href='/companies?$next_page_url'>$btn</a>";
                 }
-                if($btn < $currentPage && ($currentPage-$btn)<3){
-                    echo "<a class='btn border-white mx-1' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
-                }
+
                 if($currentPage === $btn){
-                    echo "<a class='btn border-white mx-1' style='cursor:pointer;background: #83b7aa; color: black; font-weight: bold;' href='/companies?$next_page_url'>$btn</a>";
+                    echo "<a class='btn border-white mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #3b8ad0; color: black; font-weight: bold;' href='/companies?$next_page_url'>$btn</a>";
                 }
-                if(($totalPage-$currentPage) > 4 && $btn == $totalPage){
-                    echo "..";
-                    echo "<a class='btn border-white mx-1' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
+                if( $btn == $totalPage && $currentPage !== $btn){
+                   if(($totalPage-$currentPage) > 4){ echo "..";}
+                    echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
                 }
             }
             ?>
         </div>
+    </div>
+    <div class="col-sm-12 col-md-5">
+        <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Показать с <?=((int)$currentPage-1)*(int)$count+1?> по <?=$count*($currentPage)>$totalAmount?$totalAmount:$count*($currentPage) ?> из <?=$totalAmount?> компаний</div>
     </div>
     <div>
         <table id="fixed-header-datatable" class="table dt-responsive nowrap table-striped w-100">
@@ -373,16 +377,8 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
             </tbody>
         </table>
         <div class="row">
-            <?php
-            $companyModel = new App\Models\company\Company();
-            $totalAmount = $companyModel->getCompaniesNumber();
-            $count = (int)($_GET['count'] ?? 30);
-            $totalPage = ceil($totalAmount / $count);
-            $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
-            ?>
-
             <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Showing <?=(int)$currentPage*(int)$count?> to <?=$count*($currentPage+1)?> of <?=$totalAmount?> entries</div>
+                <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Показать с <?=((int)$currentPage-1)*(int)$count+1?> по <?=$count*($currentPage)>$totalAmount?$totalAmount:$count*($currentPage) ?> из <?=$totalAmount?> компаний</div>
             </div>
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatable_paginate">

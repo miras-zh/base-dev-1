@@ -137,6 +137,35 @@ class Company
         }
     }
 
+    public function filterCount(string $name = null, string $bin = null, string $region = null,){
+        $query_where_count = [];
+        $params = [];
+
+        if ($name !== null) {
+            $query_where_count[] = "`company_name` LIKE ?";
+            $params[] = "%$name%";
+        }
+
+        if ($bin !== null) {
+            $query_where_count[] = "`company_bin` LIKE ?";
+            $params[] = "%$bin%";
+        }
+
+        if ($region !== null) {
+            $query_where_count[] = "`region` LIKE ?";
+            $params[] = "%$region%";
+        }
+
+        try {
+            $stmnt = $this->db->prepare("SELECT COUNT(*) FROM `companies` WHERE " . implode(' AND ', $query_where_count));
+            $stmnt->execute($params);
+            $row = $stmnt->fetch(PDO::FETCH_NUM);
+            return $row[0];
+        } catch (PDOException $e) {
+            exit($e);
+        }
+    }
+
     public function getCompanyById($id): bool|array
     {
         $query = "SELECT * FROM companies WHERE id=?";

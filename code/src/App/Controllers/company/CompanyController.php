@@ -13,6 +13,7 @@ class CompanyController
     public $filterCompaniesName = null;
     public $filterCompaniesBin = null;
     public $filterCompaniesRegion = null;
+    public $filterCount = null;
 
     public function index(): void
     {
@@ -29,12 +30,14 @@ class CompanyController
         $companyModel = new Company();
         $companiesAll = $companyModel->getAllCompanies(page: $page,limit: $count);
         $companies = $this->filterCompanies !== null ? $this->filterCompanies : $companiesAll;
+        $totalAmount = $this->filterCompanies !== null ? $this->filterCount : $companyModel->getCompaniesNumber();
         echo TemplatesEngine::render('layout', [
             'content' => TemplatesEngine::render('company/index', [
                 'companies' => $companies,
                 'valueBin' => $valueBin,
                 'valueName' => $valueName,
                 'valueRegion' => $valueRegion,
+                'totalAmount' => $totalAmount
             ]),
             'title' => 'Company list',
         ]);
@@ -116,6 +119,7 @@ class CompanyController
 
             $companyModel = new Company();
             $this->filterCompanies = $companyModel->filter($company_name, $company_bin, $company_region, (int)$page, $limit = 30);
+            $this->filterCount = $companyModel->filterCount($company_name, $company_bin, $company_region);
         }else{
             $this->filterCompanies = null;
         }
@@ -192,6 +196,17 @@ class CompanyController
     public function getAllRowsCompanies(){
         $companyModel = new Company();
         $rows = $companyModel->getCompanies();
+        return $rows;
+    }
+
+    public function getCompaniesNumber():int{
+        $companyModel = new Company();
+        if($this->filterCompanies !== null){
+            echo "this filter not null". $this->filterCompanies;echo "<br>";
+        }else{
+            echo "gilter null". $this->filterCompanies;echo "<br>";
+        }
+        $rows = $this->filterCompanies !== null ?  $this->filterCount: $companyModel->getCompaniesNumber();
         return $rows;
     }
 }
