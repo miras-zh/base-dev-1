@@ -98,6 +98,20 @@ class Company
 
         }
     }
+     public function getLimitCompanies($limit,$offset){
+         $query= "select * from companies limit $limit offset $offset";
+         try {
+             $stmnt = $this->db->query($query);
+             $companies = [];
+             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+                 $companies[] = $row;
+             }
+
+             return $companies;
+         } catch (PDOException $e) {
+
+         }
+     }
 
     public function filter(string $name = null, string $bin = null, string $region = null,int $page = 1,int $limit = 30){
         if ($page < 1) {

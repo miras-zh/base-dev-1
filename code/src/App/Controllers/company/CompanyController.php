@@ -2,6 +2,7 @@
 
 namespace App\Controllers\company;
 
+use App\Models\Check;
 use App\Models\company\Company;
 use App\Models\regions\RegionsModel;
 use App\Utils\TemplatesEngine;
@@ -14,6 +15,12 @@ class CompanyController
     public $filterCompaniesBin = null;
     public $filterCompaniesRegion = null;
     public $filterCount = null;
+
+    public function __construct()
+    {
+        $userRole = isset($_SESSION['user_role']) ? $_SESSION['user_role'] : null;
+        $this->check = new Check($userRole);
+    }
 
     public function index(): void
     {
@@ -31,16 +38,20 @@ class CompanyController
         $companiesAll = $companyModel->getAllCompanies(page: $page,limit: $count);
         $companies = $this->filterCompanies !== null ? $this->filterCompanies : $companiesAll;
         $totalAmount = $this->filterCompanies !== null ? $this->filterCount : $companyModel->getCompaniesNumber();
-        echo TemplatesEngine::render('layout', [
-            'content' => TemplatesEngine::render('company/index', [
-                'companies' => $companies,
-                'valueBin' => $valueBin,
-                'valueName' => $valueName,
-                'valueRegion' => $valueRegion,
-                'totalAmount' => $totalAmount
-            ]),
-            'title' => 'Company list',
-        ]);
+        if (isset($_SESSION['user_id'])) {
+            echo TemplatesEngine::render('layout', [
+                'content' => TemplatesEngine::render('company/index', [
+                    'companies' => $companies,
+                    'valueBin' => $valueBin,
+                    'valueName' => $valueName,
+                    'valueRegion' => $valueRegion,
+                    'totalAmount' => $totalAmount
+                ]),
+                'title' => 'Company list',
+            ]);
+        }else{
+            header("Location: /auth/login");
+        }
 
 //        require_once ROOT_DIR . '/templates/company/index.php';
     }
@@ -49,6 +60,9 @@ class CompanyController
     {
         $regionModel = new RegionsModel();
         $regions = $regionModel->getAllRegion();
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /auth/login");
+        }
 
         echo TemplatesEngine::render('layout', [
             'content' => TemplatesEngine::render('company/create', [
@@ -60,6 +74,9 @@ class CompanyController
 
     public function store(): void
     {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /auth/login");
+        }
         if (isset($_POST['company_name'])) {
             $company_bin = trim($_POST['company_bin']);
             $company_name = trim($_POST['company_name']);
@@ -89,6 +106,9 @@ class CompanyController
     }
 
     public function info($params){
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /auth/login");
+        }
         $companyModel = new Company();
         $company = $companyModel->getCompanyById($params['id']);
 
@@ -135,6 +155,9 @@ class CompanyController
 
     public function edit($params): void
     {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: /auth/login");
+        }
         $companyModel = new Company();
         $company = $companyModel->getCompanyById($params['id']);
 

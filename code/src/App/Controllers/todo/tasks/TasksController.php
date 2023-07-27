@@ -23,7 +23,7 @@ class TasksController
 
     public function index(): void
     {
-//        $this->check->requirePermission();
+        $this->check->requirePermission();
 
         $tasksModel = new TasksModel();
         $tasks = $tasksModel->getAllTasks();
@@ -40,6 +40,7 @@ class TasksController
     }
 
     public function kanban():void{
+        $this->check->requirePermission();
         require_once ROOT_DIR . '/templates/todo/tasks/kanban.php';
     }
 

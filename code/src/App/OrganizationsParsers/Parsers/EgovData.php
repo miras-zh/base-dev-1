@@ -54,7 +54,7 @@ class EgovData extends ParserAbstract
                    echo '+ + add:' . $organization_data['bin'] . " /" . $organization_data['nameru'] . "\n";
                    $companyModel->createCompany($organization_data['nameru'], $organization_data['bin'], 'Kazakhstan', $organization_data['addressru'], $organization_data['okedru'], '', '', $organization_data['director']);
                } else {
-                   echo '- - no:' . $organization_data['bin'] . " /" . $organization_data['nameru'] . "\n";
+                   echo '- - - - -no:' . $organization_data['bin'] . " /" . $organization_data['nameru'] . "\n";
                }
            }
            $companyModel = new Company();

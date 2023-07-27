@@ -7,24 +7,25 @@
  * @var string $valueBin
  * @var string $valueRegion
  */
-$limits = ['5','10','20','30','50','100','200','500','1000'];
+$limits = ['5', '10', '20', '30', '50', '100', '200', '500', '1000'];
 $title = 'Company list';
 
 $count = (int)($_GET['count'] ?? 30);
 $totalPage = ceil($totalAmount / $count);
-$currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
+$currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
 ?>
 
-<div class="mt-5 mb-5">
-    <span style="font-size: 12px" class="badge bg-danger text-white float-center">Раздел в разработке</span>
+<div class="mt-1 mb-1">
+    <span style="font-size: 12px" class="badge bg-dark text-black float-center">Раздел в разработке</span>
     <span style="font-size: 12px" class="badge bg-info text-white float-center">сейчас этот раздел дорабатывается,технические работы...</span>
 </div>
-<div class="w-100" style="margin-top: 80px;overflow-x: scroll;">
+<div class="w-100" style="margin-top: 20px;overflow-x: scroll;">
     <div class="flex-row d-flex w-100 justify-content-between">
         <div><h4>Список компании</h4></div>
         <div>
-            <a href="/companies/create" class="btn" style="background: #3b8ad0; color: whitesmoke"><i class="bi bi-plus-square-fill mx-1"></i>Создать компанию</a>
+            <a href="/companies/create" class="btn" style="background: #3b8ad0; color: whitesmoke"><i
+                        class="bi bi-plus-square-fill mx-1"></i>Создать компанию</a>
         </div>
     </div>
     <div class="card mt-1 mb-2 mx-1 p-3">
@@ -33,19 +34,23 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                 <div class="col-md-3">
                     <div class="mb-3">
                         <label for="company_bin_filter" class="form-label">БИН</label>
-                        <input  name="company_bin_filter" value="<?=$valueBin ?>" class="form-control" type="text" placeholder="Введите БИН" id="company_bin_filter">
+                        <input name="company_bin_filter" value="<?= $valueBin ?>" class="form-control" type="text"
+                               placeholder="Введите БИН" id="company_bin_filter">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="mb-3">
                         <label for="company_name_filter" class="form-label">Наименование</label>
-                        <input value="<?=$valueName ?>"class="form-control" type="text" placeholder="введите название организации" name="company_name_filter" id="company_name_filter">
+                        <input value="<?= $valueName ?>" class="form-control" type="text"
+                               placeholder="введите название организации" name="company_name_filter"
+                               id="company_name_filter">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="mb-3">
                         <label for="company_region_filter" class="form-label">Регион</label>
-                        <input class="form-control" type="text" placeholder="Введите регион" id="company_region_filter" name="company_region_filter" value="<?= $valueRegion ?>">
+                        <input class="form-control" type="text" placeholder="Введите регион" id="company_region_filter"
+                               name="company_region_filter" value="<?= $valueRegion ?>">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -59,7 +64,9 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                 <div class="col-4">
                     <div class="mb-3">
                         <label class="form-label">Страна</label>
-                        <select data-toggle="select2" title="Country" dataEnter your zip code-select2-id="select2-data-1-le76" tabindex="-1" class="select2-hidden-accessible" aria-hidden="true">
+                        <select data-toggle="select2" title="Country" dataEnter your zip
+                                code-select2-id="select2-data-1-le76" tabindex="-1" class="select2-hidden-accessible"
+                                aria-hidden="true">
                             <option value="0" data-select2-id="select2-data-3-jppb">Select Country</option>
                             <option value="AF">Afghanistan</option>
                             <option value="AL">Albania</option>
@@ -280,11 +287,23 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                             <option value="YE">Yemen</option>
                             <option value="ZM">Zambia</option>
                             <option value="ZW">Zimbabwe</option>
-                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="select2-data-2-8hft" style="width: 206px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" title="Country" tabindex="0" aria-disabled="false" aria-labelledby="select2-hlk3-container" aria-controls="select2-hlk3-container"><span class="select2-selection__rendered" id="select2-hlk3-container" role="textbox" aria-readonly="true" title="Select Country">Выбрать страну</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                        </select><span class="select2 select2-container select2-container--default" dir="ltr"
+                                       data-select2-id="select2-data-2-8hft" style="width: 206px;"><span
+                                    class="selection"><span class="select2-selection select2-selection--single"
+                                                            role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                            title="Country" tabindex="0" aria-disabled="false"
+                                                            aria-labelledby="select2-hlk3-container"
+                                                            aria-controls="select2-hlk3-container"><span
+                                            class="select2-selection__rendered" id="select2-hlk3-container"
+                                            role="textbox" aria-readonly="true"
+                                            title="Select Country">Выбрать страну</span><span
+                                            class="select2-selection__arrow" role="presentation"><b
+                                                role="presentation"></b></span></span></span><span
+                                    class="dropdown-wrapper" aria-hidden="true"></span></span>
                     </div>
                 </div>
                 <div class="col-2">
-                    <button type="submit" class="mx-5 mt-3 btn bg-primary" >Поиск</button>
+                    <button type="submit" class="mx-5 mt-3 btn bg-primary">Поиск</button>
                 </div>
             </div> <!-- end row -->
         </form>
@@ -293,38 +312,43 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
         <div class="form-group d-flex flex-row align-items-center mr-10" style="width: 140px;">
             <label class="w-50" for="count">строки:</label>
             <div class="btn-group">
-                        <?php $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1; ?>
-                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <?=$count ?> <span class="caret"></span> </button>
+                <?php $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1; ?>
+                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false"> <?= $count ?> <span class="caret"></span></button>
                 <div class="dropdown-menu">
-                <?php foreach ($limits as $item): ?>
-                    <?php
-                    $next_page_url = http_build_query(array_merge($_GET, ['page' => 1, 'count' =>$item]));
-                    echo "<a class='dropdown-item' href='/companies?$next_page_url'>".$item."</a>";
-                    ?>
-                <?php endforeach; ?>
+                    <?php foreach ($limits as $item): ?>
+                        <?php
+                        $next_page_url = http_build_query(array_merge($_GET, ['page' => 1, 'count' => $item]));
+                        echo "<a class='dropdown-item' href='/companies?$next_page_url'>" . $item . "</a>";
+                        ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
         <div class="my-1 px-1 d-flex flex-row mb-2 flex-wrap align-items-center">
             <?php
-            echo "<a class='btn border-white mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies'>all</a>";
+            echo "<a class='btn border-white mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?page=1&count=30'>all</a>";
             for ($btn = 1; $btn <= $totalPage; $btn++) {
-                $next_page_url = http_build_query(array_merge($_GET, ['page' => $btn, 'count' =>$count]));
+                $next_page_url = http_build_query(array_merge($_GET, ['page' => $btn, 'count' => $count]));
 
-                if($btn == 1 && $currentPage !== $btn){
+                if ($btn == 1 && $currentPage !== $btn) {
                     echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
-                    if($currentPage-4>=1){echo "..";}
+                    if ($currentPage - 4 >= 1) {
+                        echo "..";
+                    }
                 }
 
-                if(($btn > $currentPage && ($btn-$currentPage)<=3) && $btn != $totalPage && $btn !== 1|| ($btn < $currentPage && ($currentPage-$btn)<=3 && $btn != $totalPage && $btn !== 1)){
-                    echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke; width: 30px;height: 30px;' href='/companies?$next_page_url'>$btn</a>";
+                if (($btn > $currentPage && ($btn - $currentPage) <= 3) && $btn != $totalPage && $btn !== 1 || ($btn < $currentPage && ($currentPage - $btn) <= 3 && $btn != $totalPage && $btn !== 1)) {
+                    echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke; width: fit-content;height: 30px;' href='/companies?$next_page_url'>$btn</a>";
                 }
 
-                if($currentPage === $btn){
+                if ($currentPage === $btn) {
                     echo "<a class='btn border-white mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #3b8ad0; color: black; font-weight: bold;' href='/companies?$next_page_url'>$btn</a>";
                 }
-                if( $btn == $totalPage && $currentPage !== $btn){
-                   if(($totalPage-$currentPage) > 4){ echo "..";}
+                if ($btn == $totalPage && $currentPage !== $btn) {
+                    if (($totalPage - $currentPage) > 4) {
+                        echo "..";
+                    }
                     echo "<a class='btn mx-1 d-flex align-items-center justify-content-center' style='cursor:pointer;background: #494d4d; color: whitesmoke' href='/companies?$next_page_url'>$btn</a>";
                 }
             }
@@ -332,7 +356,11 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
         </div>
     </div>
     <div class="col-sm-12 col-md-5">
-        <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Показать с <?=((int)$currentPage-1)*(int)$count+1?> по <?=$count*($currentPage)>$totalAmount?$totalAmount:$count*($currentPage) ?> из <?=$totalAmount?> компаний</div>
+        <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Показать
+            с <?= ((int)$currentPage - 1) * (int)$count + 1 ?>
+            по <?= $count * ($currentPage) > $totalAmount ? $totalAmount : $count * ($currentPage) ?>
+            из <?= $totalAmount ?> компаний
+        </div>
     </div>
     <div>
         <table id="fixed-header-datatable" class="table dt-responsive nowrap table-striped w-100">
@@ -353,8 +381,8 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                     <th scope="row"><?php echo $company['id']; ?></th>
                     <td style="width: 350px">
                         <?php
-                        echo $company['company_name']."<br>";
-                         echo "<span style='font-size: 14px;background-color: #0d78b5 !important;' class='text-white float-center'>".$company['company_bin']."</span>";
+                        echo $company['company_name'] . "<br>";
+                        echo "<span style='font-size: 14px;background-color: #0d78b5 !important;' class='text-white float-center'>" . $company['company_bin'] . "</span>";
                         ?>
                     </td>
                     <td style="width: 350px"><?php echo $company['address']; ?></td>
@@ -362,7 +390,8 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                     <td><?php echo $company['region']; ?></td>
                     <td><?php echo $company['email']; ?></td>
                     <td>
-                        <a href="/companies/info/<?=$company['id']."?page=$currentPage&count=$count"?>" class="btn mx-1 item-action">
+                        <a href="/companies/info/<?= $company['id'] . "?page=$currentPage&count=$count" ?>"
+                           class="btn mx-1 item-action">
                             <i class="mdi mdi-information-off" style="font-size: 20px"></i>
                         </a>
                         <a href="/companies/edit/<?= $company['id'] ?>" class="btn mx-1 item-action">
@@ -378,7 +407,11 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
         </table>
         <div class="row">
             <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Показать с <?=((int)$currentPage-1)*(int)$count+1?> по <?=$count*($currentPage)>$totalAmount?$totalAmount:$count*($currentPage) ?> из <?=$totalAmount?> компаний</div>
+                <div class="dataTables_info" id="basic-datatable_info" role="status" aria-live="polite">Показать
+                    с <?= ((int)$currentPage - 1) * (int)$count + 1 ?>
+                    по <?= $count * ($currentPage) > $totalAmount ? $totalAmount : $count * ($currentPage) ?>
+                    из <?= $totalAmount ?> компаний
+                </div>
             </div>
             <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_simple_numbers" id="basic-datatable_paginate">
@@ -388,35 +421,73 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
                                 <i class="mdi mdi-chevron-left"></i>
                             </a>
                         </li>
-                        <?php for ($btn = 1; $btn <= $totalPage; $btn++) {
-                        if($currentPage >= 4 && $btn == 1){
-                            $next_page_url = http_build_query(array_merge($_GET, ['page' => $btn, 'count' =>$count]));
-                        echo "<li class='paginate_button page-item'>
-                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                        <?php
+                        for ($btn = 1; $btn <= $totalPage; $btn++) {
+                        $next_page_url = http_build_query(array_merge($_GET, ['page' => $btn, 'count' =>$count]));
+                        if($btn == 1 && $currentPage !== $btn){
+                        echo "
+                        <li class='paginate_button page-item'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
                         </li>";
-                        echo "..";
+                            if($currentPage-4>=1){echo "..";}
+                        }
+
+                        if(($btn > $currentPage && ($btn-$currentPage)<=3) && $btn != $totalPage && $btn !== 1|| ($btn <
+                        $currentPage && ($currentPage-$btn)<=3 && $btn != $totalPage && $btn !== 1)){
+                        echo "
+                        <li class='paginate_button page-item'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
+                        </li>
+                        ";}
+
+                        if($currentPage === $btn){
+                        echo "
+                        <li class='paginate_button page-item active'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
+                        </li>
+                        ";
+                        }
+                        if( $btn == $totalPage && $currentPage !== $btn){
+                        if(($totalPage-$currentPage) > 4){ echo "..";}
+                        echo "
+                        <li class='paginate_button page-item'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
+                        </li>
+                        ";
+                        }
                         }
                         if($btn > $currentPage && ($btn-$currentPage)<3){
-                        echo "<li class='paginate_button page-item'>
-                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
-                        </li>";
+                        echo "
+                        <li class='paginate_button page-item'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
+                        </li>
+                        ";
                         }
                         if($btn < $currentPage && ($currentPage-$btn)<3){
-                        echo "<li class='paginate_button page-item'>
-                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
-                        </li>";
+                        echo "
+                        <li class='paginate_button page-item'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
+                        </li>
+                        ";
                         }
                         if($currentPage === $btn){
-                        echo "<li class='paginate_button page-item active'>
-                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
-                        </li>";
-                        }
+                        echo "
+                        <li class='paginate_button page-item active'>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
+                        </li>";}
                         if(($totalPage-$currentPage) > 4 && $btn == $totalPage){
                         echo "..";
                         echo "<li class='paginate_button page-item'>
-                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1' tabindex='0' class='page-link'>$btn</a>
+                            <a href='/companies?$next_page_url' aria-controls='basic-datatable' data-dt-idx='1'
+                               tabindex='0' class='page-link'>$btn</a>
                         </li>";
-                        }
                         }
                         ?>
                         <li class="paginate_button page-item next" id="basic-datatable_next">
@@ -434,7 +505,7 @@ $currentPage =isset($_GET['page'])?(int)$_GET['page'] : 1;
     const selElement = document.querySelector('.count-row-table');
     const urlParams = new URLSearchParams(window.location.search);
     selElement.value = urlParams.get('count');
-    selElement.addEventListener('change',()=>{
+    selElement.addEventListener('change', () => {
         window.location.search = `?page=1&count=${selElement.value}`
     })
 </script>

@@ -16,6 +16,7 @@ class ParsersController
     public const ALL = [
         Parsers\EgovData::class,
         Parsers\Uchet::class,
+        Parsers\FindPhone::class
     ];
 
     public static function getParser(string $code, Client $client, string $token = null): ParserAbstract

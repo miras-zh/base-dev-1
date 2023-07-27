@@ -86,10 +86,12 @@ class PagesController
     }
 
     public function calendar(){
+        $this->check->requirePermission();
         include ROOT_DIR . "/templates/pages/calendar.php";
     }
 
     public function roadmap(){
+        $this->check->requirePermission();
         include ROOT_DIR . "/templates/pages/roadmap.php";
     }
 
