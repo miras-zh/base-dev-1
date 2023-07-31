@@ -229,7 +229,6 @@ class Company
     public function updateCompany($id, $company_name,$company_bin, $region, $address, $otrasl, $phone, $email)
     {
         $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
-        echo '<br/>';
         try {
             $stmnt = $this->db->prepare($query);
             $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);

@@ -19,9 +19,9 @@ class UpdateOrganizations extends CliCommand
         $client = new Client;
         $api = new Api($client, $token);
 
-        $limit = 100;
+        $limit = 1000;
 //        $offset = 468800;
-        $offset = 815800;
+        $offset = 570000;//2838 add
 
         $companyModel = new Company();
         $beforeCompanies = $companyModel->getCompaniesNumber();

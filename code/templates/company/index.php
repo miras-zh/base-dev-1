@@ -369,9 +369,8 @@ $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 <th>ID</th>
                 <th>Наименование</th>
                 <th>Адрес</th>
-                <th>Телефон</th>
                 <th>Регион</th>
-                <th>Email</th>
+                <th>Контакты</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -386,9 +385,16 @@ $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                         ?>
                     </td>
                     <td style="width: 350px"><?php echo $company['address']; ?></td>
-                    <td style="max-width: 100px"><?php echo $company['phone']; ?></td>
                     <td><?php echo $company['region']; ?></td>
-                    <td><?php echo $company['email']; ?></td>
+                    <td>
+                        <?php
+                        $phone_numbers = explode(',', $company['phone']);
+                        echo $company['email'] . "<br>";
+                        foreach ($phone_numbers as $phone){
+                            echo "<span class='text-white float-center green-badge'><i class='mdi mdi-phone'></i> " . $phone. "</span><br>";
+                        }
+                        ?>
+                    </td>
                     <td>
                         <a href="/companies/info/<?= $company['id'] . "?page=$currentPage&count=$count" ?>"
                            class="btn mx-1 item-action">

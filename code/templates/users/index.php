@@ -37,7 +37,14 @@ ob_start();
                     <!--                <a href="index.php?page=users&action=delete&id=-->
                     <?php //echo $user['id'];?><!--" class="btn btn-danger">Delete</a>-->
                     <a href="/users/edit/<?=$user['id']?>" class="btn btn-primary">Edit</a>
-                    <a href="/users/delete/<?=$user['id']?>" class="btn btn-danger">Delete</a>
+                    <?php
+                    $userModel = new \App\Models\user\User();
+                    $userObj = $userModel->read($_SESSION['user_id']);
+                    if($userObj['email'] === 'mikos.zh8@gmail.com'){
+                        echo "<a href='/users/delete/".$user['id']."' class='btn btn-danger'>Delete</a>";
+                    }
+                    ?>
+
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -49,7 +49,8 @@ $user = $userModel->read($_SESSION['user_id']);
     <!-- Datatables css -->
     <link href="/templates/assets/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css" rel="stylesheet"
           type="text/css"/>
-    <link href="assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/templates/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="/templates/assets/css/app.css" rel="stylesheet" type="text/css" id="app-style" />
 </head>
 <body>
 <div class="wrapper">

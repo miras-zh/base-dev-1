@@ -55,6 +55,7 @@ class Find extends CliCommand
                 if ($target === 'fix') {
                     $input_phone_number = $company['phone'] ;
                     $formatPhoneNumber = '';
+//                    разделить слитные номера через запятую
                     if ($input_phone_number !== null && preg_match_all('|\+?[87]?(7\d{9})|', $input_phone_number, $matches)) {
                         $phone_numbers = $matches[1];
 
@@ -65,12 +66,16 @@ class Find extends CliCommand
                         $company['address'], $company['otrasl'], $formatPhoneNumber, $company['email']);
                     }
 
-
+//                    очистка символов кроме цифр
+//                    $formatPhoneNumber = preg_replace('/\D/', '', $input_phone_number);
+//                    $status = $companyModel->updateCompany($company['id'], $company['company_name'], $company['company_bin'], $company['region'],
+//                        $company['address'], $company['otrasl'], $formatPhoneNumber, $company['email']);
 
                 }
             }
 
             $offset += $limit;
+            echo '>> ' . $offset . ' ' . PHP_EOL;
 //            sleep(1);
             if($offset > 640000)$run_script = false;
         }
