@@ -47,6 +47,8 @@ $user = $userModel->read($_SESSION['user_id']);
           type="text/css"/>
     <link href="/templates/assets/css/app-saas.min.css" rel="stylesheet" type="text/css" id="app-style" />
     <link href="/templates/assets/css/app.css" rel="stylesheet" type="text/css" id="app-style" />
+    <script src="/templates/assets/vendor/dropzone/min/dropzone.min.js"></script>
+    <script src="/templates/assets/js/ui/component.fileupload.js"></script>
 </head>
 <body>
 <div class="wrapper">

@@ -185,19 +185,30 @@ class Treaty
         }
     }
 
-    public function createTreaty($number_treties = '',
-                                    $contractor = '',
-                                    $iniciator = '',
-                                    $subject = '',
-                                    $sum = '',
-                                    $sum_service = '',
-                                    $created_at = '')
+    public function createTreaty($number_treties,
+                                    $contractor ,
+                                    $iniciator ,
+                                    $subject ,
+                                    $sum ,
+                                    $sum_service,
+                                    $created_at ,
+                                    $file,
+                                    $file_content = ''
+    )
     {
-        $query = "INSERT INTO `treaties` (number,contractor,iniciator, subject,sum,sum_service,created_at) VALUES (?,?,?,?,?,?,?)";
+        $query = "INSERT INTO `treaties` (number,contractor,iniciator, subject,sum,sum_service,created_at, file_name, file_type, file_content) VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+        $file_name = $file['name'] ?? '';
+        $file_type = $file['type'] ?? '';
+        var_dump('$file_name>',$file_name);
+        var_dump('$file_type>',$file_type);
+        var_dump('$query>', $query);
+        var_dump('$file>',$file);
+//        exit();
 
         try {
             $stmt = $this->db->prepare($query);
-            $res = $stmt->execute([$number_treties, $contractor, $iniciator, $subject, $sum, $sum_service, $created_at]);
+            $res = $stmt->execute([$number_treties, $contractor, $iniciator, $subject, $sum, $sum_service, $created_at, $file_name, $file_type, $file_content]);
 
             return true;
         } catch (PDOException $e) {

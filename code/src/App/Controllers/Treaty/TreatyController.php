@@ -69,6 +69,11 @@ class TreatyController
 
     public function store(): void
     {
+//        var_dump('---------------------->',$_POST);
+//
+//        echo '<pre>';
+//        var_dump('---------------------->',$_FILES);echo '</pre>';
+//
         if (!isset($_SESSION['user_id'])) {
             header("Location: /auth/login");
         }
@@ -87,6 +92,12 @@ class TreatyController
                 return;
             }
 
+            $file = $_FILES['file'];
+            if ($file['error'] !== UPLOAD_ERR_OK) {
+                die("Ошибка при загрузке файла.");
+            }
+            $file_content = file_get_contents($file['tmp_name']);
+
             $treatyModel = new Treaty();
             $treatyModel->createTreaty(
                 $number_treties,
@@ -95,9 +106,12 @@ class TreatyController
                 $subject,
                 $sum,
                 $sum_service,
-                $created_at
+                $created_at,
+                $file,
+                $file_content
             );
         }
+//        exit;
         header('Location: /treaties?page=1&count=30');
     }
 
