@@ -12,7 +12,7 @@ class TemplatesEngine
     {
     }
 
-    public static function render(string $template_path, array $data): string
+    public static function render(string $template_path, array $data = []): string
     {
         foreach ($data as $key => $value) {
             $$key = $value;

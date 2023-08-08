@@ -15,6 +15,7 @@ class Router
         '|^/todo\/category(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\category\\TodoCategoryController'],
         '|^/todo\/tasks(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'todo\tasks\\TasksController'],
         '|^/auth(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'auth\\AuthController'],
+        '|^/treaties(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'Treaty\\TreatyController'],
     ];
 
     public function run(): void

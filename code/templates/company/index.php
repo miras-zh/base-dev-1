@@ -381,7 +381,8 @@ $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                     <td style="width: 350px">
                         <?php
                         echo $company['company_name'] . "<br>";
-                        echo "<span style='font-size: 14px;background-color: #0d78b5 !important;' class='text-white float-center'>" . $company['company_bin'] . "</span>";
+//                        echo "<span style='font-size: 14px;background-color: #004c7a !important;' class='text-white float-center'>" . "БИН " . "</span>";
+                        echo "<span style='font-size: 14px;padding:0px 4px;background-color: #0d78b5 !important;' class='text-white float-center'> " . $company['company_bin'] . "</span>";
                         ?>
                     </td>
                     <td style="width: 350px"><?php echo $company['address']; ?></td>

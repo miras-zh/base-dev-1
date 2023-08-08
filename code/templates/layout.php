@@ -8,10 +8,6 @@
 use App\Models\user\User;
 
 $currentPath = $_SERVER['REQUEST_URI'];
-function is_active($path, $currentPath): string
-{
-    return $path == $currentPath ? 'active' : '';
-}
 
 $userModel = new App\Models\user\User();
 $user = $userModel->read($_SESSION['user_id']);
@@ -570,6 +566,13 @@ $user = $userModel->read($_SESSION['user_id']);
                     <a href="/companies?page=1&count=30" class="side-nav-link">
                         <i class="uil-calender"></i>
                         <span> *База компаний</span>
+                        <span class="badge bg-primary text-white float-end">New</span>
+                    </a>
+                </li>
+                <li class="side-nav-item">
+                    <a href="/treaties?page=1&count=30" class="side-nav-link">
+                        <i class="uil-calender"></i>
+                        <span> *Реестр договоров</span>
                         <span class="badge bg-primary text-white float-end">New</span>
                     </a>
                 </li>

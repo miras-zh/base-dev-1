@@ -2,7 +2,7 @@
 $title = 'User list';
 ?>
 
-<div class="bg-dark h-100 w-50 mx-auto">
+<div class=" h-100 w-50 mx-auto">
     <div class="container">
         <h1>Добавить компанию</h1>
     </div>

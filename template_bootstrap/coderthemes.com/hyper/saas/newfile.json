@@ -1,0 +1,197 @@
+[
+    {
+        "data": {
+            "status": "success",
+            "message": null,
+            "content": [
+                {
+                    "id": "i00_image",
+                    "question": "Обложка курса",
+                    "type": "image"
+                },
+                {
+                    "id": "i00_course_name",
+                    "question": "Название курса",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i0d_publdate",
+                    "question": "Дата публикации курса",
+                    "type": "date"
+                },
+                {
+                    "id": "i00_redirect",
+                    "question": "Главная страница",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i00_category",
+                    "question": "Категория",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i00_raiting",
+                    "question": "Рейтинг",
+                    "type": "integer"
+                },
+                {
+                    "id": "i00_redirect_after_start",
+                    "question": "Ссылка после старта курса",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i0d_srok",
+                    "question": "Срок курса",
+                    "type": "date"
+                },
+                {
+                    "id": "i00_tags",
+                    "question": "Тэги",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i00_notif_topic",
+                    "question": "Тема уведомления",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i00_notif_text",
+                    "question": "Текст уведомления",
+                    "type": "text"
+                },
+                {
+                    "id": "i00_send_notifs",
+                    "question": "Отправлять уведомления",
+                    "type": "boolean"
+                },
+                {
+                    "id": "ilc_lms_status",
+                    "question": "Статус курса",
+                    "answers_url": "/api/data/reference?table=lms_status&schema=list",
+                    "type": "list_ref"
+                },
+                {
+                    "id": "i00_end_notif_topic",
+                    "question": "Тема уведомления после завершения курса",
+                    "type": "varchar"
+                },
+                {
+                    "id": "i00_end_norif_text",
+                    "question": "Текст уведомления после завершения курса",
+                    "type": "text"
+                },
+                {
+                    "id": "scen_id",
+                    "question": "ИД сценария",
+                    "type": "integer"
+                }
+            ]
+        },
+        "status": 200,
+        "statusText": "OK",
+        "headers": {
+            "cache-control": "max-age=0, must-revalidate, private",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "date": "Thu, 03 Aug 2023 11:02:38 GMT",
+            "expires": "Thu, 03 Aug 2023 11:02:38 GMT",
+            "server": "nginx/1.17.10",
+            "transfer-encoding": "chunked",
+            "x-debug-token": "e608be",
+            "x-powered-by": "PHP/8.1.19",
+            "x-robots-tag": "noindex"
+        },
+        "config": {
+            "url": "/form/fields?schema=doc&table=lms_test&action=create",
+            "method": "get",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiNzhhODA4YzQtMmViMy00NTIwLTgxOWQtN2VjODE0NzkzMDM3IiwiZXhwIjoxMTY5MDk3NjExOCwicGxhdGZvcm1fY29kZSI6ImFsbCJ9.xF5CKKpDUu2qO6-F97-WLvRYOvKf_dRoS5pHO1pbGE8"
+            },
+            "baseURL": "https://localhost:/api/",
+            "transformRequest": [
+                null
+            ],
+            "transformResponse": [
+                null
+            ],
+            "timeout": 0,
+            "responseType": "json",
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1
+        },
+        "request": {}
+    },
+    {
+        "data": {
+            "status": "success",
+            "message": null,
+            "content": {
+                "row": {
+                    "doc.lms_test.updated_at": "2023-08-03 09:21:41.261743",
+                    "doc.lms_test.i00_image": null,
+                    "doc.lms_test.i00_course_name": "раилыалуу1",
+                    "doc.lms_test.i0d_publdate": null,
+                    "doc.lms_test.i00_redirect": "railyaluu1-1page",
+                    "doc.lms_test.i00_category": null,
+                    "doc.lms_test.i00_raiting": null,
+                    "doc.lms_test.i00_redirect_after_start": "railyaluu1-2page",
+                    "doc.lms_test.i0d_srok": null,
+                    "doc.lms_test.i00_tags": null,
+                    "doc.lms_test.i00_notif_topic": null,
+                    "doc.lms_test.i00_notif_text": null,
+                    "doc.lms_test.i00_send_notifs": null,
+                    "doc.lms_test.ilc_lms_status": null,
+                    "doc.lms_test.i00_end_notif_topic": null,
+                    "doc.lms_test.i00_end_norif_text": null,
+                    "doc.lms_test.id": "0c0f8696-1ee8-482f-848f-531b11287e19",
+                    "doc.lms_test.requis": null,
+                    "doc.lms_test.scen_id": 0,
+                    "doc.lms_test.ver_id": 0,
+                    "doc.lms_test.i00_runed": false,
+                    "doc.lms_test.created_by": "78a808c4-2eb3-4520-819d-7ec814793037",
+                    "doc.lms_test.updated_by": null,
+                    "doc.lms_test.created_at": "2023-08-03 09:21:41.261743",
+                    "doc.lms_test.static_index": null
+                },
+                "_sql": "SELECT doc.lms_test.updated_at as \"doc.lms_test.updated_at\", doc.lms_test.i00_image as \"doc.lms_test.i00_image\", doc.lms_test.i00_course_name as \"doc.lms_test.i00_course_name\", doc.lms_test.i0d_publdate as \"doc.lms_test.i0d_publdate\", doc.lms_test.i00_redirect as \"doc.lms_test.i00_redirect\", doc.lms_test.i00_category as \"doc.lms_test.i00_category\", doc.lms_test.i00_raiting as \"doc.lms_test.i00_raiting\", doc.lms_test.i00_redirect_after_start as \"doc.lms_test.i00_redirect_after_start\", doc.lms_test.i0d_srok as \"doc.lms_test.i0d_srok\", doc.lms_test.i00_tags as \"doc.lms_test.i00_tags\", doc.lms_test.i00_notif_topic as \"doc.lms_test.i00_notif_topic\", doc.lms_test.i00_notif_text as \"doc.lms_test.i00_notif_text\", doc.lms_test.i00_send_notifs as \"doc.lms_test.i00_send_notifs\", doc.lms_test.ilc_lms_status as \"doc.lms_test.ilc_lms_status\", doc.lms_test.i00_end_notif_topic as \"doc.lms_test.i00_end_notif_topic\", doc.lms_test.i00_end_norif_text as \"doc.lms_test.i00_end_norif_text\", doc.lms_test.id as \"doc.lms_test.id\", doc.lms_test.requis as \"doc.lms_test.requis\", doc.lms_test.scen_id as \"doc.lms_test.scen_id\", doc.lms_test.ver_id as \"doc.lms_test.ver_id\", doc.lms_test.i00_runed as \"doc.lms_test.i00_runed\", doc.lms_test.created_by as \"doc.lms_test.created_by\", doc.lms_test.updated_by as \"doc.lms_test.updated_by\", doc.lms_test.created_at as \"doc.lms_test.created_at\", doc.lms_test.static_index as \"doc.lms_test.static_index\" FROM doc.lms_test  WHERE doc.lms_test.id = '0c0f8696-1ee8-482f-848f-531b11287e19'"
+            }
+        },
+        "status": 200,
+        "statusText": "OK",
+        "headers": {
+            "cache-control": "max-age=0, must-revalidate, private",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "date": "Thu, 03 Aug 2023 11:02:38 GMT",
+            "expires": "Thu, 03 Aug 2023 11:02:38 GMT",
+            "server": "nginx/1.17.10",
+            "transfer-encoding": "chunked",
+            "x-debug-token": "ff6624",
+            "x-powered-by": "PHP/8.1.19",
+            "x-robots-tag": "noindex"
+        },
+        "config": {
+            "url": "/data/row?schema=doc&table=lms_test&id=0c0f8696-1ee8-482f-848f-531b11287e19",
+            "method": "get",
+            "headers": {
+                "Accept": "application/json",
+                "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiNzhhODA4YzQtMmViMy00NTIwLTgxOWQtN2VjODE0NzkzMDM3IiwiZXhwIjoxMTY5MDk3NjExOCwicGxhdGZvcm1fY29kZSI6ImFsbCJ9.xF5CKKpDUu2qO6-F97-WLvRYOvKf_dRoS5pHO1pbGE8"
+            },
+            "baseURL": "https://localhost:/api/",
+            "transformRequest": [
+                null
+            ],
+            "transformResponse": [
+                null
+            ],
+            "timeout": 0,
+            "responseType": "json",
+            "xsrfCookieName": "XSRF-TOKEN",
+            "xsrfHeaderName": "X-XSRF-TOKEN",
+            "maxContentLength": -1
+        },
+        "request": {}
+    }
+]
