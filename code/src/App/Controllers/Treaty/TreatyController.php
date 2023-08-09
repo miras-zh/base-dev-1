@@ -119,20 +119,17 @@ class TreatyController
         if (!isset($_SESSION['user_id'])) {
             header("Location: /auth/login");
         }
-        $companyModel = new Company();
-        $company = $companyModel->getCompanyById($params['id']);
+        $treatyModel = new Treaty();
+        $treaty = $treatyModel->getTreatiesById($params['id']);
 
-        $regionModel = new RegionsModel();
-        $regions = $regionModel->getAllRegion();
-
-        if (!$company) {
-            echo "Company not found";
+        if (!$treaty) {
+            echo "treaty not found";
             return;
         }
 
         echo TemplatesEngine::render('layout', [
-            'content' => TemplatesEngine::render('company/info', [
-                'company' => $company
+            'content' => TemplatesEngine::render('treaty/info', [
+                'treaty' => $treaty
             ]),
             'title' => 'Company info',
         ]);
@@ -157,35 +154,23 @@ class TreatyController
 
     public function delete($params): void
     {
-        $companyModel = new Company();
-        $companyModel->deleteCompany($params['id']);
+        $treatyModel = new Treaty();
+        $treatyModel->deleteTreaty($params['id']);
 
-        header('Location: /companies');
+        header('Location: /treaties?page=1&count=30');
     }
 
     public function edit($params): void
     {
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /auth/login");
-        }
-        $companyModel = new Company();
-        $company = $companyModel->getCompanyById($params['id']);
-
-        $regionModel = new RegionsModel();
-        $regions = $regionModel->getAllRegion();
-
-        if (!$company) {
-            echo "Company not found";
-            return;
-        }
-
+        if (!isset($_SESSION['user_id'])) { header("Location: /auth/login");}
+        $treatyModel = new Treaty();
+        $treaty = $treatyModel->getTreatiesById($params['id']);
 
         echo TemplatesEngine::render('layout', [
-            'content' => TemplatesEngine::render('company/edit', [
-                'company' => $company,
-                'regions' => $regions
+            'content' => TemplatesEngine::render('treaty/edit', [
+                'treaty' => $treaty,
             ]),
-            'title' => 'Company info',
+            'title' => 'Treaty edit',
         ]);
     }
 

@@ -176,9 +176,7 @@ class Treaty
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
-            $treaty = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            return $treaty;
+            return $stmt->fetch(PDO::FETCH_ASSOC);
 
         } catch (PDOException $err) {
             return false;
