@@ -178,30 +178,26 @@ class TreatyController
     {
         if (isset($params['id']) && isset($_POST['company_name']) && isset($_POST['email'])) {
             $id = trim($params['id']);
-            $company_name = trim($_POST['company_name']);
-            $company_bin = trim($_POST['company_bin']);
-            $region = isset($_POST['region']) && trim($_POST['region']) !== ''? $_POST['region']:'Kazakhstan';
-            $address = isset($_POST['address']) && trim($_POST['address']) !== ''? $_POST['address']:'Astana';;
-            $otrasl = isset($_POST['otrasl']) && trim($_POST['otrasl']) !== ''? $_POST['otrasl']:'Kazakhstan';;
-            $phone = isset($_POST['phone']) && trim($_POST['phone']) !== ''? $_POST['phone']:'phone none';;
-            $email = isset($_POST['email']) && trim($_POST['email']) !== ''? $_POST['email']:'email@email.com';;
+            $treaty_number = $_POST['number'] ?? '';
+            $iniciator = $_POST['iniciator'] ?? '';
+            $contractor = $_POST['contractor'] ?? '';
+            $subject = $_POST['subject'] ?? '';
+            $sum = $_POST['sum'] ?? '';
+            $sum_service = $_POST['sum_service'] ?? '';
+            $file_name = $_POST['file_name'] ?? '';
+            $file_type = $_POST['file_type'] ?? '';
+            $file_path = $_POST['file_path'] ?? '';
 
-            if (empty($company_name)) {
-                echo "Company name is required";
+            if (empty($treaty_number)) {
+                echo "treaty number is required";
                 return;
             }
 
-            $companyModel = new Company();
-            $companyModel->updateCompany($id, $company_name,
-                $company_bin,
-                $region,
-                $address,
-                $otrasl,
-                $phone,
-                $email);
+            $treatyModel = new Treaty();
+            $treatyModel->updateTreaty($id, $treaty_number,$iniciator, $contractor, $subject, $sum, $sum_service, $file_name, $file_type,$file_path);
         }
 
-        header('Location: /companies');
+        header('Location: /treaties?page=1&count=30');
     }
 
     public function qa($title = 'QA:', $value = ''): void

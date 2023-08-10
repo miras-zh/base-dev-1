@@ -26,8 +26,6 @@ class Treaty
 
     public function createTable(): bool
     {
-        var_dump('======================================== create table');
-
         $treatyTableQuery = "CREATE TABLE IF NOT EXISTS `treaties` (
              `id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
              `number` VARCHAR(255) NOT NULL, 
@@ -191,10 +189,10 @@ class Treaty
                                     $sum_service,
                                     $created_at ,
                                     $file,
-                                    $file_content = ''
+                                    $file_path = ''
     )
     {
-        $query = "INSERT INTO `treaties` (number,contractor,iniciator, subject,sum,sum_service,created_at, file_name, file_type, file_content) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $query = "INSERT INTO `treaties` (number,contractor,iniciator, subject,sum,sum_service,created_at, file_name, file_type, file_path) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         $file_name = $file['name'] ?? '';
         $file_type = $file['type'] ?? '';
@@ -216,16 +214,16 @@ class Treaty
     }
 
 
-    public function updateTreaty($id, $company_name,$company_bin, $region, $address, $otrasl, $phone, $email)
+    public function updateTreaty($id, $treaty_number,$iniciator, $contractor, $subject, $sum, $sum_service, $file_name, $file_type,$file_path)
     {
-        $query = "UPDATE `treaties` SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
+        $query = "UPDATE `treaties` SET number=?,contractor=?, iniciator=?, subject=?, sum=?, sum_service=? ,file_name=?, file_type=?, file_path=? WHERE id=?";
         try {
             $stmnt = $this->db->prepare($query);
-            $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
+            $res = $stmnt->execute([$treaty_number,$contractor,$iniciator, $subject, $sum, $sum_service, $file_name, $file_type, $file_path, $id]);
 
             return true;
         } catch (PDOException $e) {
-
+            var_dump('update treaty error:',$e);
         }
     }
 
