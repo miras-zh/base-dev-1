@@ -204,7 +204,7 @@ class Treaty
 
         try {
             $stmt = $this->db->prepare($query);
-            $res = $stmt->execute([$number_treties, $contractor, $iniciator, $subject, $sum, $sum_service, $created_at, $file_name, $file_type, $file_content]);
+            $res = $stmt->execute([$number_treties, $contractor, $iniciator, $subject, $sum, $sum_service, $created_at, $file_name, $file_type, $file_path]);
 
             return true;
         } catch (PDOException $e) {

@@ -116,6 +116,7 @@ $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                 <th>Предмет договора</th>
                 <th>Сумма</th>
                 <th>Сумма анализа</th>
+                <th>Doc</th>
                 <th>Действия</th>
             </tr>
             </thead>
@@ -133,6 +134,7 @@ $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                     <td><?php echo $treaty['subject']; ?></td>
                     <td><?php echo $treaty['sum']; ?></td>
                     <td><?php echo $treaty['sum_service']; ?></td>
+                    <td><?php echo $treaty['file_name']?? ''; ?></td>
                     <td>
                         <a href="/treaties/info/<?= $treaty['id'] . "?page=$currentPage&count=$count" ?>"
                            class="btn mx-1 item-action">

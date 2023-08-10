@@ -7,6 +7,9 @@
 
 $count = (int)($_GET['count'] ?? 30);
 $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+    $contents = file_get_contents(ROOT_DIR . '/doc/'.$treaty['file_path']);
+    $documentContentEncode = base64_encode($contents);
 ?>
 <div class="w-100" style="margin-top: 80px;">
     <div class="flex-row d-flex w-100 justify-content-between">
@@ -37,9 +40,7 @@ $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         </div>
         <div class="form-group mt-1">
             <?php if($treaty['file_name']):?>
-            <a href="#"
-               onclick="showFile('<?= $treaty['file_type']; ?>', '<?= base64_encode($treaty['file_content']); ?>')">показать
-                файл</a>
+                <a href="/doc/<?= $treaty['file_path'] ?>" target="_blank">показать файл</a>
             <?php endif;?>
         </div>
 
