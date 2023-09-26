@@ -16,7 +16,6 @@ class UpdateOrganizations extends CliCommand
     public static function execute(CliInput $cliInput): int
     {
         $parser_code = $cliInput->getParameter(0);
-        var_dump($parser_code);exit();
         if ($parser_code === null) {
             exit("Empty parser code\n");
         }
@@ -28,7 +27,7 @@ class UpdateOrganizations extends CliCommand
 
         $parser = ParsersController::getParser($parser_code, new Client(), $token);
 
-        if($parser_code = FindPhone::getCode()){
+        if($parser_code === FindPhone::getCode()){
             $parser->updatePhoneOrganizations();
         }else{
             $organizations_list = $parser->getOrganizationsList();

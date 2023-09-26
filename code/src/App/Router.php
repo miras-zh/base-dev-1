@@ -8,6 +8,7 @@ class Router
     private array $routes = [
         '|^/?$|' => ['controller' => 'home\\HomeController', 'action' => 'index'],
         '|^/users(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'users\\UserController'],
+        '|^/workers(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'workers\\WorkersController'],
         '|^/companies(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'company\\CompanyController'],
         '|^/roles(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'role\\RoleController'],
         '|^/regions(\/(?P<action>[a-z]+)(\/(?P<id>\d+))?)?$|' => ['controller' => 'regions\\RegionsController'],

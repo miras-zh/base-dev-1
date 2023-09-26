@@ -195,11 +195,12 @@ class Company
         }
     }
 
-    public function runQuery(string $query){
+    public function runQuery(string $query): bool|\PDOStatement
+    {
         return $this->db->query($query);
     }
 
-    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email,$boss)
+    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email,$boss): bool
     {
         $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email,boss) VALUES (?,?,?,?,?,?,?,?)";
 
@@ -239,6 +240,20 @@ class Company
         }
     }
 
+    public function updateCompanyOked($bin, $statusru, $statuskz,$okedru,$okedkz,$addresskz, $datareg)
+    {
+        $query = "UPDATE companies SET status_ru=?,status_kz=?, oked_ru=?, oked_kz=?, datereg=?, address_kz=? WHERE company_bin=?";
+        try {
+            $stmnt = $this->db->prepare($query);
+            $res = $stmnt->execute([$statusru,$statuskz,$okedru,$okedkz,$addresskz, $datareg, $bin]);
+
+            return true;
+        } catch (PDOException $e) {
+            var_dump('error>>',$bin,'>');
+            return false;
+        }
+    }
+
     public function deleteCompany($id): bool
     {
         $query = "DELETE FROM companies WHERE id= ?";
@@ -266,7 +281,7 @@ class Company
         }
     }
 
-    function checkCompanyByBin($bin):bool
+    function checkCompanyByBin($bin): bool
     {
         $query = "select COUNT(*) from companies where company_bin =? LIMIT 1";
         try {

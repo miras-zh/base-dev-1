@@ -17,6 +17,7 @@ class CliController
         $command_class = self::getCommandClassByName($command_name);
         var_dump('$command_class>',$command_class);
         if (!class_exists($command_class)) {
+            var_dump('exit file');
             exit("Unknown command: $command_name");
         }
 

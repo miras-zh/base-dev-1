@@ -19,9 +19,9 @@ class UpdateOrganizations extends CliCommand
         $client = new Client;
         $api = new Api($client, $token);
 
-        $limit = 1000;
+        $limit = 100000;
 //        $offset = 468800;
-        $offset = 570000;//2838 add
+        $offset = 0;//2838 add
 
         $companyModel = new Company();
         $beforeCompanies = $companyModel->getCompaniesNumber();
@@ -42,14 +42,25 @@ class UpdateOrganizations extends CliCommand
             foreach ($response as $organization_data) {
 //                print_r($organization_data);
 //                echo "\n";
-//                echo $organization_data['id'] ."\n";
+//                echo $organization_data['id'].": --->". $organization_data['okedru']."\n";
                 $companyModel = new Company();
                 $companyFound = $companyModel->checkCompanyByBin($organization_data['bin']);
                 if (!$companyFound) {
                     echo '+ + add:' . $organization_data['bin'] . " /" . $organization_data['nameru'] . "\n";
                     $companyModel->createCompany($organization_data['nameru'], $organization_data['bin'], 'Kazakhstan', $organization_data['addressru'], $organization_data['okedru'], '', '', $organization_data['director']);
                 } else {
-                    echo '- - no:' . $organization_data['bin'] . " /" . $organization_data['nameru'] . "\n";
+                    $statusAction = $companyModel->updateCompanyOked(
+                        $organization_data['bin'],
+                        $organization_data['statusru'],
+                        $organization_data['statuskz'],
+                        $organization_data['okedru'],
+                        $organization_data['okedkz'],
+                        $organization_data['addresskz'],
+                        $organization_data['datereg'] );
+//                    if(!$statusAction){
+//                        echo "update:".$organization_data['bin']. "\n";
+//                        echo "no--update:".$organization_data['bin']. "\n";
+//                    }
                 }
             }
             $companyModel = new Company();

@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Models\user;
+namespace App\Models\workers;
 
 use App\Models\Database;
 use PDO;
 use PDOException;
 
-class User
+class Workers
 {
-
-
     private PDO $db;
 
     public function __construct()
@@ -17,7 +15,7 @@ class User
         $this->db = Database::getInstance()->getConnection();
 
         try {
-            $this->db->prepare("SELECT 1 FROM `users` LIMIT 1")->execute();
+            $this->db->prepare("SELECT 1 FROM `workers` LIMIT 1")->execute();
         } catch (PDOException $err) {
             $this->createTable();
         } catch (\Throwable $throwable) {
@@ -28,45 +26,25 @@ class User
 
     public function createTable(): bool
     {
-        $roleTableQuery = "CREATE TABLE IF NOT EXISTS `roles` (
-            `id` INT(11) NOT NULL PRIMARY KEY ,
-            `role_name` VARCHAR(255) NOT NULL,
-            `role_description` TEXT)";
-        $jobTableQuery = "CREATE TABLE IF NOT EXISTS `job_titles` (
-            `id` INT(11) NOT NULL PRIMARY KEY ,
-            `job_title` VARCHAR(255) NOT NULL,
-            `job_description` TEXT)";
-        $userTableQuery = "CREATE TABLE IF NOT EXISTS `users` (
-             `id` INT(11) NOT NULL AUTO_INCREMENT,
-             `username` VARCHAR(255) NOT NULL, 
+        $workerTableQuery = "CREATE TABLE IF NOT EXISTS `workers` (
+             `id` INT(11) PRIMARY KEY AUTO_INCREMENT,
+             `firstname` VARCHAR(255), 
+             `lastname` VARCHAR(255) , 
              `fullname` VARCHAR(255), 
              `year_of_birth` VARCHAR(255), 
-             `path_anketa` VARCHAR(255), 
              `path_employment_contract` VARCHAR(255), 
              `path_biography` VARCHAR(255), 
-             `job_title` INT(11) NOT NULL DEFAULT 0, 
+             `job_title` INT(11) DEFAULT 0, 
              `phone` VARCHAR(255), 
              `phone_first` VARCHAR(255), 
              `phone_second` VARCHAR(255), 
              `address` VARCHAR(255), 
-             `email` VARCHAR(255) NOT NULL, 
-             `email_verification` TINYINT(1) NOT NULL DEFAULT 0, 
-             `password` VARCHAR(255) NOT NULL,
-             `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
-             `role` INT(11) NOT NULL DEFAULT 0,
-             `is_active` TINYINT(1) NOT NULL DEFAULT 1,
-             `last_login` TIMESTAMP NULL,
-             `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-             PRIMARY KEY (`id`),
-             FOREIGN KEY (`role`) REFERENCES `roles`(`id`),
-             FOREIGN KEY (`job_title`) REFERENCES `job_titles`(`id`))";
-        var_dump($userTableQuery);
+             `email` VARCHAR(255))";
+        var_dump($workerTableQuery);
 
         $this->db->beginTransaction();
         try {
-            $this->db->exec($roleTableQuery);
-            $this->db->exec($jobTableQuery);
-            $this->db->exec($userTableQuery);
+            $this->db->exec($workerTableQuery);
             $this->db->commit();
             return true;
         } catch (PDOException $err) {
@@ -85,33 +63,35 @@ class User
     public function readAll(): bool|array
     {
         try {
-            $stmnt = $this->db->query("SELECT * FROM `users`");
-            $users = [];
+//            $stmnt = $this->db->query("SELECT * FROM `workers` ORDER BY lastname ASC");
+            $stmnt = $this->db->query("SELECT * FROM `workers`");
+            $workers = [];
 
             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                $users[] = $row;
+                $workers[] = $row;
             }
-            return $users;
+            return $workers;
         } catch (PDOException $err) {
             return false;
         }
     }
 
     public function create(
-        string $username,
-        string $email,
-        string $password,
-        int    $role,
+        $firstname,
+        $lastname,
+        $surname,
+        $phone,
+        $email,
     ): bool
     {
         $created_at = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO users (username, email, password, role, created_at) VALUES (?,?,?,?,?)";
+        $query = "INSERT INTO workers (firstname, lastname, surname, phone, email) VALUES (?,?,?,?,?)";
         var_dump($query);
 
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$username, $email, $password, $role, $created_at]);
+            $stmt->execute([$firstname, $lastname, $surname, $phone, $email]);
             return true;
         } catch (PDOException $error) {
             exit($error);
@@ -121,7 +101,7 @@ class User
 
     public function delete($id): bool
     {
-        $query = "DELETE FROM users WHERE id= ?";
+        $query = "DELETE FROM workers WHERE id= ?";
 
         try {
             $stmt = $this->db->prepare($query);
@@ -135,7 +115,7 @@ class User
 
     public function edit($id)
     {
-        $query = "DELETE FROM users WHERE id= ?";
+        $query = "DELETE FROM workers WHERE id= ?";
         try {
             $stmt = $this->db->prepare($query);
             $stmt->execute([$id]);
@@ -148,7 +128,7 @@ class User
 
     public function read($id)
     {
-        $query = "SELECT * FROM users WHERE id= ?";
+        $query = "SELECT * FROM workers WHERE id= ?";
 
         try {
             $stmt = $this->db->prepare($query);
@@ -170,7 +150,7 @@ class User
         $email = $data['email'];
         $role = $data['role'];
         $is_active = isset($data['is_active']) ? 1 : 0;
-        $query = "UPDATE users SET username=?,email=?, role=?, is_admin=? WHERE id=?";
+        $query = "UPDATE workers SET username=?,email=?, role=?, is_admin=? WHERE id=?";
 
         try {
             $stmt = $this->db->prepare($query);

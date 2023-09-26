@@ -578,7 +578,13 @@ $user = $userModel->read($_SESSION['user_id']);
                         <span class="badge bg-primary text-white float-end">New</span>
                     </a>
                 </li>
-
+                <li class="side-nav-item">
+                    <a href="/workers?page=1&count=30" class="side-nav-link">
+                        <i class="uil-calender"></i>
+                        <span> *Сотрудники</span>
+                        <span class="badge bg-primary text-white float-end">New</span>
+                    </a>
+                </li>
                 <li class="side-nav-item">
                     <a href="/pages/calendar" class="side-nav-link">
                         <i class="uil-calender"></i>
