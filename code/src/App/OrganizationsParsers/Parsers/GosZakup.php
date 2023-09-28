@@ -24,21 +24,23 @@ class GosZakup extends ParserAbstract
 
     public function getOrganizationsList(SelectionData $selection_data = null): OrganizationsList
     {
-        $num = 1;
+        $limit = 10;
+        $offset = 0;
         do {
 
 
-            $page = $this->request('ru/registry/supplierreg', [
-                'count_record' => $selection_data?->limit ?? 50,
-                'page' => $num,
-            ]);
+//            $page = $this->request('ru/registry/supplierreg', ['count_record' => $selection_data?->limit ?? 50,'page' => $num]);
+              $companyModel = new Company();
+              $links = $companyModel->getLink($limit, $offset);
+//              var_dump($links);
+//              exit();
+//              exit($links);
 
-            if (preg_match_all('/<td[^>]*>\s*<a href="([^"]+)"/', $page, $matches)) {
-                foreach ($matches[1] as $key => $match) {
-                    if (strpos($match, 'supplierreg?filter[other]') === false) {
-                        $item_page = $this->request($match);
-
-                        if (preg_match_all('/<tr>\s*<th>(.*?)<\/th>\s*<td>(.*?)<\/td>\s*<\/tr>/s', $item_page, $matches2)) {
+                foreach ($links as $key => $value) {
+                    var_dump($value['link']);
+                    if (strpos($value['link'], 'supplierreg?filter[other]') === false) {
+                        $page = $this->request($value['link']);
+                        if (preg_match_all('/<tr>\s*<th>(.*?)<\/th>\s*<td>(.*?)<\/td>\s*<\/tr>/s', $page, $matches2)) {
                             $data = array_combine($matches2[1], $matches2[2]);
                             // Создаем ассоциативный массив для переименованных ключей
                             $renamedData = array(
@@ -61,19 +63,50 @@ class GosZakup extends ParserAbstract
                             );
                             print_r($renamedData);
 
+                            $companyFound = $companyModel->checkCompanyByBin($renamedData['bin']);
+                            if (!$companyFound) {
+                                echo '+ + add:' . $renamedData['bin'] . " /" . $renamedData['nameru'] . "\n";
+                                $isAdd = $companyModel->createCompanyGos(
+                                    $renamedData["date_last_updated"],
+                                    $renamedData["roles"],
+                                    $renamedData["exists_in_reestr"],
+                                    $renamedData["bin"],
+                                    $renamedData["rnn"],
+                                    $renamedData["namekz"],
+                                    $renamedData["nameru"],
+                                    $renamedData["resident"],
+                                    $renamedData["kato"],
+                                    $renamedData["region"],
+                                    $renamedData["website"],
+                                    $renamedData["email"],
+                                    $renamedData["phone"],
+                                    $renamedData["number_id"],
+                                    $renamedData["date_registration"],
+                                    $renamedData["admin_reporting"],
 
-
+                                );
+                                var_dump('isAdd>',$isAdd);
+                                exit();
+                            } else {
+                                echo '- - no:' . $renamedData['bin'] . " /" . $renamedData['nameru'] . "\n";
+                            }
+//                            exit();
                         }
-                        if (($key % 50) == 0) {
-                            sleep(10);
-                            var_dump( "-------------------------------------------- 100 <br>");
+                        if (($key % 2) == 0) {
+                            sleep(1);
+                            var_dump( "--------------------------------------------  <br>");
                         }
                     }
                 }
+            if(($offset % 2) === 0){
+                $total = $offset+$limit;
+                var_dump("------ ($total)}");
+                sleep(2);
             }
-            $num++;
-            var_dump('num:', $num);
-        }while($num <= 9673);
+            $limit+=$offset;
+            $offset+=10;
+        }while($offset <= 9673);
+        exit();
     }
 
     public function request(string $path, array $get = null, array $post = null): string

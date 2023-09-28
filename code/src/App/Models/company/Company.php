@@ -49,7 +49,8 @@ class Company
         }
     }
 
-    public function getCompanies(){
+    public function getCompanies()
+    {
         $query = "SELECT * FROM `companies`";
 
         try {
@@ -85,7 +86,6 @@ class Company
         $query = "SELECT * FROM `companies` LIMIT $limit OFFSET $offset";
 
 
-
         try {
             $stmnt = $this->db->query($query);
             $companies = [];
@@ -98,22 +98,41 @@ class Company
 
         }
     }
-     public function getLimitCompanies($limit,$offset){
-         $query= "select * from companies limit $limit offset $offset";
-         try {
-             $stmnt = $this->db->query($query);
-             $companies = [];
-             while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                 $companies[] = $row;
-             }
 
-             return $companies;
-         } catch (PDOException $e) {
+    public function getLimitCompanies($limit, $offset)
+    {
+        $query = "select * from companies limit $limit offset $offset";
+        try {
+            $stmnt = $this->db->query($query);
+            $companies = [];
+            while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+                $companies[] = $row;
+            }
 
-         }
-     }
+            return $companies;
+        } catch (PDOException $e) {
 
-    public function filter(string $name = null, string $bin = null, string $region = null,int $page = 1,int $limit = 30){
+        }
+    }
+
+    public function getLink($limit, $offset): array|bool
+    {
+        $query = "select * from links limit $limit offset $offset";
+        try {
+            $stmnt = $this->db->query($query);
+            $links = [];
+            while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
+                $links[] = $row;
+            }
+
+            return $links;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function filter(string $name = null, string $bin = null, string $region = null, int $page = 1, int $limit = 30)
+    {
         if ($page < 1) {
             $page = 1;
         }
@@ -151,7 +170,8 @@ class Company
         }
     }
 
-    public function filterCount(string $name = null, string $bin = null, string $region = null,){
+    public function filterCount(string $name = null, string $bin = null, string $region = null,)
+    {
         $query_where_count = [];
         $params = [];
 
@@ -200,7 +220,7 @@ class Company
         return $this->db->query($query);
     }
 
-    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email,$boss): bool
+    public function createCompany($company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $boss): bool
     {
         $query = "INSERT INTO companies (company_name,company_bin,region, address,otrasl,phone,email,boss) VALUES (?,?,?,?,?,?,?,?)";
 
@@ -215,60 +235,119 @@ class Company
         }
     }
 
-    public function createByUchetOrganization(UchetOrganization $organization)
+    public function createCompanyGos(
+        $date_last_updated,
+        $roles,
+        $exists_in_reestr,
+        $bin,
+        $rnn,
+        $namekz,
+        $nameru,
+        $resident,
+        $kato,
+        $region,
+        $website,
+        $email,
+        $phone,
+        $number_id,
+        $date_registration,
+        $admin_reporting,
+    ): bool
     {
-        // todo
-    }
-
-    public function updateByUchetOrganization(UchetOrganization $organization)
-    {
-        // todo
-    }
-
-
-
-    public function updateCompany($id, $company_name,$company_bin, $region, $address, $otrasl, $phone, $email)
-    {
-        $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
-        try {
-            $stmnt = $this->db->prepare($query);
-            $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
-
-            return true;
-        } catch (PDOException $e) {
-
-        }
-    }
-
-    public function updateCompanyOked($bin, $statusru, $statuskz,$okedru,$okedkz,$addresskz, $datareg)
-    {
-        $query = "UPDATE companies SET status_ru=?,status_kz=?, oked_ru=?, oked_kz=?, datereg=?, address_kz=? WHERE company_bin=?";
-        try {
-            $stmnt = $this->db->prepare($query);
-            $res = $stmnt->execute([$statusru,$statuskz,$okedru,$okedkz,$addresskz, $datareg, $bin]);
-
-            return true;
-        } catch (PDOException $e) {
-            var_dump('error>>',$bin,'>');
-            return false;
-        }
-    }
-
-    public function deleteCompany($id): bool
-    {
-        $query = "DELETE FROM companies WHERE id= ?";
+        $query = "INSERT INTO companies (
+                       company_name,
+                       namekz,
+                       company_bin,
+                       rnn,
+                       kato,
+                       region, 
+                       website,
+                       phone,
+                       email,
+                       datereg,
+                       date_last_updated
+                       ) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$id]);
+            $res = $stmt->execute([$nameru, $namekz,$bin,$rnn,$kato, $region, $website, $phone, $email, $date_registration, $date_last_updated]);
 
             return true;
-        } catch (PDOException $error) {
-            return false;
         }
+
+catch
+(PDOException $e) {
+    var_dump('error->', $e);
+    return false;
+}
     }
 
-    function checkCompanyByBiin(Biin $biin):bool
+    public function writeLink($link): bool
+{
+    $query = "INSERT INTO links (link) VALUES (?)";
+    try {
+        $stmt = $this->db->prepare($query);
+        return $stmt->execute([$link]);
+    } catch (PDOException $e) {
+        var_dump('error->', $e);
+        return false;
+    }
+}
+
+    public function createByUchetOrganization(UchetOrganization $organization)
+{
+    // todo
+}
+
+    public function updateByUchetOrganization(UchetOrganization $organization)
+{
+    // todo
+}
+
+
+
+    public function updateCompany($id, $company_name, $company_bin, $region, $address, $otrasl, $phone, $email)
+{
+    $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
+    try {
+        $stmnt = $this->db->prepare($query);
+        $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
+
+        return true;
+    } catch (PDOException $e) {
+
+    }
+}
+
+    public function updateCompanyOked($bin, $statusru, $statuskz, $okedru, $okedkz, $addresskz, $datareg)
+{
+    $query = "UPDATE companies SET status_ru=?,status_kz=?, oked_ru=?, oked_kz=?, datereg=?, address_kz=? WHERE company_bin=?";
+    try {
+        $stmnt = $this->db->prepare($query);
+        $res = $stmnt->execute([$statusru, $statuskz, $okedru, $okedkz, $addresskz, $datareg, $bin]);
+
+        return true;
+    } catch (PDOException $e) {
+        var_dump('error>>', $bin, '>');
+        return false;
+    }
+}
+
+    public function deleteCompany($id): bool
+{
+    $query = "DELETE FROM companies WHERE id= ?";
+
+    try {
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$id]);
+
+        return true;
+    } catch (PDOException $error) {
+        return false;
+    }
+}
+
+    function checkCompanyByBiin(Biin $biin): bool
     {
         $query = "select COUNT(*) from companies where company_bin =? LIMIT 1";
         try {
