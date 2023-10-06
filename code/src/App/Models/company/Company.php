@@ -215,6 +215,19 @@ class Company
         }
     }
 
+    public function getCompanyByBin($bin): bool|array
+    {
+        $query = "SELECT * FROM companies WHERE company_bin=?";
+        try {
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$bin]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $err) {
+            return false;
+        }
+    }
+
     public function runQuery(string $query): bool|\PDOStatement
     {
         return $this->db->query($query);
@@ -270,54 +283,79 @@ class Company
 
         try {
             $stmt = $this->db->prepare($query);
-            $res = $stmt->execute([$nameru, $namekz,$bin,$rnn,$kato, $region, $website, $phone, $email, $date_registration, $date_last_updated]);
+            $res = $stmt->execute([$nameru, $namekz, $bin, $rnn, $kato, $region, $website, $phone, $email, $date_registration, $date_last_updated]);
+
+            return true;
+        } catch
+        (PDOException $e) {
+            var_dump('error->', $e);
+            return false;
+        }
+    }
+
+    public function writeLink($link): bool
+    {
+        $query = "INSERT INTO links (link) VALUES (?)";
+        try {
+            $stmt = $this->db->prepare($query);
+            return $stmt->execute([$link]);
+        } catch (PDOException $e) {
+            var_dump('error->', $e);
+            return false;
+        }
+    }
+
+    public function createByUchetOrganization(UchetOrganization $organization)
+    {
+        // todo
+    }
+
+    public function updateByUchetOrganization(UchetOrganization $organization)
+    {
+        // todo
+    }
+
+
+    public function updateCompany($id, $company_name, $company_bin, $region, $address, $otrasl, $phone, $email): bool
+    {
+        $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
+        try {
+            $stmnt = $this->db->prepare($query);
+            $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
+
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updateCompanyGOSZAKUP(
+        $bin,
+        $rnn,
+        $date_last_updated,
+        $namekz,
+        $kato,
+        $region,
+        $website,
+        $email,
+        $phone,
+        $doc_id,
+        $date_reg
+): bool
+    {
+        $query = "UPDATE companies SET rnn=?,date_last_updated=?, namekz=?, kato=?, region=? ,website=?, email=?, phone=?, doc_register_id=?,datereg=? WHERE company_bin=?";
+        try {
+            $stmnt = $this->db->prepare($query);
+            $res = $stmnt->execute([$rnn, $date_last_updated, $namekz, $kato, $region, $website, $email, $phone, $doc_id, $date_reg, $bin]);
 
             return true;
         }
 
 catch
 (PDOException $e) {
-    var_dump('error->', $e);
     return false;
 }
     }
-
-    public function writeLink($link): bool
-{
-    $query = "INSERT INTO links (link) VALUES (?)";
-    try {
-        $stmt = $this->db->prepare($query);
-        return $stmt->execute([$link]);
-    } catch (PDOException $e) {
-        var_dump('error->', $e);
-        return false;
-    }
-}
-
-    public function createByUchetOrganization(UchetOrganization $organization)
-{
-    // todo
-}
-
-    public function updateByUchetOrganization(UchetOrganization $organization)
-{
-    // todo
-}
-
-
-
-    public function updateCompany($id, $company_name, $company_bin, $region, $address, $otrasl, $phone, $email)
-{
-    $query = "UPDATE companies SET company_name=?,company_bin=?, region=?, address=?, otrasl=?, phone=? ,email=? WHERE id=?";
-    try {
-        $stmnt = $this->db->prepare($query);
-        $res = $stmnt->execute([$company_name, $company_bin, $region, $address, $otrasl, $phone, $email, $id]);
-
-        return true;
-    } catch (PDOException $e) {
-
-    }
-}
 
     public function updateCompanyOked($bin, $statusru, $statuskz, $okedru, $okedkz, $addresskz, $datareg)
 {

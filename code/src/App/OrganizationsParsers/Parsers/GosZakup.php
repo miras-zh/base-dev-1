@@ -24,91 +24,130 @@ class GosZakup extends ParserAbstract
 
     public function getOrganizationsList(SelectionData $selection_data = null): OrganizationsList
     {
-        $limit = 10;
-        $offset = 0;
+        $limit = 100;
+        $offset = 66037;
+        $countUpdated = 0;
+        $countAdd = 0;
+        $countNoFitler = 0;
         do {
 
 
 //            $page = $this->request('ru/registry/supplierreg', ['count_record' => $selection_data?->limit ?? 50,'page' => $num]);
-              $companyModel = new Company();
-              $links = $companyModel->getLink($limit, $offset);
+            $companyModel = new Company();
+            $links = $companyModel->getLink($limit, $offset);
 //              var_dump($links);
 //              exit();
 //              exit($links);
 
-                foreach ($links as $key => $value) {
-                    var_dump($value['link']);
-                    if (strpos($value['link'], 'supplierreg?filter[other]') === false) {
+            foreach ($links as $key => $value) {
+                echo $offset + $key . ') ';
+
+                while (true) {
+                    try {
                         $page = $this->request($value['link']);
-                        if (preg_match_all('/<tr>\s*<th>(.*?)<\/th>\s*<td>(.*?)<\/td>\s*<\/tr>/s', $page, $matches2)) {
-                            $data = array_combine($matches2[1], $matches2[2]);
-                            // Создаем ассоциативный массив для переименованных ключей
-                            $renamedData = array(
-                                "date_last_updated" => $data["Дата последнего обновления"],
-                                "roles" => $data["Роли участника"],
-                                "exists_in_reestr" => $data["Состоит в реестре государственных заказчиков"],
-                                "bin" => $data["БИН участника"],
-                                "rnn" => $data["РНН участника"],
-                                "namekz" => $data["Наименование на каз. языке"],
-                                "nameru" => $data["Наименование на рус. языке"],
-                                "resident" => $data["Резиденство"],
-                                "kato" => $data["КАТО"],
-                                "region" => $data["Регион"],
-                                "website" => $data["Вебсайт:"],
-                                "email" => $data["E-Mail:"],
-                                "phone" => $data["Контактный телефон:"],
-                                "number_id" => $data["Серия свидетельства (для ИП) и номер свидетельства о государственной регистрации"],
-                                "date_registration" => $data["Дата свидетельства о государственной регистрации"],
-                                "admin_reporting" => $data["Наименование администратора(ов) отчетности"],
-                            );
-                            print_r($renamedData);
-
-                            $companyFound = $companyModel->checkCompanyByBin($renamedData['bin']);
-                            if (!$companyFound) {
-                                echo '+ + add:' . $renamedData['bin'] . " /" . $renamedData['nameru'] . "\n";
-                                $isAdd = $companyModel->createCompanyGos(
-                                    $renamedData["date_last_updated"],
-                                    $renamedData["roles"],
-                                    $renamedData["exists_in_reestr"],
-                                    $renamedData["bin"],
-                                    $renamedData["rnn"],
-                                    $renamedData["namekz"],
-                                    $renamedData["nameru"],
-                                    $renamedData["resident"],
-                                    $renamedData["kato"],
-                                    $renamedData["region"],
-                                    $renamedData["website"],
-                                    $renamedData["email"],
-                                    $renamedData["phone"],
-                                    $renamedData["number_id"],
-                                    $renamedData["date_registration"],
-                                    $renamedData["admin_reporting"],
-
-                                );
-                                var_dump('isAdd>',$isAdd);
-                                exit();
-                            } else {
-                                echo '- - no:' . $renamedData['bin'] . " /" . $renamedData['nameru'] . "\n";
-                            }
-//                            exit();
-                        }
-                        if (($key % 2) == 0) {
-                            sleep(1);
-                            var_dump( "--------------------------------------------  <br>");
-                        }
+                        break;
+                    } catch (GuzzleException $exception) {
+                        echo "cURL error #{$exception->getCode()}: {$exception->getMessage()}\n";
+                        sleep(5);
                     }
                 }
-            if(($offset % 2) === 0){
-                $total = $offset+$limit;
-                var_dump("------ ($total)}");
-                sleep(2);
+
+
+                if (preg_match_all('/<tr>\s*<th>(.*?)<\/th>\s*<td>(.*?)<\/td>\s*<\/tr>/s', $page, $matches2)) {
+                    $data = array_combine($matches2[1], $matches2[2]);
+                    // Создаем ассоциативный массив для переименованных ключей
+                    $renamedData = array(
+                        "date_last_updated" => trim($data["Дата последнего обновления"] ?? ''),
+                        "roles" => trim($data["Роли участника"] ?? ''),
+                        "exists_in_reestr" => trim($data["Состоит в реестре государственных заказчиков"] ?? ''),
+                        "bin" => trim($data["БИН участника"] ?? ''),
+                        "iin" => trim($data["ИИН участника"] ?? ''),
+                        "rnn" => trim($data["РНН участника"] ?? ''),
+                        "namekz" => trim($data["Наименование на каз. языке"] ?? ''),
+                        "nameru" => trim($data["Наименование на рус. языке"] ?? ''),
+                        "resident" => trim($data["Резиденство"] ?? ''),
+                        "kato" => trim($data["КАТО"] ?? ''),
+                        "region" => trim($data["Регион"] ?? ''),
+                        "website" => trim($data["Вебсайт:"] ?? ''),
+                        "email" => trim($data["E-Mail:"] ?? ''),
+                        "phone" => trim($data["Контактный телефон:"] ?? ''),
+                        "number_id" => trim($data["Серия свидетельства (для ИП) и номер свидетельства о государственной регистрации"] ?? ''),
+                        "date_registration" => trim($data["Дата свидетельства о государственной регистрации"] ?? ''),
+                        "admin_reporting" => trim($data["Наименование администратора(ов) отчетности"] ?? ''),
+                    );
+                    $biin = empty($renamedData['bin'])? $renamedData['iin'] : $renamedData['bin'];
+
+                    $companyFound = $companyModel->checkCompanyByBin($biin);
+                    if (!$companyFound) {
+                        $isAdd = $companyModel->createCompanyGos(
+                            $renamedData["date_last_updated"],
+                            $renamedData["roles"],
+                            $renamedData["exists_in_reestr"],
+                            $biin,
+                            $renamedData["rnn"],
+                            $renamedData["namekz"],
+                            $renamedData["nameru"],
+                            $renamedData["resident"],
+                            $renamedData["kato"],
+                            $renamedData["region"],
+                            $renamedData["website"],
+                            $renamedData["email"],
+                            $renamedData["phone"],
+                            $renamedData["number_id"],
+                            $renamedData["date_registration"],
+                            $renamedData["admin_reporting"],
+
+                        );
+                        echo '+ + add:' . " /" . $isAdd . '/ ' . $biin . ' /'.$renamedData['email'].'/' .$renamedData['phone'].'/'. $renamedData['nameru'] . "\n";
+                        $countAdd++;
+                    } else {
+                        $companyTarget = $companyModel->getCompanyByBin($biin);
+                        $region = $renamedData['region'] !== '' ? $renamedData['region'] : $companyTarget['region'];
+                        $email = $renamedData['email'] !== null ? $renamedData['email'] . ' ' . $companyTarget['email'] : $renamedData['email'];
+                        $phone = $companyTarget['phone'] !== null ? $renamedData['phone'] . ' ' . $companyTarget['phone'] : $renamedData['phone'];
+
+                        $isUpdated = $companyModel->updateCompanyGOSZAKUP(
+                            $companyTarget['company_bin'],
+                            $renamedData['rnn'],
+                            $renamedData['date_last_updated'],
+                            $renamedData['namekz'],
+                            $renamedData['kato'],
+                            $region,
+                            $renamedData['website'],
+                            $email,
+                            $phone,
+                            $renamedData['number_id'],
+                            $renamedData['date_registration']
+                        );
+                        if ($isUpdated) {
+                            echo '- - update:' . $biin . ' | email:' . $renamedData['email'] . ":| phone:" . $renamedData['phone'] . ":| r:" . $region . ':|' . $renamedData['nameru'] . "\n";
+                            $countUpdated++;
+                        } else {
+                            echo 'no update - - - *' . $biin .PHP_EOL;
+                            var_dump('data>>',$data);
+                            var_dump('$renamedData>>',$renamedData);
+                            var_dump('$companyTarget>>',$companyTarget);
+                        }
+                    }
+                } else {
+                    echo 'no no filter' . $page . PHP_EOL;
+                    $countNoFitler++;
+                }
+//                if($key % 2 == 0){
+//                }
+                sleep(1);
             }
-            $limit+=$offset;
-            $offset+=10;
-        }while($offset <= 9673);
+
+            echo "-------------------- offset:  ($offset)}" . PHP_EOL;
+            echo ' ------------------- updated: ' . $countUpdated . ' ----- add: ' . $countAdd . ' / count no filter:' . $countNoFitler . ' / ' . PHP_EOL;
+            $offset += $limit;
+        } while ($offset <= 487000);
         exit();
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function request(string $path, array $get = null, array $post = null): string
     {
         $uri = self::HOST . '/' . ltrim($path, '/');
@@ -117,7 +156,6 @@ class GosZakup extends ParserAbstract
         }
 
         $this->last_request_uri = $uri;
-
         $response = $this->client->request($post === null ? 'GET' : 'POST', $uri, [
             RequestOptions::HEADERS => [
                 'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -144,7 +182,6 @@ class GosZakup extends ParserAbstract
             RequestOptions::BODY => $post === null ? null : http_build_query($post),
             RequestOptions::VERIFY => false,
         ]);
-
         return $response->getBody()->getContents();
     }
 }
